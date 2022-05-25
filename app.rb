@@ -29,12 +29,12 @@ class CustomRenderer < Redcarpet::Render::HTML
 end
 
 markdown = Redcarpet::Markdown.new(CustomRenderer, autolink: true, fenced_code_blocks: true, :tables => true, :with_toc_data => true)
-readme_path = File.dirname(__FILE__) + "/readme.md"
-readme_md = File.read(readme_path)
-README_HTML = markdown.render(readme_md)
+about_path = File.dirname(__FILE__) + "/about.md"
+about_md = File.read(about_path)
+about_HTML = markdown.render(about_md)
 document_path = File.dirname(__FILE__) + "/documentation.md"
-readme_md = File.read(document_path)
-DOCUMENT_HTML = markdown.render(readme_md)
+about_md = File.read(document_path)
+DOCUMENT_HTML = markdown.render(about_md)
 
 configure do
   enable :sessions
