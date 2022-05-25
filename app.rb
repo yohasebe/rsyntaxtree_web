@@ -31,7 +31,7 @@ end
 markdown = Redcarpet::Markdown.new(CustomRenderer, autolink: true, fenced_code_blocks: true, :tables => true, :with_toc_data => true)
 about_path = File.dirname(__FILE__) + "/about.md"
 about_md = File.read(about_path)
-about_HTML = markdown.render(about_md)
+ABOUT_HTML = markdown.render(about_md)
 document_path = File.dirname(__FILE__) + "/documentation.md"
 about_md = File.read(document_path)
 DOCUMENT_HTML = markdown.render(about_md)
