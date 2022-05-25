@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+    <meta name="description" content="RSyntaxTree: A Linguistic Syntax Tree Generator">
+    <meta name="author" content="Yoichiro Hasebe">
+
+    <meta name="twitter:card"         content="summary" />
+    <meta name="twitter:site"         content="@yohasebe" />
+    <meta property="og:url"           content="https://yohasebe.com/rsyntaxtree" />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="RSyntaxTree" />
+    <meta property="og:description"   content="A Linguistic Syntax Tree Generator" />
+    <meta property="og:image"         content="https://yohasebe.com/rsyntaxtree/img/rsyntaxtree.png" />
+
+    <link rel="icon" href="">
+    <title>RSyntaxTree</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="<%= $SUB_DIRECTORY %>/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="<%= $SUB_DIRECTORY %>/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="<%= $SUB_DIRECTORY %>/favicon-16x16.png">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-ui-dist@1.12.1/jquery-ui.min.css" >
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightbox2@2.11.3/src/css/lightbox.css" >
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" >
+    <link href="<%= $SUB_DIRECTORY %>/css/whirl.min.css" rel="stylesheet">
+    <link href="<%= $SUB_DIRECTORY %>/css/rsyntaxtree.<%= RSyntaxTreeWeb::VERSION %>.min.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <div id="wrap">
+      <%= erb :navbar %>
+      <div data-subdir="<%= $SUB_DIRECTORY %>" id="top" style='visibility:hidden;'></div>
+
+      <main role="main">
+        <div class="jumbotron">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-12">
+                <h1><a href="<%= $SUB_DIRECTORY %>"><img width="65px" style='margin-right:15px;' src ="<%= $SUB_DIRECTORY %>/img/rsyntaxtree.png"/>RSyntaxTree</a></h1>
+                <p class='slogan'>Syntax tree generator made with Ruby</p>
+              </div>
+            </div>
+            <%= yield %>
+          </div>
+        </div>
+      </main>
+
+      <div class='container' style='margin-top:20px;margin-bottom:40px;'>
+        <p class='slogan' style='margin-top: 10px;' >RSyntaxTree Version: <a href='https://github.com/yohasebe/rsyntaxtree'><%= $RSYNTAXTREE_VER %></a></p>
+        <div class="alert alert-secondary" role="alert">
+          <b>Note:</b> Text markup syntax has been comprehensively renewed in version 1.0.0. Please refer to the <a href="https://yohasebe.github.io/rsyntaxtree/documentation">documentation</a>.
+        </div>
+
+        <%= README_HTML %>
+      </div>
+      <%= erb :footer %>
+
+      <div id="to-top" class="scroll-top ctrl-wrapper">
+        <span class="ctrl-inner">
+          <span class="fas fa-chevron-up"></span>
+        </span>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-ui-dist@1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lightbox2@2.11.3/src/js/lightbox.js"></script>
+    <script src="<%= $SUB_DIRECTORY %>/ace-editor/ace.js"></script>
+    <script src="<%= $SUB_DIRECTORY %>/js/rsyntaxtree.<%= RSyntaxTreeWeb::VERSION %>.min.js"></script>
+  </body>
+</html>

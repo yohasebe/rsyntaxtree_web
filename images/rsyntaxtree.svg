@@ -1,0 +1,35 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="1067.5" height="632.5" viewBox="42, -16, 1067.5, 632.5" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<style>
+@import url(http://fonts.googleapis.com/earlyaccess/notosansjp.css);
+</style>
+</defs>
+<rect x="42" y="-16" width="1067.5" height="632.5" stroke="none" fill="white" />"
+<text letter-spacing='0' word-spacing='0' kerning='0' style='fill: green; font-size: 40px; ; ;' x='563.5' y='540.0' text-decoration='' font-family="'Noto Sans JP', 'Noto Sans', sans-serif">multilingual</text>
+<text letter-spacing='0' word-spacing='0' kerning='0' style='fill: green; font-size: 40px; ; ;' x='826.5' y='540.0' text-decoration='' font-family="'Noto Sans JP', 'Noto Sans', sans-serif">syntax trees</text>
+<text letter-spacing='0' word-spacing='0' kerning='0' style='fill: green; font-size: 40px; ; ;' x='332.5' y='420.0' text-decoration='' font-family="'Noto Sans JP', 'Noto Sans', sans-serif">generates</text>
+<text letter-spacing='0' word-spacing='0' kerning='0' style='fill: blue; font-size: 40px; ; ;' x='644.5' y='420.0' text-decoration='' font-family="'Noto Sans JP', 'Noto Sans', sans-serif">Adj</text>
+<text letter-spacing='0' word-spacing='0' kerning='0' style='fill: blue; font-size: 40px; ; ;' x='905.0' y='420.0' text-decoration='' font-family="'Noto Sans JP', 'Noto Sans', sans-serif">NP</text>
+<text letter-spacing='0' word-spacing='0' kerning='0' style='fill: blue; font-size: 28.0  ' x='959.0' y='429.0' text-decoration='' font-family="'Noto Sans JP', 'Noto Sans', sans-serif">3</text>
+<text letter-spacing='0' word-spacing='0' kerning='0' style='fill: green; font-size: 40px; ; ;' x='58.5' y='300.0' text-decoration='' font-family="'Noto Sans JP', 'Noto Sans', sans-serif">RSyntaxTree</text>
+<text letter-spacing='0' word-spacing='0' kerning='0' style='fill: blue; font-size: 40px; ; ;' x='416.0' y='300.0' text-decoration='' font-family="'Noto Sans JP', 'Noto Sans', sans-serif">V</text>
+<text letter-spacing='0' word-spacing='0' kerning='0' style='fill: blue; font-size: 40px; ; ;' x='772.5' y='300.0' text-decoration='' font-family="'Noto Sans JP', 'Noto Sans', sans-serif">NP</text>
+<text letter-spacing='0' word-spacing='0' kerning='0' style='fill: blue; font-size: 28.0  ' x='826.5' y='309.0' text-decoration='' font-family="'Noto Sans JP', 'Noto Sans', sans-serif">2</text>
+<text letter-spacing='0' word-spacing='0' kerning='0' style='fill: blue; font-size: 40px; ; ;' x='140.5' y='180.0' text-decoration='' font-family="'Noto Sans JP', 'Noto Sans', sans-serif">NP</text>
+<text letter-spacing='0' word-spacing='0' kerning='0' style='fill: blue; font-size: 28.0  ' x='194.5' y='189.0' text-decoration='' font-family="'Noto Sans JP', 'Noto Sans', sans-serif">1</text>
+<text letter-spacing='0' word-spacing='0' kerning='0' style='fill: blue; font-size: 40px; ; ;' x='593.75' y='180.0' text-decoration='' font-family="'Noto Sans JP', 'Noto Sans', sans-serif">VP</text>
+<text letter-spacing='0' word-spacing='0' kerning='0' style='fill: blue; font-size: 40px; ; ;' x='385.625' y='60.0' text-decoration='' font-family="'Noto Sans JP', 'Noto Sans', sans-serif">S</text>
+<polygon style='fill: none; stroke: black; stroke-width:2;' points='1053.5 480.0 826.5 480.0 940.0 440.0' />
+<polygon style='fill: none; stroke: black; stroke-width:2;' points='292.5 240.0 58.5 240.0 175.5 200.0' />
+<line style='stroke:black; stroke-width:2;' x1='675.0' y1='480.0' x2='675.0' y2='440.0' />
+<line style='stroke:black; stroke-width:2;' x1='428.0' y1='360.0' x2='428.0' y2='320.0' />
+<line style='stroke:black; stroke-width:2;' x1='675.0' y1='360.0' x2='807.5' y2='320.0' />
+<line style='stroke:black; stroke-width:2;' x1='940.0' y1='360.0' x2='807.5' y2='320.0' />
+<line style='stroke:black; stroke-width:2;' x1='428.0' y1='240.0' x2='617.75' y2='200.0' />
+<line style='stroke:black; stroke-width:2;' x1='807.5' y1='240.0' x2='617.75' y2='200.0' />
+<line style='stroke:black; stroke-width:2;' x1='175.5' y1='120.0' x2='396.625' y2='80.0' />
+<line style='stroke:black; stroke-width:2;' x1='617.75' y1='120.0' x2='396.625' y2='80.0' />
+</svg>

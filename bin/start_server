@@ -1,0 +1,14 @@
+#!/bin/sh
+DIR=$(cd $(dirname "$0"); pwd)
+
+rake minify
+
+gemfile_lock=${DIR}/../Gemfile.lock
+rm -rf "$gemfile_lock"
+
+# Usage: unicorn config.ru unicorn.rb
+
+/usr/local/bin/docker container run \
+--rm -it -p 8080:8080 \
+-w /app -v ${DIR}/../:/app rsyntaxtree/latest \
+/bin/bash -c "bundle update; bundle exec unicorn"
