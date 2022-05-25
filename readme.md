@@ -7,7 +7,7 @@ Author: Yoichiro Hasbe
 1. Download and install [Docker Desktop](https://docs.docker.com/desktop/).
 2. Run Docker Desktop.
 3. Open a terminal and go to the project root folder.
-4. Run the following command and build the Docker image. This may take 10 or more minutes.
+4. Run the following command and build the Docker image. This may take a while.
 
 ```
 docker build -t rsyntaxtree/latest .
