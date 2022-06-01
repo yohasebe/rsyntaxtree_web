@@ -13,26 +13,13 @@ RUN apt-get update &&\
     git \
     wget \
     curl \
-    rsync \
-    nginx \
-    mecab \
-    libmecab-dev \
-    mecab-ipadic-utf8 \
     librsvg2-2 \
     librsvg2-common \
     librsvg2-dev \
-    graphviz \
-    sqlite3 \
-    libsqlite3-dev \
-    postgresql-client \
-    libpq-dev \
-    nodejs \
     imagemagick \
     imagemagick-common \
     libmagickcore-dev \
     libmagickwand-dev \
-    libffi-dev \
-    zlib1g-dev \
     liblzma-dev \
     libbz2-dev \
     libgirepository1.0-dev && \

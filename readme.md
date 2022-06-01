@@ -24,7 +24,7 @@ chmod a+x ./bin/start_server
 2. Start RSyntaxTree server.
 
 ```
-./bin/run_server
+./bin/start_server
 ```
 
 3. Access the folloing URL in a web browser
