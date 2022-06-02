@@ -4,7 +4,7 @@
 
 **RSyntaxTree** is a graphical syntax tree generator written in the Ruby programming language created by <a href="mailto:yohasebe@gmail.com">Yoichiro Hasebe</a>.
 
-The original version of RSyntaxTree was inspired by [phpSyntaxTree](http://ironcreek.net/phpsyntaxtree/) by André Esenbach. 
+The original version of RSyntaxTree was inspired by [phpSyntaxTree](http://ironcreek.net/phpsyntaxtree/) by André Esenbach.
 
 **Command-line version** of RSyntaxTree is available at [GitHub](http://github.com/yohasebe/rsyntaxtree).
 
@@ -13,6 +13,7 @@ See RSyntaxTree [Documentation](https://yohasebe.github.io/rsyntaxtree/documenta
 
 ### What's new
 
+* RSyntaxTree on the Web (UI sourcecode package you can run locally using docker) [June 2022]
 * Polyline connector option [February 2022]
 * Improved user interface (error message display; image zoom, etc.) [January 2022]
 * Comprehensive code rewrite [January 2022]
