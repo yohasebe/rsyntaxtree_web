@@ -32,9 +32,6 @@ markdown = Redcarpet::Markdown.new(CustomRenderer, autolink: true, fenced_code_b
 about_path = File.dirname(__FILE__) + "/about.md"
 about_md = File.read(about_path)
 ABOUT_HTML = markdown.render(about_md)
-document_path = File.dirname(__FILE__) + "/documentation.md"
-about_md = File.read(document_path)
-DOCUMENT_HTML = markdown.render(about_md)
 
 configure do
   enable :sessions
