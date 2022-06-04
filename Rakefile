@@ -28,3 +28,15 @@ task :minify do
   end
 end
 
+desc "Build Docker Environment"
+task :build do
+  `docker build -t rsyntaxtree/latest .`
+end
+
+desc "Start Server"
+task :start do
+  puts "Server is running"
+  puts "Access http://localhost:8080/"
+  puts "Press Ctrl+C to stop server"
+  `./bin/start_server`
+end
