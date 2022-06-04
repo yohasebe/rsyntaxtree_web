@@ -8,7 +8,6 @@ require 'rsyntaxtree_web/version'
 require 'securerandom'
 require 'json'
 
-$TEMPDIR = File.join(File.dirname(__FILE__), "public/tempfiles")
 $RSYNTAXTREE_VER = Gem.loaded_specs["rsyntaxtree"].version.to_s
 
 class CustomRenderer < Redcarpet::Render::HTML
@@ -79,15 +78,6 @@ post '/check_plus' do
     {"status" => "failure", "message" => e.message.gsub("\n", "<br />")}.to_json
   rescue => e
     {"status" => "failure", "message" => "Error: invalid input"}.to_json
-  end
-end
-
-get '/png/:name' do |name|
-  filename = $TEMPDIR + "/" + name + ".png"
-  if File.exist?(filename)
-    send_file filename, :type => :png
-  else
-    status 404
   end
 end
 
