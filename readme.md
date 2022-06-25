@@ -1,4 +1,4 @@
-# RSyntaxTree on the Web
+# RSyntaxTree Web UI
 
 This is an web UI source code package for [RSyntaxTree](https://github.com/yohasebe/rsyntaxtree), a command line app to generate linguistic syntax trees. With this, you can run your local copy of RSyntaxTree on Docker installed on your own computer.
 
