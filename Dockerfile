@@ -1,6 +1,6 @@
 # docker build -t rsyntaxtree/latest .
 
-FROM ubuntu:21.10
+FROM ubuntu:22.04
 
 RUN apt-get update &&\
     apt-get install -y tzdata && \

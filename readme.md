@@ -2,6 +2,10 @@
 
 This is an web UI source code package for [RSyntaxTree](https://github.com/yohasebe/rsyntaxtree), a command line app to generate linguistic syntax trees. With this, you can run your local copy of RSyntaxTree on Docker installed on your own computer.
 
+## Changelog
+
+- [November 19, 2022] Docker Ubuntu image updated to 22.04
+
 ## Setup
 
 1. Download and install Docker Desktop ([Windows](https://docs.docker.com/desktop/windows/install/) / [MacOS](https://docs.docker.com/desktop/mac/install/) / [Linux](https://docs.docker.com/desktop/linux/install/)).
