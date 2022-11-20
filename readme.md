@@ -4,6 +4,7 @@ This is an web UI source code package for [RSyntaxTree](https://github.com/yohas
 
 ## Changelog
 
+- [November 20, 2022] Minor change to server settings
 - [November 19, 2022] Docker Ubuntu image updated to 22.04
 
 ## Setup
