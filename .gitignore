@@ -3,8 +3,6 @@ tmp/
 doc/
 .DS_Store
 Gemfile.lock
-*.min.js
-*.min.css
 *.bak
 *.~
 *.log

@@ -2,9 +2,6 @@ path = File.expand_path("../", __FILE__)
 
 require 'sinatra'
 
-set :bind, '0.0.0.0'
-set :environment, :production
-
 require "#{path}/app"
 
 $SUB_DIRECTORY = "/rsyntaxtree"
