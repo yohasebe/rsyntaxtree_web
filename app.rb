@@ -139,7 +139,7 @@ end
 
 sample1 = []
 sample1 << "[S"
-sample1 << "  [NP ^|R|<>SyntaxTree]"
+sample1 << "  [NP |R| SyntaxTree]"
 sample1 << "  [VP"
 sample1 << "    [V generates]"
 sample1 << "    [NP"

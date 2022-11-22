@@ -13,6 +13,7 @@ See RSyntaxTree [Documentation](https://yohasebe.github.io/rsyntaxtree/documenta
 
 ### What's new
 
+* [Documantation in 日本語 (Japanese)](https://yohasebe.github.io/rsyntaxtree/documentation_ja) has been added [November 2022]
 * RSyntaxTree on the Web (UI sourcecode package you can run locally using docker) [June 2022]
 * Polyline connector option [February 2022]
 * Improved user interface (error message display; image zoom, etc.) [January 2022]
