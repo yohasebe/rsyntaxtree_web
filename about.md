@@ -12,6 +12,7 @@ The original version of RSyntaxTree was inspired by [phpSyntaxTree](http://ironc
 
 ### What's new
 
+* The `¥` symbol can be used in place of the backslash `\` to escape certain characters [November 2022]
 * Documantation in [日本語 (Japanese)](https://yohasebe.github.io/rsyntaxtree/documentation_ja) has been added [November 2022]
 * RSyntaxTree on the Web (UI sourcecode package you can run locally using docker) [June 2022]
 * Polyline connector option [February 2022]
