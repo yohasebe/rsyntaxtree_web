@@ -4,16 +4,15 @@
 
 **RSyntaxTree** is a graphical syntax tree generator written in the Ruby programming language created by <a href="mailto:yohasebe@gmail.com">Yoichiro Hasebe</a>.
 
+Documentation of the input text syntax and markups of RSyntaxTree is avalable in [English](https://yohasebe.github.io/rsyntaxtree/documentation) and [Japanese](https://yohasebe.github.io/rsyntaxtree/documentation_ja). See also [Example Gallery](https://yohasebe.github.io/rsyntaxtree/examples) for different types of sample input and result syntree images.
+
+A [command-line version](http://github.com/yohasebe/rsyntaxtree) of RSyntaxTree is available on GitHub. A web user interface for RSyntaxTree is also available; you can run RSyntaxTree with a web UI locally on your computer using [Docker](https://www.docker.com/products/docker-desktop/).
+
 The original version of RSyntaxTree was inspired by [phpSyntaxTree](http://ironcreek.net/phpsyntaxtree/) by André Esenbach.
-
-**Command-line version** of RSyntaxTree is available at [GitHub](http://github.com/yohasebe/rsyntaxtree).
-
-See RSyntaxTree [Documentation](https://yohasebe.github.io/rsyntaxtree/documentation) and [Examples](https://yohasebe.github.io/rsyntaxtree/examples).
-
 
 ### What's new
 
-* [Documantation in 日本語 (Japanese)](https://yohasebe.github.io/rsyntaxtree/documentation_ja) has been added [November 2022]
+* Documantation in [日本語 (Japanese)](https://yohasebe.github.io/rsyntaxtree/documentation_ja) has been added [November 2022]
 * RSyntaxTree on the Web (UI sourcecode package you can run locally using docker) [June 2022]
 * Polyline connector option [February 2022]
 * Improved user interface (error message display; image zoom, etc.) [January 2022]

@@ -9,6 +9,8 @@ This is an web UI source code package for [RSyntaxTree](https://github.com/yohas
 
 ## Setup
 
+Setup tutorial is also available in [Chinese](https://zhuanlan.zhihu.com/p/585260718) (thanks to Kent)
+
 1. Download and install Docker Desktop ([Windows](https://docs.docker.com/desktop/windows/install/) / [MacOS](https://docs.docker.com/desktop/mac/install/) / [Linux](https://docs.docker.com/desktop/linux/install/)).
 2. Start Docker Desktop.
 3. Clone this repository, or download and extract the [ZIP package](https://github.com/yohasebe/rsyntaxtree_web/archive/refs/heads/main.zip).
@@ -40,3 +42,4 @@ http://localhost:8080/rsyntaxtree
 ```
 
 4. You can stop the server with `Ctrl + c` in the terminal
+
