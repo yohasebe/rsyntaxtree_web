@@ -2,12 +2,42 @@
 
 This is an web UI source code package for [RSyntaxTree](https://github.com/yohasebe/rsyntaxtree), a command line app to generate linguistic syntax trees. With this, you can run your local copy of RSyntaxTree on Docker installed on your own computer.
 
-## Changelog
+**Changelog**
 
-- [November 20, 2022] Minified JS and CSS are included
-- [November 19, 2022] Docker Ubuntu image updated to 22.04
+- [December, 2022] Docker Hub image is available
+- [December, 2022] Base Docker image is changed to Alpine
+- [November, 2022] Minified JS and CSS are included
 
-## Setup
+You can setup a docker container using either downloading a Docker Hub image or building a Docker image locally.
+
+## Usage 1: Use Docker Hub (Recommended)
+
+### Setup
+
+1. Download and install Docker Desktop ([Windows](https://docs.docker.com/desktop/windows/install/) / [MacOS](https://docs.docker.com/desktop/mac/install/) / [Linux](https://docs.docker.com/desktop/linux/install/)).
+2. Start Docker Desktop.
+
+### Start Server
+
+1. Run the following command in a terminal and set up the Docker image. This may take a while the first time. 
+
+```
+docker run -it -p 8080:8080 yohasebe/rsyntaxtree
+```
+
+When you have `INFO -- : worker=0 ready` shown in the terminal, the setup is complete.
+
+2. Access the folloing URL in a web browser
+
+```
+http://localhost:8080
+```
+
+3. You can stop the server with `Ctrl + c` in the terminal
+
+## Usage 2: Build Docker Image Locally
+
+### Setup
 
 Setup tutorial is also available in [Chinese](https://zhuanlan.zhihu.com/p/585260718) (thanks to Kent)
 
@@ -21,7 +51,7 @@ Setup tutorial is also available in [Chinese](https://zhuanlan.zhihu.com/p/58526
 docker build -t rsyntaxtree/latest .
 ```
 
-## Start Server
+### Start Server
 
 1. Make the server script executable.
 

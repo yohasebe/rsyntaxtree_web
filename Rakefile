@@ -2,6 +2,13 @@ $LOAD_PATH << File.dirname(__FILE__)
 
 require 'lib/rsyntaxtree_web/version'
 require 'uglifier'
+require_relative './lib/rsyntaxtree_web/version.rb'
+
+class String
+  def strip_heredoc
+    gsub(/^#{scan(/^[ \t]*(?=\S)/).min}/, ''.freeze)
+  end
+end
 
 desc "Minify JavaScript files"
 task :minify do
@@ -40,3 +47,16 @@ task :start do
   puts "Press Ctrl+C to stop server"
   `./bin/start_server`
 end
+
+desc 'Push Docker images'
+task :push do
+  sh <<-EOS.strip_heredoc, {verbose: false}
+    /bin/bash -xeu <<'BASH'
+      # docker buildx create --name mybuilder
+      # docker buildx use mybuilder
+      # docker buildx inspect --bootstrap
+      docker buildx build --platform linux/amd64,linux/arm64 -t yohasebe/rsyntaxtree:#{RSyntaxTreeWeb::VERSION} -t yohasebe/rsyntaxtree:latest . --push
+    BASH
+  EOS
+end
+
