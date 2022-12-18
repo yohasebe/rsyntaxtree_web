@@ -10,5 +10,5 @@ rm -rf "$gemfile_lock"
 
 /usr/local/bin/docker container run \
 --rm -it -p 8080:8080 \
--w /app -v ${DIR}/../:/app rsyntaxtree/latest \
+-w /app -v ${DIR}/../:/app rsyntaxtree:latest \
 /bin/bash -c "bundle update; bundle exec unicorn"

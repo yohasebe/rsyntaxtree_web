@@ -39,8 +39,6 @@ http://localhost:8080
 
 ### Setup
 
-Setup tutorial is also available in [Chinese](https://zhuanlan.zhihu.com/p/585260718) (thanks to Kent)
-
 1. Download and install Docker Desktop ([Windows](https://docs.docker.com/desktop/windows/install/) / [MacOS](https://docs.docker.com/desktop/mac/install/) / [Linux](https://docs.docker.com/desktop/linux/install/)).
 2. Start Docker Desktop.
 3. Clone this repository, or download and extract the [ZIP package](https://github.com/yohasebe/rsyntaxtree_web/archive/refs/heads/main.zip).
@@ -48,7 +46,7 @@ Setup tutorial is also available in [Chinese](https://zhuanlan.zhihu.com/p/58526
 5. Run the following command and build the Docker image. This may take a while.
 
 ```
-docker build -t rsyntaxtree/latest .
+docker build -t rsyntaxtree .
 ```
 
 ### Start Server
@@ -68,8 +66,9 @@ chmod a+x ./bin/start_server
 3. Access the folloing URL in a web browser
 
 ```
-http://localhost:8080/rsyntaxtree
+http://localhost:8080
 ```
 
 4. You can stop the server with `Ctrl + c` in the terminal
 
+**NOTE:** Setup tutorial is also available in [Chinese](https://zhuanlan.zhihu.com/p/585260718) (thanks to Kent)
