@@ -1,5 +1,4 @@
-FROM ruby:3.1.3-alpine3.17
-
+FROM ruby:3.2.0-alpine3.17
 ENV WORKSPACE /rsyntaxtree
 ADD . $WORKSPACE
 WORKDIR $WORKSPACE
