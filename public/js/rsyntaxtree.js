@@ -96,12 +96,13 @@ $(function(){
     params = params + "&leafstyle=" +  $("select[name=leafstyle]").val();
     params = params + "&fontstyle=" +  $("select[name=fontstyle]").val();
     params = params + "&fontsize=" +  $("select[name=fontsize]").val();
-    params = params + "&margin=" +  $("select[name=margin]").val();
     params = params + "&vheight=" +  $("select[name=vheight]").val();
     params = params + "&polyline=" +  $("input[name=polyline]:checked").val();
-    params = params + "&color=" +  $("input[name=color]:checked").val();
+    params = params + "&color=" +  $("select[name=color]").val();
+    params = params + "&linewidth=" +  $("select[name=linewidth]").val();
     params = params + "&symmetrize="  +  $("input[name=symmetrize]:checked").val();
     params = params + "&transparent=" +  $("input[name=transparent]:checked").val();
+    params = params + "&hide_default_connectors=" +  $("input[name=hide_default_connectors]:checked").val();
     return params;
   }
 
@@ -207,11 +208,12 @@ $(function(){
       .append($('<input/>', {type: 'hidden', name: 'leafstyle', value: $("select[name=leafstyle]").val()}))
       .append($('<input/>', {type: 'hidden', name: 'fontstyle', value: $("select[name=fontstyle]").val()}))
       .append($('<input/>', {type: 'hidden', name: 'fontsize', value: $("select[name=fontsize]").val()}))
-      .append($('<input/>', {type: 'hidden', name: 'margin', value: $("select[name=margin]").val()}))
       .append($('<input/>', {type: 'hidden', name: 'vheight', value: $("select[name=vheight]").val()}))
       .append($('<input/>', {type: 'hidden', name: 'polyline', value: $("input[name=polyline]:checked").val()}))
-      .append($('<input/>', {type: 'hidden', name: 'color', value: $("input[name=color]:checked").val()}))
+      .append($('<input/>', {type: 'hidden', name: 'color', value: $("select[name=color]").val()}))
+      .append($('<input/>', {type: 'hidden', name: 'linewidth', value: $("select[name=linewidth]").val()}))
       .append($('<input/>', {type: 'hidden', name: 'symmetrize', value:  $("input[name=symmetrize]:checked").val()}))
+      .append($('<input/>', {type: 'hidden', name: 'hide_default_connectors', value:  $("input[name=hide_default_connectors]:checked").val()}))
       .append($('<input/>', {type: 'hidden', name: 'transparent', value: $("input[name=transparent]:checked").val()}))
       .appendTo(document.body).submit();
   }

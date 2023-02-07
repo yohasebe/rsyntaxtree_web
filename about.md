@@ -12,6 +12,11 @@ The original version of RSyntaxTree was inspired by [phpSyntaxTree](http://ironc
 
 ### What's new
 
+* Line edge rendering improved [February 2023]
+* `Line width` option added [February 2023]
+* `Traditional` color option added [February 2023]
+* `Hide default connectors` option added [February 2023]
+* Extra connector drawing feature added [February 2023]
 * `Noto Sans Mono` font option added [January 2023]
 * The `¥` symbol can be used in place of the backslash `\` to escape certain characters [November 2022]
 * Documantation in [日本語 (Japanese)](https://yohasebe.github.io/rsyntaxtree/documentation_ja) has been added [November 2022]

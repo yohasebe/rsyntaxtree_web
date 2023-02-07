@@ -1,9 +1,10 @@
-@dir = File.expand_path(File.dirname(__FILE__))
+# frozen_string_literal: true
+
 worker_processes 10
 working_directory @dir
 preload_app true
 timeout 30
-listen "#{@dir}/tmp/rsyntaxtree.sock", :backlog => 64
-pid "#{@dir}/tmp/pids/unicorn.pid"
-stderr_path "#{@dir}/log/unicorn.stderr.log"
-stdout_path "#{@dir}/log/unicorn.stdout.log"
+listen "#{__dir__}/tmp/rsyntaxtree.sock", backlog: 64
+pid "#{__dir__}/tmp/pids/unicorn.pid"
+stderr_path "#{__dir__}/log/unicorn.stderr.log"
+stdout_path "#{__dir__}/log/unicorn.stdout.log"

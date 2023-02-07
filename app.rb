@@ -1,12 +1,13 @@
-$: << File.join(File.dirname(__FILE__), "lib")
+# frozen_string_literal: true
 
-require 'redcarpet'
-require 'sinatra'
-require 'base64'
-require 'rsyntaxtree'
-require 'rsyntaxtree_web/version'
-require 'securerandom'
-require 'json'
+require "redcarpet"
+require "sinatra"
+require "base64"
+require "securerandom"
+require "json"
+require "rsyntaxtree"
+
+require_relative "lib/rsyntaxtree_web/version"
 
 $RSYNTAXTREE_VER = Gem.loaded_specs["rsyntaxtree"].version.to_s
 
@@ -27,7 +28,7 @@ class CustomRenderer < Redcarpet::Render::HTML
   end
 end
 
-markdown = Redcarpet::Markdown.new(CustomRenderer, autolink: true, fenced_code_blocks: true, :tables => true, :with_toc_data => true)
+markdown = Redcarpet::Markdown.new(CustomRenderer, autolink: true, fenced_code_blocks: true, tables: true, with_toc_data: true)
 about_path = File.dirname(__FILE__) + "/about.md"
 about_md = File.read(about_path)
 ABOUT_HTML = markdown.render(about_md)
@@ -45,14 +46,14 @@ post '/check' do
   begin
     result = RSyntaxTree::RSGenerator.check_data(data)
     if result
-      {"status" => "success", "message" => "OK"}.to_json
+      { status: "success", message: "OK" }.to_json
     else
-      {"status" => "failure", "message" => "NG"}.to_json
+      { status: "failure", message: "NG" }.to_json
     end
   rescue RSTError => e
-    {"status" => "failure", "message" => e.message.gsub("\n", "<br />")}.to_json
-  rescue => e
-    {"status" => "failure", "message" => "Error: invalid input"}.to_json
+    { status: "failure", message: e.message.gsub("\n", "<br />") }.to_json
+  rescue StandardError
+    { status: "failure", message: "Error: invalid input" }.to_json
   end
 end
 
@@ -61,63 +62,52 @@ post '/check_plus' do
   data = params["data"]
   begin
     result = RSyntaxTree::RSGenerator.check_data(data)
-    if result
-      rs_generator = RSyntaxTree::RSGenerator.new(params)
-      tree = rs_generator.draw_tree
-    else
-     return {"status" => "failure", "message" => "NG"}.to_json
-    end
 
-    if tree
-      return {"status" => "success", "message" => "OK"}.to_json
-    else
-      raise
-    end
+    return { status: "failure", message: "NG" }.to_json unless result
 
+    rs_generator = RSyntaxTree::RSGenerator.new(params)
+    tree = rs_generator.draw_tree
+    tree ? { status: "success", message: "OK" }.to_json : raise
   rescue RSTError => e
-    {"status" => "failure", "message" => e.message.gsub("\n", "<br />")}.to_json
-  rescue => e
-    {"status" => "failure", "message" => "Error: invalid input"}.to_json
+    { status: "failure", message: e.message.gsub("\n", "<br />") }.to_json
+  rescue StandardError
+    { status: "failure", message: "Error: invalid input" }.to_json
   end
 end
 
 post '/draw_png' do
-  begin
-    basename = "syntree.png"
-    rs_generator = RSyntaxTree::RSGenerator.new(params)
-    png_blob = rs_generator.draw_png
-    response.headers['content_type'] = "image/png"
-    response.headers['content_length'] = png_blob.size.to_s
-    response.headers['content_disposition'] = "inline" + %(; filename="#{basename}")
-    {"status" => "success", "png" => Base64.encode64(png_blob)}.to_json
-  rescue RSTError => e
-    {"status" => "failure", "message" => e.message.gsub("\n", "<br />")}.to_json
-  rescue => e
-    {"status" => "failure", "message" => "Error: invalid input"}.to_json
-  end
+  basename = "syntree.png"
+  rs_generator = RSyntaxTree::RSGenerator.new(params)
+  png_blob = rs_generator.draw_png
+  response.headers['content_type'] = "image/png"
+  response.headers['content_length'] = png_blob.size.to_s
+  response.headers['content_disposition'] = "inline" + %(; filename="#{basename}")
+  { status: "success", "png" => Base64.encode64(png_blob) }.to_json
+rescue RSTError => e
+  { status: "failure", message: e.message.gsub("\n", "<br />") }.to_json
+rescue StandardError
+  { status: "failure", message: "Error: invalid input" }.to_json
 end
 
 post '/draw_svg' do
-  begin
-    basename = "syntree.svg"
-    rs_generator = RSyntaxTree::RSGenerator.new(params)
-    svg = rs_generator.draw_svg
-    response.headers['content_type'] = "image/svg+xml"
-    response.headers['content_length'] = svg.size.to_s
-    response.headers['content_disposition'] = "inline" + %(; filename="#{basename}")
-    {"status" => "success", "svg" => Base64.encode64(svg)}.to_json
-  rescue RSTError => e
-    {"status" => "failure", "message" => e.message.gsub("\n", "<br />")}.to_json
-  rescue => e
-    {"status" => "failure", "message" => "Error: invalid input"}.to_json
-  end
+  basename = "syntree.svg"
+  rs_generator = RSyntaxTree::RSGenerator.new(params)
+  svg = rs_generator.draw_svg
+  response.headers['content_type'] = "image/svg+xml"
+  response.headers['content_length'] = svg.size.to_s
+  response.headers['content_disposition'] = "inline" + %(; filename="#{basename}")
+  { status: "success", svg: Base64.encode64(svg) }.to_json
+rescue RSTError => e
+  { status: "failure", message: e.message.gsub("\n", "<br />") }.to_json
+rescue StandardError
+  { status: "failure", message: "Error: invalid input" }.to_json
 end
 
 post '/download_svg' do
   begin
     rs_generator = RSyntaxTree::RSGenerator.new(params)
     svg = rs_generator.draw_svg
-  rescue
+  rescue StandardError
     error 500
   end
   content_type 'image/svg+xml'
@@ -129,7 +119,7 @@ post '/download_png' do
   begin
     rs_generator = RSyntaxTree::RSGenerator.new(params)
     png = rs_generator.draw_png
-  rescue
+  rescue StandardError
     error 500
   end
   content_type 'image/png'
@@ -150,6 +140,5 @@ sample1 << "          trees]"
 sample1 << "    ]"
 sample1 << "  ]"
 sample1 << "]"
-
 
 $SAMPLE1 = sample1.join("\n")

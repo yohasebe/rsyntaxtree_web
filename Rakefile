@@ -1,12 +1,11 @@
-$LOAD_PATH << File.dirname(__FILE__)
+# frozen_string_literal: true
 
-require 'lib/rsyntaxtree_web/version'
-require 'uglifier'
-require_relative './lib/rsyntaxtree_web/version.rb'
+require "uglifier"
+require_relative "lib/rsyntaxtree_web/version"
 
 class String
   def strip_heredoc
-    gsub(/^#{scan(/^[ \t]*(?=\S)/).min}/, ''.freeze)
+    gsub(/^#{scan(/^[ \t]*(?=\S)/).min}/, "")
   end
 end
 
@@ -20,9 +19,7 @@ task :minify do
     ext = File.extname(f)
     subpath = File.expand_path(path + f + '/../') + '/'
     `rm -rf #{subpath}#{base}.*.min#{ext}`
-    if ext == ".js" || ext == ".css"
-      filename = base + "." + RSyntaxTreeWeb::VERSION + ".min" + ext
-    end
+    filename = base + "." + RSyntaxTreeWeb::VERSION + ".min" + ext if [".js", ".css"].include? ext
     newfile = subpath + filename
     puts filename
     File.open(newfile, "wb+") do |g|
@@ -37,7 +34,7 @@ end
 
 desc "Build Docker Environment"
 task :build do
-  `docker build -t rsyntaxtree/latest .`
+  `docker build -t rsyntaxtree:latest .`
 end
 
 desc "Start Server"
@@ -50,13 +47,12 @@ end
 
 desc 'Push Docker images'
 task :push do
-  sh <<-EOS.strip_heredoc, {verbose: false}
+  sh <<-DOCKER.strip_heredoc, { verbose: false }
     /bin/bash -xeu <<'BASH'
       # docker buildx create --name mybuilder
       # docker buildx use mybuilder
       # docker buildx inspect --bootstrap
       docker buildx build --platform linux/amd64,linux/arm64 -t yohasebe/rsyntaxtree:#{RSyntaxTreeWeb::VERSION} -t yohasebe/rsyntaxtree:latest . --push
     BASH
-  EOS
+  DOCKER
 end
-

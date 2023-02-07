@@ -57,16 +57,6 @@
           </div>
         </div>
 
-        <!--
-        <div class="row" style="margin-bottom:10px;">
-          <div class="col-sm-6">
-            <button class='btn btn-secondary draw btn-block' id='download_png' type='submit'><i class="fas fa-file-download"></i> Save PNG</button>
-          </div>
-          <div class="col-sm-6">
-            <button class='btn btn-secondary draw btn-block' id='download_svg' type='submit'><i class="fas fa-file-download"></i> Save SVG</button>
-          </div>
-        </div>
-        -->
       </div>
     </div>
   </div>
@@ -74,7 +64,7 @@
 
 <div class="container" style='margin-top: 10px; margin-bottom:20px; padding: 0;'>
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-3">
       <label for="leafstyle">Connector shape</label>
       <select class="form-control" name='leafstyle' id='leafstyle'>
         <option value='auto'>Auto</option>
@@ -82,7 +72,7 @@
         <option value='nothing'>None</option>
       </select>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
       <label for="leafstyle">Font style</label>
       <select class="form-control" name='fontstyle'>
         <option value='noto-serif'>Noto Serif</option>
@@ -91,7 +81,7 @@
         <option value='cjk'>WQY Zen Hei</option>
       </select>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
       <label for="leafstyle">Font size</label>
       <select class="form-control" name='fontsize'>
         <option value='6'>6</option>
@@ -107,24 +97,18 @@
         <option value='26'>26</option>
       </select>
     </div>
+    <div class="col-md-3">
+      <label for="leafstyle">Color</label>
+      <select class="form-control" name='color'>
+        <option value='modern'>Modern</option>
+        <option value='traditional' selected='selected'>Traditional</option>
+        <option value='none'>None</option>
+      </select>
+      </div>
+    </div>
   </div>
   <div class="row">
-    <div class="col-md-4">
-      <label for="leafstyle">Margin</label>
-      <select class="form-control" name='margin'>
-        <option value='1'>1</option>
-        <option value='2' selected='selected' >2</option>
-        <option value='3'>3</option>
-        <option value='4'>4</option>
-        <option value='5'>5</option>
-        <option value='6'>6</option>
-        <option value='7'>7</option>
-        <option value='8'>8</option>
-        <option value='9'>9</option>
-        <option value='10'>10</option>
-      </select>
-    </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
       <label for="leafstyle">Connector height</label>
       <select class="form-control" name='vheight'>
         <option value='0.5'>0.5</option>
@@ -136,8 +120,18 @@
         <option value='5.0'>5.0</option>
       </select>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
+      <label for="leafstyle">Line width</label>
+      <select class="form-control" name='linewidth'>
+        <option value='1' selected='selected'>1</option>
+        <option value='2'>2</option>
+        <option value='3'>3</option>
+        <option value='4'>4</option>
+        <option value='5'>5</option>
+      </select>
     </div>
+    <div class="col-md-3"></div>
+    <div class="col-md-3"></div>
   </div>
 
   <div class='row'>
@@ -149,18 +143,6 @@
         </label>
         <label class="btn btn-light">
           <input type="radio" name="polyline" value="off" autocomplete="off" checked> Off
-        </label>
-      </div>
-    </div>
-
-    <div class='col-md-3'>
-      <label for="color">Colorization</label><br />
-      <div class="btn-group btn-group-toggle" data-toggle="buttons">
-        <label class="btn btn-light active">
-          <input type="radio" name="color" value="on" autocomplete="off" checked> On
-        </label>
-        <label class="btn btn-light">
-          <input type="radio" name="color" value="off" autocomplete="off"> Off
         </label>
       </div>
     </div>
@@ -188,5 +170,18 @@
         </label>
       </div>
     </div>
+
+    <div class='col-md-3'>
+      <label for="hide_default_connectors">Hide Default Connectors</label><br />
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-light active">
+          <input type="radio" name="hide_default_connectors" value="on" autocomplete="off" > On
+        </label>
+        <label class="btn btn-light">
+          <input type="radio" name="hide_default_connectors" value="off" autocomplete="off" checked> Off
+        </label>
+      </div>
+    </div>
+
   </div>
 </div>
