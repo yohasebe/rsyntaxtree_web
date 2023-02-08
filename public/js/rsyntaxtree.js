@@ -3,10 +3,10 @@ $(function(){
   var isMobile = (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase()));
 
   //////////////////// Setup Ace Syntax ///////////////
-  define('ace/mode/custom', [], function(require, exports, module) {
+  define('ace/mode/custom', [], function(_require, exports, _module) {
     var oop = require("ace/lib/oop");
     var TextMode = require("ace/mode/text").Mode;
-    var Tokenizer = require("ace/tokenizer").Tokenizer;
+    // var Tokenizer = require("ace/tokenizer").Tokenizer;
     var CustomHighlightRules = require("ace/mode/custom_highlight_rules").CustomHighlightRules;
     var CstyleBehaviour = require("ace/mode/behaviour/cstyle").CstyleBehaviour;
     var Mode = function() {

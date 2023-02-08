@@ -49,9 +49,9 @@ desc 'Push Docker images'
 task :push do
   sh <<-DOCKER.strip_heredoc, { verbose: false }
     /bin/bash -xeu <<'BASH'
-      # docker buildx create --name mybuilder
-      # docker buildx use mybuilder
-      # docker buildx inspect --bootstrap
+      docker buildx create --name mybuilder
+      docker buildx use mybuilder
+      docker buildx inspect --bootstrap
       docker buildx build --platform linux/amd64,linux/arm64 -t yohasebe/rsyntaxtree:#{RSyntaxTreeWeb::VERSION} -t yohasebe/rsyntaxtree:latest . --push
     BASH
   DOCKER
