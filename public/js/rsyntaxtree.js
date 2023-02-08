@@ -322,6 +322,30 @@ $(function(){
     });
   });
 
+  $("#download_pdf").click(function(){
+    $("#alert").empty();
+    var data = editor.getValue();
+    data = escape_chrs(data);
+    $.ajax({
+      type: "POST",
+      dataType: 'json',
+      url: subdir + "/check_plus",
+      data: make_params(data)
+    }).done(function(res){
+      if(res["status"] === "failure"){
+        alert(res["message"], "warning");
+        $('body, html').animate({ scrollTop: top}, 500)
+      } else {
+        alert("Syntree generated successfully", "success");
+        postForm(data, "pdf");
+      }
+    }).fail(function(){
+      process_finished();
+      alert("Error: Something unexpected occurrred", "danger");
+      $('body, html').animate({ scrollTop: top}, 500)
+    });
+  });
+
   $("#check").click(function(){
     var data = editor.getValue();
     $.ajax({

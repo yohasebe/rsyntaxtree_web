@@ -127,6 +127,18 @@ post '/download_png' do
   png
 end
 
+post '/download_pdf' do
+  begin
+    rs_generator = RSyntaxTree::RSGenerator.new(params)
+    pdf = rs_generator.draw_pdf
+  rescue StandardError
+    error 500
+  end
+  content_type 'application/pdf'
+  attachment 'syntree.pdf'
+  pdf
+end
+
 sample1 = []
 sample1 << "[S"
 sample1 << "  [NP |R| SyntaxTree]"

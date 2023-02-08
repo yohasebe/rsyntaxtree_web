@@ -1,7 +1,7 @@
 FROM ruby:3.2.0-alpine3.17
 ENV WORKSPACE /rsyntaxtree
-ADD . $WORKSPACE
 WORKDIR $WORKSPACE
+ADD Gemfile $WORKSPACE
 
 RUN apk update && \
     apk upgrade && \
@@ -11,8 +11,10 @@ RUN apk update && \
     apk add --no-cache -t .build-packages --no-cache build-base curl-dev wget gcompat && \
     bundle install -j4
 
+ADD fonts $WORKSPACE
 RUN mkdir -p /usr/share/fonts/yh
 COPY ./fonts/* /usr/share/fonts/yh/
 RUN fc-cache -fv
 
+ADD . $WORKSPACE
 CMD ["bundle", "exec", "unicorn"]
