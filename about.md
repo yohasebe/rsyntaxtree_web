@@ -12,12 +12,16 @@ The original version of RSyntaxTree was inspired by [phpSyntaxTree](http://ironc
 
 ### What's new
 
+* PDF download feature added [February 2023]
 * Line edge rendering improved [February 2023]
 * `Line width` option added [February 2023]
 * `Traditional` color option added [February 2023]
 * `Hide default connectors` option added [February 2023]
 * Extra connector drawing feature added [February 2023]
 * `Noto Sans Mono` font option added [January 2023]
+
+### Past updates
+
 * The `¥` symbol can be used in place of the backslash `\` to escape certain characters [November 2022]
 * Documantation in [日本語 (Japanese)](https://yohasebe.github.io/rsyntaxtree/documentation_ja) has been added [November 2022]
 * RSyntaxTree on the Web (UI sourcecode package you can run locally using docker) [June 2022]
@@ -28,9 +32,6 @@ The original version of RSyntaxTree was inspired by [phpSyntaxTree](http://ironc
 * Text markup is more flexibly applicable than before [January 2022]
 * New text markup patterns (newlines, brackets, horizontal lines, boxed texts) [January 2022]
 * Triangle can be specified in all connector modes (`auto`, `bar`, `none`) [January 2022]
-
-### Past updates
-
 * Superscript (e.g. T<sup>0</sup>) specification is possible [December 2021]
 * Newline characters `\n` can be used inside terminal nodes [December 2021]
 * Label-less terminal nodes are now allowed (e.g. `[A [B] [C]]`) [November 2021]

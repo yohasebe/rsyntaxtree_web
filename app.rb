@@ -11,6 +11,16 @@ require_relative "lib/rsyntaxtree_web/version"
 
 $RSYNTAXTREE_VER = Gem.loaded_specs["rsyntaxtree"].version.to_s
 
+# Use Google Analytics code only if the code file exists
+ga_path = File.dirname(__FILE__) + "/google_analytics_tracking_code"
+if File.exist?(ga_path)
+  gfile = File.open(ga_path, "r:UTF-8:UTF-8")
+  $GOOGLE_CODE = gfile.read
+  gfile.close
+else
+  $GOOGLE_CODE = ""
+end
+
 class CustomRenderer < Redcarpet::Render::HTML
   def image(link, title, alt_text)
     if title =~ /([^=\s]+)=([^=\s]+)/
