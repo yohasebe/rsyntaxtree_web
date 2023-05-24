@@ -13,3 +13,5 @@ bin/linktree.rb
 tags
 .tags
 tempfiles/
+.rubocop.yml
+.solargraph.yml
