@@ -12,6 +12,7 @@ The original version of RSyntaxTree was inspired by [phpSyntaxTree](http://ironc
 
 ### What's new
 
+* Cross-hatch rendering issue fixed [September 2023]
 * PDF download feature added [February 2023]
 * Line edge rendering improved [February 2023]
 * `Line width` option added [February 2023]
