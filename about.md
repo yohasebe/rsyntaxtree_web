@@ -2,9 +2,9 @@
 
 ### About
 
-**RSyntaxTree** is a graphical syntax tree generator written in the Ruby programming language created by <a href="mailto:yohasebe@gmail.com">Yoichiro Hasebe</a>.
+**RSyntaxTree** is a graphical syntax tree generator written in the Ruby programming language.
 
-Documentation of the input text syntax and markups of RSyntaxTree is avalable in [English](https://yohasebe.github.io/rsyntaxtree/documentation) and [Japanese](https://yohasebe.github.io/rsyntaxtree/documentation_ja). See also [Example Gallery](https://yohasebe.github.io/rsyntaxtree/examples) for different types of sample input and result syntree images.
+Documentation of the input text syntax and markups of RSyntaxTree is available in [English](https://yohasebe.github.io/rsyntaxtree/documentation) and [Japanese](https://yohasebe.github.io/rsyntaxtree/documentation_ja). See also [Example Gallery](https://yohasebe.github.io/rsyntaxtree/examples) for different types of sample input and result syntree images.
 
 A [command-line version](http://github.com/yohasebe/rsyntaxtree) of RSyntaxTree is available on GitHub. A web user interface for RSyntaxTree is also available; you can run RSyntaxTree with a web UI locally on your computer using [Docker](https://www.docker.com/products/docker-desktop/).
 
@@ -12,6 +12,7 @@ The original version of RSyntaxTree was inspired by [phpSyntaxTree](http://ironc
 
 ### What's new
 
+* Japanese version of the Web UI added [February 2025]
 * Escape square brackets with `\[` and `\]` [October 2024]
 * Cross-hatch rendering issue fixed [September 2023]
 * PDF download feature added [February 2023]
@@ -25,9 +26,9 @@ The original version of RSyntaxTree was inspired by [phpSyntaxTree](http://ironc
 ### Past updates
 
 * The `¥` symbol can be used in place of the backslash `\` to escape certain characters [November 2022]
-* Documantation in [日本語 (Japanese)](https://yohasebe.github.io/rsyntaxtree/documentation_ja) has been added [November 2022]
+* Documentation in [日本語 (Japanese)](https://yohasebe.github.io/rsyntaxtree/documentation_ja) has been added [November 2022]
 * RSyntaxTree on the Web (UI sourcecode package you can run locally using docker) [June 2022]
-* Polyline connector option [February 2022]
+* `Polyline connector` option [February 2022]
 * Improved user interface (error message display; image zoom, etc.) [January 2022]
 * Comprehensive code rewrite [January 2022]
 * Path drawing functionality (non-directional, directional, bidirectional) [January 2022]
@@ -46,7 +47,7 @@ The original version of RSyntaxTree was inspired by [phpSyntaxTree](http://ironc
 * White spaces can be included in node labels with the `<>` notation (e.g. `Modal<>AUX`) [June 2018]
 * Various sizes of `margin` to the image [February 2018]
 * Better text editor using <a href='https://ace.c9.io/'>Ace</a> [February 2018]
-* <em>Connector height</em> option [March 2018]
+* `Connector height` option [March 2018]
 * Syntax highlighting of input text [March 2018]
 * Refined site design and documentation [March 2018]
 * Text styles (italic and bold) and decoration (underline, overline, line-through) [March 2018]

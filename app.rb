@@ -39,16 +39,24 @@ class CustomRenderer < Redcarpet::Render::HTML
 end
 
 markdown = Redcarpet::Markdown.new(CustomRenderer, autolink: true, fenced_code_blocks: true, tables: true, with_toc_data: true)
-about_path = File.dirname(__FILE__) + "/about.md"
-about_md = File.read(about_path)
+about_md = File.read(File.dirname(__FILE__) + "/about.md")
 ABOUT_HTML = markdown.render(about_md)
+
+about_md_ja = File.read(File.dirname(__FILE__) + "/about_ja.md")
+ABOUT_HTML_JA = markdown.render(about_md_ja)
 
 configure do
   enable :sessions
 end
 
+# the default / route, whose views are in the '/views' directory
 get '/' do
   erb :index
+end
+
+# set '/ja' to the Japanese version of the site, whose views are in the '/views/ja' directory
+get '/ja' do
+  erb :"ja/index", :layout => :"ja/layout"
 end
 
 post '/check' do

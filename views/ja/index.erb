@@ -8,8 +8,8 @@
       </div>
       <div class='text-right' style="margin-bottom:10px; line-height: 100%;">
         <sub>
-          Left-click to focus; right-click to save image<br />
-          Image-area and text-area are vertically resizable
+          左クリックでズーム，右クリックで画像保存<br />
+          画像エリアとテキストエリアは縦方向にサイズ変更可能
         </sub>
       </div>
     </div>
@@ -26,11 +26,7 @@
 
       <div class='text-right' style="margin-bottom:10px; line-height: 100%;">
         <sub>
-          In version 1.0, the tree drawing syntax has changed significantly. <br />
-          Please see the
-          <a href="https://yohasebe.github.io/rsyntaxtree/documentation">documentation</a> and
-          <a target="_blank" rel="noopener noreferrer"
-                             href="https://yohasebe.github.io/rsyntaxtree/examples">examples</a>.
+          バージョン1.0では，樹形図描画の構文が大幅に刷新されました．詳しくは<br /> <a href="https://yohasebe.github.io/rsyntaxtree/documentation_ja">使い方</a> および <a target="_blank" rel="noopener noreferrer" href="https://yohasebe.github.io/rsyntaxtree/examples">ギャラリー</a> を参照してください．
         </sub>
       </div>
 
@@ -40,20 +36,20 @@
             <div style="display:inline">
               <input type="checkbox" value="" id="auto-bracket">
               <label for="auto-bracket">
-                Auto-close brackets
+                <small>括弧を自動で閉じる</small>
               </label>&nbsp;&nbsp;
             </div>
-            <button type='button' class='btn btn-sm btn-light' id="check"><i class="far fa-check-square"></i> Check brackets</button>&nbsp;
-            <button type='button' class='btn btn-sm btn-light' id="clear"><i class="fas fa-eraser"></i> Clear text</button>
+            <button type='button' class='btn btn-sm btn-light' id="check"><i class="far fa-check-square"></i><small> 括弧の対応チェック</small></button>&nbsp;
+            <button type='button' class='btn btn-sm btn-light' id="clear"><i class="fas fa-eraser"></i><small> クリア</small></button>
           </div>
         </div>
 
         <div class="row" style="margin-bottom:15px; margin-top:15px;">
           <div class="col-sm-4">
-            <button class='btn btn-primary draw btn-block' id='draw_png' type='submit'><i class="fas fa-pencil-ruler"></i> Draw <b>PNG</b></button>
+            <button class='btn btn-primary draw btn-block' id='draw_png' type='submit'><i class="fas fa-pencil-ruler"></i> <b>Draw PNG</b></button>
           </div>
           <div class="col-sm-4">
-            <button class='btn btn-primary draw btn-block' id='draw_svg' type='submit'><i class="fas fa-pencil-ruler"></i> Draw <b>SVG</b></button>
+            <button class='btn btn-primary draw btn-block' id='draw_svg' type='submit'><i class="fas fa-pencil-ruler"></i> <b>Draw SVG</b></button>
           </div>
           <div class="col-sm-4">
             <button class='btn btn-secondary draw btn-block' id='download_pdf' type='submit'><i class="fas fa-file-pdf"></i> Download <b>PDF</b></button>
@@ -68,15 +64,15 @@
 <div class="container" style='margin-top: 10px; margin-bottom:20px; padding: 0;'>
   <div class="row">
     <div class="col-md-3">
-      <label for="leafstyle">Connector shape</label>
+      <label for="leafstyle">コネクタの形状</label>
       <select class="form-control" name='leafstyle' id='leafstyle'>
-        <option value='auto'>Auto</option>
-        <option value='bar'>Bar</option>
-        <option value='nothing'>None</option>
+        <option value='auto'>自動</option>
+        <option value='bar'>縦線のみ</option>
+        <option value='nothing'>なし</option>
       </select>
     </div>
     <div class="col-md-3">
-      <label for="leafstyle">Font style</label>
+      <label for="leafstyle">フォント・スタイル</label>
       <select class="form-control" name='fontstyle'>
         <option value='noto-serif'>Noto Serif</option>
         <option value='noto-sans'>Noto Sans</option>
@@ -85,7 +81,7 @@
       </select>
     </div>
     <div class="col-md-3">
-      <label for="leafstyle">Font size</label>
+      <label for="leafstyle">フォント・サイズ</label>
       <select class="form-control" name='fontsize'>
         <option value='6'>6</option>
         <option value='8'>8</option>
@@ -101,18 +97,18 @@
       </select>
     </div>
     <div class="col-md-3">
-      <label for="leafstyle">Color</label>
+      <label for="leafstyle">カラー</label>
       <select class="form-control" name='color'>
         <option value='modern'>Modern</option>
         <option value='traditional' selected='selected'>Traditional</option>
-        <option value='none'>None</option>
+        <option value='none'>なし</option>
       </select>
       </div>
     </div>
   </div>
   <div class="row">
     <div class="col-md-3">
-      <label for="leafstyle">Connector height</label>
+      <label for="leafstyle">コネクタの高さ</label>
       <select class="form-control" name='vheight'>
         <option value='0.5'>0.5</option>
         <option value='1.0'>1.0</option>
@@ -124,7 +120,7 @@
       </select>
     </div>
     <div class="col-md-3">
-      <label for="leafstyle">Line width</label>
+      <label for="leafstyle">線の幅</label>
       <select class="form-control" name='linewidth'>
         <option value='1' selected='selected'>1</option>
         <option value='2'>2</option>
@@ -139,7 +135,7 @@
 
   <div class='row'>
     <div class='col-md-3'>
-      <label for="color">Polyline</label><br />
+      <label for="color">折れ線コネクタ</label><br />
       <div class="btn-group btn-group-toggle" data-toggle="buttons">
         <label class="btn btn-light active">
           <input type="radio" name="polyline" value="on" autocomplete="off"> On
@@ -151,7 +147,7 @@
     </div>
 
     <div class='col-md-3'>
-      <label for="transparent">Transparent Background</label><br />
+      <label for="transparent">背景の透過</label><br />
       <div class="btn-group btn-group-toggle" data-toggle="buttons">
         <label class="btn btn-light active">
           <input type="radio" name="transparent" value="on" autocomplete="off"> On
@@ -163,7 +159,7 @@
     </div>
 
     <div class='col-md-3'>
-      <label for="symmetrize">Radical Symmetrization</label><br />
+      <label for="symmetrize">極端な左右対象化</label><br />
       <div class="btn-group btn-group-toggle" data-toggle="buttons">
         <label class="btn btn-light active">
           <input type="radio" name="symmetrize" value="on" autocomplete="off" > On
@@ -175,7 +171,7 @@
     </div>
 
     <div class='col-md-3'>
-      <label for="hide_default_connectors">Hide Default Connectors</label><br />
+      <label for="hide_default_connectors">デフォルトのコネクタを隠す</label><br />
       <div class="btn-group btn-group-toggle" data-toggle="buttons">
         <label class="btn btn-light active">
           <input type="radio" name="hide_default_connectors" value="on" autocomplete="off" > On

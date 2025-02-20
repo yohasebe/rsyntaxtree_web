@@ -36,7 +36,7 @@
     <a class="github-fork-ribbon" href="https://github.com/yohasebe/rsyntaxtree" data-ribbon="Fork me on GitHub" title="Fork me on GitHub">Fork me on GitHub</a>
     <style>.github-fork-ribbon:before { background-color: #0C61FE; }</style>
     <div id="wrap">
-      <%= erb :navbar %>
+      <%= erb :"/ja/navbar" %>
       <div data-subdir="<%= $SUB_DIRECTORY %>" id="top" style='visibility:hidden;'></div>
 
       <main role="main">
@@ -56,12 +56,12 @@
       <div class='container' style='margin-top:20px;margin-bottom:40px;'>
         <p class='slogan' style='margin-top: 10px;' >RSyntaxTree Version: <a href='https://github.com/yohasebe/rsyntaxtree'><%= $RSYNTAXTREE_VER %></a></p>
         <div class="alert alert-secondary" role="alert">
-          Request for your support: Thank you for using RSyntaxTree. If you like it, please give a ⭐️ on <a href='https://github.com/yohasebe/rsyntaxtree'>GitHub</a>. It will be a great encouragement for me 😃
+          サポートのお願い：RSyntaxTreeを使っていただきありがとうございます．気に入ってくれたら，<a href='https://github.com/yohasebe/rsyntaxtree'>GitHub</a>で⭐️をつけていただけると励みになります😃
         </div>
 
-      <%= ABOUT_HTML %>
+      <%= ABOUT_HTML_JA %>
       </div>
-      <%= erb :footer %>
+      <%= erb :"/ja/footer" %>
 
       <div id="to-top" class="scroll-top ctrl-wrapper">
         <span class="ctrl-inner">
