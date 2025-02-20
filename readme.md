@@ -4,6 +4,7 @@ This is an web UI source code package for [RSyntaxTree](https://github.com/yohas
 
 **Changelog**
 
+- [February, 2025] Japanese version web UI is added
 - [December, 2022] Docker Hub images are available
 - [December, 2022] Base Docker image is changed to Alpine
 - [November, 2022] Minified JS and CSS are included
