@@ -10,9 +10,9 @@ RSyntaxTreeの[コマンドライン版](http://github.com/yohasebe/rsyntaxtree)
 
 RSyntaxTreeのオリジナルバージョンは，André Esenbachによる[phpSyntaxTree](http://ironcreek.net/phpsyntaxtree/)をもとに開発されました．
 
-### 最新の更新情報
+### 最新の情報
 
-* 日本語版Web UIを追加 [2025年2月]
+* Web UIの操作性向上; 日本語版UIを追加 [2025年2月]
 * 角括弧を`\[`と`\]`でエスケープ可能に [2024年10月]
 * クロスハッチのレンダリングの問題を修正 [2023年9月]
 * PDFダウンロード機能を追加 [2023年2月]
