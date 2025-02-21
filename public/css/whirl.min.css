@@ -470,3 +470,7 @@ Makes use of standard animation spin and minimally extends core.*/
   border-left: 4px solid #999999;
   border-bottom: 4px solid #bbbbbb;
 }
+
+ .btn-group-toggle .btn.active {
+     color: #3579f6 !important;
+ }
