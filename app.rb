@@ -49,6 +49,18 @@ configure do
   enable :sessions
 end
 
+# Helper method: asset version management
+helpers do
+  def asset_version
+    # Always use latest version in development, use version number in production
+    if settings.development?
+      Time.now.to_i.to_s
+    else
+      RSyntaxTreeWeb::VERSION
+    end
+  end
+end
+
 # the default / route, whose views are in the '/views' directory
 get '/' do
   erb :index

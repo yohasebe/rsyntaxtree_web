@@ -1,16 +1,28 @@
 # frozen_string_literal: true
 
-require "sinatra"
+path = File.expand_path("../", __FILE__)
 
-set :bind, "0.0.0.0"
-set :environment, :development
+require 'sinatra'
+require "#{path}/app"
 
-require_relative "app"
+# Cache control settings
+use Rack::Static,
+  :urls => ["/css", "/js", "/images", "/fonts"],
+  :root => "public",
+  :header_rules => [
+    [:all, {
+      'Cache-Control' => 'public, max-age=3600',
+      'Expires' => proc { (Time.now + 3600).httpdate }
+    }],
+    [%w(css js), {
+      'Cache-Control' => 'public, max-age=86400'
+    }]
+  ]
 
 $SUB_DIRECTORY = "/rsyntaxtree"
 
 run Sinatra::Application
 
-map "/rsyntaxtree" do
+map '/rsyntaxtree' do
   run Sinatra::Application
 end
