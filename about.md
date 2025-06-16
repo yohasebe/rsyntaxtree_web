@@ -12,7 +12,12 @@ The original version of RSyntaxTree was inspired by [phpSyntaxTree](http://ironc
 
 ### What's new
 
+* Backslash `\` and bar `|` quick insert buttons added [June 2025]
+* `IPA (International Phonetic Alphabet) virtual keyboard` added [June 2025]
 * Improved usability of the Web UI; Japanese UI added [February 2025]
+
+### Past updates
+
 * Escape square brackets with `\[` and `\]` [October 2024]
 * Cross-hatch rendering issue fixed [September 2023]
 * PDF download feature added [February 2023]
@@ -22,8 +27,6 @@ The original version of RSyntaxTree was inspired by [phpSyntaxTree](http://ironc
 * `Hide default connectors` option added [February 2023]
 * Extra connector drawing feature added [February 2023]
 * `Noto Sans Mono` font option added [January 2023]
-
-### Past updates
 
 * The `¥` symbol can be used in place of the backslash `\` to escape certain characters [November 2022]
 * Documentation in [日本語 (Japanese)](https://yohasebe.github.io/rsyntaxtree/documentation_ja) has been added [November 2022]

@@ -426,4 +426,102 @@ $(function(){
     'resizeDuration': 200,
   })
 
+  // Insert character at cursor position
+  function insertAtCursor(text) {
+    editor.session.insert(editor.getCursorPosition(), text);
+    editor.focus();
+  }
+
+  // Backslash and bar insert buttons
+  $("#insert-backslash").click(function(){
+    insertAtCursor('\\');
+  });
+
+  $("#insert-bar").click(function(){
+    insertAtCursor('|');
+  });
+
+  // IPA Keyboard toggle
+  $("#toggle-ipa-keyboard").click(function(){
+    $("#ipa-keyboard-panel").slideToggle();
+  });
+
+  // IPA symbols data
+  var ipaSymbols = {
+    vowels: {
+      "Close": ['i', 'y', 'ɨ', 'ʉ', 'ɯ', 'u'],
+      "Near-close": ['ɪ', 'ʏ', 'ʊ'],
+      "Close-mid": ['e', 'ø', 'ɘ', 'ɵ', 'ɤ', 'o'],
+      "Mid": ['ə'],
+      "Open-mid": ['ɛ', 'œ', 'ɜ', 'ɞ', 'ʌ', 'ɔ'],
+      "Near-open": ['æ', 'ɐ'],
+      "Open": ['a', 'ɶ', 'ä', 'ɑ', 'ɒ']
+    },
+    consonants: {
+      "Plosive": ['p', 'b', 't', 'd', 'ʈ', 'ɖ', 'c', 'ɟ', 'k', 'g', 'q', 'ɢ', 'ʔ', 'ʡ'],
+      "Nasal": ['m', 'ɱ', 'n', 'ɳ', 'ɲ', 'ŋ', 'ɴ'],
+      "Trill": ['ʙ', 'r', 'ʀ'],
+      "Tap/Flap": ['ⱱ', 'ɾ', 'ɽ', 'ɺ'],
+      "Fricative": ['ɸ', 'β', 'f', 'v', 'θ', 'ð', 's', 'z', 'ʃ', 'ʒ', 'ʂ', 'ʐ', 'ç', 'ʝ', 'x', 'ɣ', 'χ', 'ʁ', 'ħ', 'ʕ', 'ʜ', 'ʢ', 'h', 'ɦ', 'ɧ'],
+      "Lateral fricative": ['ɬ', 'ɮ'],
+      "Approximant": ['ʋ', 'ɹ', 'ɻ', 'j', 'ɰ', 'w', 'ɥ', 'ʍ'],
+      "Lateral approximant": ['l', 'ɭ', 'ʎ', 'ʟ', 'ɫ'],
+      "Clicks": ['ʘ', 'ǀ', 'ǃ', 'ǂ', 'ǁ'],
+      "Voiced implosives": ['ɓ', 'ɗ', 'ʄ', 'ɠ', 'ʛ'],
+      "Ejectives": ['pʼ', 'tʼ', 'kʼ', 'sʼ', 'qʼ', 'tʃʼ', 'tsʼ', 'tɬʼ', 'cʼ', 'ʃʼ', 'xʼ', 'χʼ']
+    },
+    diacritics: {
+      "Syllabicity": ['̩', '̯'],
+      "Release": ['ʰ', '̚', 'ⁿ', 'ˡ', '̊'],
+      "Phonation": ['̥', '̬', '̤', '̰', '̼', '̊'],
+      "Articulation": ['̪', '̺', '̻', '̟', '̠', '̈', '̽', '̝', '̞', '̘', '̙', '̹', '̜'],
+      "Co-articulation": ['ʷ', 'ʲ', 'ˠ', 'ˤ', '̴', '̃', '˞'],
+      "Timing": ['̆', '̄', 'ː', 'ˑ']
+    },
+    suprasegmentals: {
+      "Stress": ['ˈ', 'ˌ', 'ˈˈ'],
+      "Length": ['ː', 'ˑ', '̆'],
+      "Intonation": ['|', '‖', '.', '‿', '↗', '↘'],
+      "Tone (Level)": ['˥', '˦', '˧', '˨', '˩'],
+      "Tone (Contour)": ['˩˥', '˥˩', '˧˥', '˩˧', '˧˩˧', '˦˥', '˧˦', '˨˧', '˩˨'],
+      "Tone (Diacritics)": ['̋', '́', '̄', '̀', '̏', '̌', '̂'],
+      "Prosody": ['↑', '↓', '!', '|', '‖']
+    }
+  };
+
+  // Build IPA keyboard panels
+  function buildIPAPanel(category, symbols) {
+    var html = '<div class="ipa-category-container">';
+    
+    for (var subcategory in symbols) {
+      if (symbols.hasOwnProperty(subcategory)) {
+        var chars = symbols[subcategory];
+        html += '<div class="ipa-subcategory">';
+        html += '<h6 class="ipa-subcategory-title">' + subcategory + '</h6>';
+        html += '<div class="ipa-button-group">';
+        
+        chars.forEach(function(char) {
+          html += '<button type="button" class="btn btn-sm btn-outline-secondary ipa-char-btn" data-char="' + char + '">' + char + '</button>';
+        });
+        
+        html += '</div></div>';
+      }
+    }
+    
+    html += '</div>';
+    return html;
+  }
+
+  // Initialize IPA keyboard panels
+  $('#vowels').html(buildIPAPanel('vowels', ipaSymbols.vowels));
+  $('#consonants').html(buildIPAPanel('consonants', ipaSymbols.consonants));
+  $('#diacritics').html(buildIPAPanel('diacritics', ipaSymbols.diacritics));
+  $('#suprasegmentals').html(buildIPAPanel('suprasegmentals', ipaSymbols.suprasegmentals));
+
+  // IPA character button click handler
+  $(document).on('click', '.ipa-char-btn', function() {
+    var char = $(this).data('char');
+    insertAtCursor(char);
+  });
+
 });
