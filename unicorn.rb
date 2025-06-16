@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 worker_processes 10
-working_directory @dir
+working_directory __dir__
 preload_app true
 timeout 30
 listen "#{__dir__}/tmp/rsyntaxtree.sock", backlog: 64
