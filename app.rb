@@ -96,8 +96,8 @@ post '/check_plus' do
     return { status: "failure", message: "NG" }.to_json unless result
 
     rs_generator = RSyntaxTree::RSGenerator.new(params)
-    tree = rs_generator.draw_tree
-    tree ? { status: "success", message: "OK" }.to_json : raise
+    svg = rs_generator.draw_svg
+    svg ? { status: "success", message: "OK" }.to_json : raise
   rescue RSTError => e
     { status: "failure", message: e.message.gsub("\n", "<br />") }.to_json
   rescue StandardError
