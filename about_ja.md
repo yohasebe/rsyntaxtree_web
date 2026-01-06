@@ -28,7 +28,6 @@ RSyntaxTreeのオリジナルバージョンは，André Esenbachによる[phpSy
 * `デフォルトコネクタを非表示`オプションを追加 [2023年2月]
 * 追加コネクタ描画機能を追加 [2023年2月]
 * `Noto Sans Mono`フォントオプションを追加 [2023年1月]
-
 * バックスラッシュ`\`の代わりに`¥`記号を使用して特定の文字をエスケープ可能に [2022年11月]
 * [日本語](https://yohasebe.github.io/rsyntaxtree/documentation_ja)のドキュメントを追加 [2022年11月]
 * RSyntaxTree on the Web（dockerを使用してローカルで実行可能なUIソースコードパッケージ）[2022年6月]
