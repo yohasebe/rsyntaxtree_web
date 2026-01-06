@@ -12,6 +12,7 @@ The original version of RSyntaxTree was inspired by [phpSyntaxTree](http://ironc
 
 ### What's new
 
+* Per-node coloring with `@color:` syntax (named colors and hex colors) [January 2026]
 * Backslash `\` and bar `|` quick insert buttons added [June 2025]
 * `IPA (International Phonetic Alphabet) virtual keyboard` added [June 2025]
 * Improved usability of the Web UI; Japanese UI added [February 2025]
