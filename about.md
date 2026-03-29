@@ -38,7 +38,7 @@ The original version of RSyntaxTree was inspired by [phpSyntaxTree](http://ironc
 * Text markup is more flexibly applicable than before [January 2022]
 * New text markup patterns (newlines, brackets, horizontal lines, boxed texts) [January 2022]
 * Triangle can be specified in all connector modes (`auto`, `bar`, `none`) [January 2022]
-* Superscript (e.g. T<sup>0</sup>) specification is possible [December 2021]
+* Subscript (`_text_`) and superscript (`__text__`) specification is possible (e.g. `DP_i_` → DP<sub>i</sub>, `T__0__` → T<sup>0</sup>) [December 2021]
 * Newline characters `\n` can be used inside terminal nodes [December 2021]
 * Label-less terminal nodes are now allowed (e.g. `[A [B] [C]]`) [November 2021]
 * Auto bracket close option [November 2021]
