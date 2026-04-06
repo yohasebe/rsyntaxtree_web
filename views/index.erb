@@ -44,9 +44,7 @@
               </label>&nbsp;&nbsp;
             </div>
             <button type="button" class="btn btn-sm btn-light" id="check"><i class="far fa-check-square"></i> Check brackets</button>&nbsp;
-            <button type="button" class="btn btn-sm btn-light" id="clear"><i class="fas fa-eraser"></i> Clear text</button>&nbsp;
-            <button type="button" class="btn btn-sm btn-light" id="insert-backslash" title="Insert backslash">\</button>&nbsp;
-            <button type="button" class="btn btn-sm btn-light" id="insert-bar" title="Insert bar">|</button>
+            <button type="button" class="btn btn-sm btn-light" id="clear"><i class="fas fa-eraser"></i> Clear text</button>
           </div>
         </div>
 
@@ -61,7 +59,10 @@
             <div class="card-body">
               <ul class="nav nav-tabs" id="ipa-tabs" role="tablist">
                 <li class="nav-item">
-                  <a class="nav-link active" id="vowels-tab" data-toggle="tab" href="#vowels" role="tab">Vowels</a>
+                  <a class="nav-link active" id="markup-tab" data-toggle="tab" href="#markup" role="tab">Markup</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="vowels-tab" data-toggle="tab" href="#vowels" role="tab">Vowels</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" id="consonants-tab" data-toggle="tab" href="#consonants" role="tab">Consonants</a>
@@ -74,7 +75,19 @@
                 </li>
               </ul>
               <div class="tab-content" id="ipa-tab-content" style="padding-top: 10px;">
-                <div class="tab-pane fade show active" id="vowels" role="tabpanel"></div>
+                <div class="tab-pane fade show active" id="markup" role="tabpanel">
+                  <button type="button" class="btn btn-sm btn-outline-secondary ipa-char-btn" data-char="\\" title="Backslash (escape / newline)">\</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary ipa-char-btn" data-char="|" title="Bar (boxed text)">|</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary ipa-char-btn" data-char="*" title="Italic / Bold">*</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary ipa-char-btn" data-char="_" title="Subscript / Superscript">_</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary ipa-char-btn" data-char="^" title="Triangle connector">^</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary ipa-char-btn" data-char="#" title="Brackets / Rectangle">#</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary ipa-char-btn" data-char="{" title="Circle (open)">{</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary ipa-char-btn" data-char="}" title="Circle (close)">}</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary ipa-char-btn" data-char="<>" title="Whitespace">&lt;&gt;</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary ipa-char-btn" data-char="@" title="Per-node color">@</button>
+                </div>
+                <div class="tab-pane fade" id="vowels" role="tabpanel"></div>
                 <div class="tab-pane fade" id="consonants" role="tabpanel"></div>
                 <div class="tab-pane fade" id="diacritics" role="tabpanel"></div>
                 <div class="tab-pane fade" id="suprasegmentals" role="tabpanel"></div>
@@ -85,13 +98,13 @@
 
         <div class="row" style="margin-bottom:15px; margin-top:15px;">
           <div class="col-sm-4">
-            <button class="btn btn-primary draw btn-block" id="draw_png" type="button"><i class="fas fa-image"></i> Draw <b>PNG</b></button>
+            <button class="btn btn-sm btn-primary draw btn-block" id="draw_png" type="button"><i class="fas fa-image"></i> Draw <b>PNG</b></button>
           </div>
           <div class="col-sm-4">
-            <button class="btn btn-primary draw btn-block" id="draw_svg" type="button"><i class="fas fa-vector-square"></i> Draw <b>SVG</b></button>
+            <button class="btn btn-sm btn-primary draw btn-block" id="draw_svg" type="button"><i class="fas fa-vector-square"></i> Draw <b>SVG</b></button>
           </div>
           <div class="col-sm-4">
-            <button class="btn btn-secondary draw btn-block" id="download_pdf" type="button"><i class="fas fa-file-pdf"></i> Download <b>PDF</b></button>
+            <button class="btn btn-sm btn-secondary draw btn-block" id="download_pdf" type="button"><i class="fas fa-file-pdf"></i> Download <b>PDF</b></button>
           </div>
         </div>
 
@@ -105,7 +118,7 @@
     <div class="col-md-3">
       <div class="form-group">
         <label for="leafstyle">Connector shape</label>
-        <select class="form-control" name="leafstyle" id="leafstyle">
+        <select class="form-control form-control-sm" name="leafstyle" id="leafstyle">
           <option value="auto">Auto</option>
           <option value="bar">Bar</option>
           <option value="nothing">None</option>
@@ -116,7 +129,7 @@
     <div class="col-md-3">
       <div class="form-group">
         <label for="fontstyle">Font style</label>
-        <select class="form-control" name="fontstyle" id="fontstyle">
+        <select class="form-control form-control-sm" name="fontstyle" id="fontstyle">
           <option value="noto-serif">Noto Serif</option>
           <option value="noto-sans">Noto Sans</option>
           <option value="noto-sans-mono">Noto Sans Mono</option>
@@ -128,7 +141,7 @@
     <div class="col-md-3">
       <div class="form-group">
         <label for="fontsize">Font size</label>
-        <select class="form-control" name="fontsize" id="fontsize">
+        <select class="form-control form-control-sm" name="fontsize" id="fontsize">
           <option value="6">6</option>
           <option value="8">8</option>
           <option value="10">10</option>
@@ -147,7 +160,7 @@
     <div class="col-md-3">
       <div class="form-group">
         <label for="color">Color</label>
-        <select class="form-control" name="color" id="color">
+        <select class="form-control form-control-sm" name="color" id="color">
           <option value="modern">Modern</option>
           <option value="traditional" selected="selected">Traditional</option>
           <option value="none">None</option>
@@ -160,7 +173,7 @@
     <div class="col-md-3">
       <div class="form-group">
         <label for="vheight">Connector height</label>
-        <select class="form-control" name="vheight" id="vheight">
+        <select class="form-control form-control-sm" name="vheight" id="vheight">
           <option value="0.5">0.5</option>
           <option value="1.0">1.0</option>
           <option value="1.5">1.5</option>
@@ -175,7 +188,7 @@
     <div class="col-md-3">
       <div class="form-group">
         <label for="linewidth">Line width</label>
-        <select class="form-control" name="linewidth" id="linewidth">
+        <select class="form-control form-control-sm" name="linewidth" id="linewidth">
           <option value="1" selected="selected">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -206,7 +219,7 @@
     <div class="col-md-3">
       <div class="form-group">
         <label for="polyline">Polyline</label><br />
-        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
           <label class="btn btn-light active">
             <input type="radio" name="polyline" id="polyline-on" value="on" autocomplete="off"> On
           </label>
@@ -220,7 +233,7 @@
     <div class="col-md-3">
       <div class="form-group">
         <label for="transparent">Transparent Background</label><br />
-        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
           <label class="btn btn-light">
             <input type="radio" name="transparent" id="transparent-on" value="on" autocomplete="off"> On
           </label>
@@ -234,7 +247,7 @@
     <div class="col-md-3">
       <div class="form-group">
         <label for="symmetrize">Radical Symmetrization</label><br />
-        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
           <label class="btn btn-light">
             <input type="radio" name="symmetrize" id="symmetrize-on" value="on" autocomplete="off"> On
           </label>
@@ -248,7 +261,7 @@
     <div class="col-md-3">
       <div class="form-group">
         <label for="hide_default_connectors">Hide Connectors</label><br />
-        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
           <label class="btn btn-light">
             <input type="radio" name="hide_default_connectors" id="hide_default_connectors-on" value="on" autocomplete="off"> On
           </label>

@@ -40,9 +40,7 @@
               </label>&nbsp;&nbsp;
             </div>
             <button type="button" class="btn btn-sm btn-light" id="check"><i class="far fa-check-square"></i><small> 括弧の対応チェック</small></button>&nbsp;
-            <button type="button" class="btn btn-sm btn-light" id="clear"><i class="fas fa-eraser"></i><small> クリア</small></button>&nbsp;
-            <button type="button" class="btn btn-sm btn-light" id="insert-backslash" title="バックスラッシュを挿入">\</button>&nbsp;
-            <button type="button" class="btn btn-sm btn-light" id="insert-bar" title="縦線を挿入">|</button>
+            <button type="button" class="btn btn-sm btn-light" id="clear"><i class="fas fa-eraser"></i><small> クリア</small></button>
           </div>
         </div>
 
@@ -57,7 +55,10 @@
             <div class="card-body">
               <ul class="nav nav-tabs" id="ipa-tabs" role="tablist">
                 <li class="nav-item">
-                  <a class="nav-link active" id="vowels-tab" data-toggle="tab" href="#vowels" role="tab">母音</a>
+                  <a class="nav-link active" id="markup-tab" data-toggle="tab" href="#markup" role="tab">マークアップ</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="vowels-tab" data-toggle="tab" href="#vowels" role="tab">母音</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" id="consonants-tab" data-toggle="tab" href="#consonants" role="tab">子音</a>
@@ -70,7 +71,19 @@
                 </li>
               </ul>
               <div class="tab-content" id="ipa-tab-content" style="padding-top: 10px;">
-                <div class="tab-pane fade show active" id="vowels" role="tabpanel"></div>
+                <div class="tab-pane fade show active" id="markup" role="tabpanel">
+                  <button type="button" class="btn btn-sm btn-outline-secondary ipa-char-btn" data-char="\\" title="バックスラッシュ（エスケープ・改行）">\</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary ipa-char-btn" data-char="|" title="縦線（ボックス）">|</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary ipa-char-btn" data-char="*" title="イタリック・太字">*</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary ipa-char-btn" data-char="_" title="下付き・上付き">_</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary ipa-char-btn" data-char="^" title="三角コネクタ">^</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary ipa-char-btn" data-char="#" title="括弧・矩形">#</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary ipa-char-btn" data-char="{" title="丸囲み（開）">{</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary ipa-char-btn" data-char="}" title="丸囲み（閉）">}</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary ipa-char-btn" data-char="<>" title="空白">&lt;&gt;</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary ipa-char-btn" data-char="@" title="ノード別カラー">@</button>
+                </div>
+                <div class="tab-pane fade" id="vowels" role="tabpanel"></div>
                 <div class="tab-pane fade" id="consonants" role="tabpanel"></div>
                 <div class="tab-pane fade" id="diacritics" role="tabpanel"></div>
                 <div class="tab-pane fade" id="suprasegmentals" role="tabpanel"></div>
@@ -81,13 +94,13 @@
 
         <div class="row" style="margin-bottom:15px; margin-top:15px;">
           <div class="col-sm-4">
-            <button class="btn btn-primary draw btn-block" id="draw_png" type="button"><i class="fas fa-image"></i> Draw <b>PNG</b></button>
+            <button class="btn btn-sm btn-primary draw btn-block" id="draw_png" type="button"><i class="fas fa-image"></i> Draw <b>PNG</b></button>
           </div>
           <div class="col-sm-4">
-            <button class="btn btn-primary draw btn-block" id="draw_svg" type="button"><i class="fas fa-vector-square"></i> Draw <b>SVG</b></button>
+            <button class="btn btn-sm btn-primary draw btn-block" id="draw_svg" type="button"><i class="fas fa-vector-square"></i> Draw <b>SVG</b></button>
           </div>
           <div class="col-sm-4">
-            <button class="btn btn-secondary draw btn-block" id="download_pdf" type="button"><i class="fas fa-file-pdf"></i> Download <b>PDF</b></button>
+            <button class="btn btn-sm btn-secondary draw btn-block" id="download_pdf" type="button"><i class="fas fa-file-pdf"></i> Download <b>PDF</b></button>
           </div>
         </div>
 
@@ -100,7 +113,7 @@
   <div class="row">
     <div class="col-md-3">
       <label for="leafstyle">コネクタの形状</label>
-      <select class="form-control" name="leafstyle" id="leafstyle">
+      <select class="form-control form-control-sm" name="leafstyle" id="leafstyle">
         <option value="auto">自動</option>
         <option value="bar">縦線のみ</option>
         <option value="nothing">なし</option>
@@ -108,7 +121,7 @@
     </div>
     <div class="col-md-3">
       <label for="fontstyle">フォント・スタイル</label>
-      <select class="form-control" name="fontstyle" id="fontstyle">
+      <select class="form-control form-control-sm" name="fontstyle" id="fontstyle">
         <option value="noto-serif">Noto Serif</option>
         <option value="noto-sans">Noto Sans</option>
         <option value="noto-sans-mono">Noto Sans Mono</option>
@@ -117,7 +130,7 @@
     </div>
     <div class="col-md-3">
       <label for="fontsize">フォント・サイズ</label>
-      <select class="form-control" name="fontsize" id="fontsize">
+      <select class="form-control form-control-sm" name="fontsize" id="fontsize">
         <option value="6">6</option>
         <option value="8">8</option>
         <option value="10">10</option>
@@ -133,7 +146,7 @@
     </div>
     <div class="col-md-3">
       <label for="color">カラー</label>
-      <select class="form-control" name="color" id="color">
+      <select class="form-control form-control-sm" name="color" id="color">
         <option value="modern">Modern</option>
         <option value="traditional" selected="selected">Traditional</option>
         <option value="none">なし</option>
@@ -144,7 +157,7 @@
   <div class="row">
     <div class="col-md-3">
       <label for="vheight">コネクタの高さ</label>
-      <select class="form-control" name="vheight" id="vheight">
+      <select class="form-control form-control-sm" name="vheight" id="vheight">
         <option value="0.5">0.5</option>
         <option value="1.0">1.0</option>
         <option value="1.5">1.5</option>
@@ -156,7 +169,7 @@
     </div>
     <div class="col-md-3">
       <label for="linewidth">線の幅</label>
-      <select class="form-control" name="linewidth" id="linewidth">
+      <select class="form-control form-control-sm" name="linewidth" id="linewidth">
         <option value="1" selected="selected">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
@@ -166,7 +179,7 @@
     </div>
     <div class="col-md-3">
       <label for="direction">方向</label>
-      <select class="form-control" name="direction" id="direction">
+      <select class="form-control form-control-sm" name="direction" id="direction">
         <option value="ttb" selected>上から下</option>
         <option value="ltr">左から右</option>
       </select>
@@ -178,7 +191,7 @@
     <div class="col-md-3">
       <div class="form-group">
         <label for="polyline">折れ線コネクタ</label><br />
-        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
           <label class="btn btn-light active">
             <input type="radio" name="polyline" id="polyline-on" value="on" autocomplete="off"> On
           </label>
@@ -192,7 +205,7 @@
     <div class="col-md-3">
       <div class="form-group">
         <label for="transparent">背景の透過</label><br />
-        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
           <label class="btn btn-light">
             <input type="radio" name="transparent" id="transparent-on" value="on" autocomplete="off"> On
           </label>
@@ -206,7 +219,7 @@
     <div class="col-md-3">
       <div class="form-group">
         <label for="symmetrize">極端な左右対象化</label><br />
-        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
           <label class="btn btn-light">
             <input type="radio" name="symmetrize" id="symmetrize-on" value="on" autocomplete="off"> On
           </label>
@@ -220,7 +233,7 @@
     <div class="col-md-3">
       <div class="form-group">
         <label for="hide_default_connectors">コネクタを隠す</label><br />
-        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
           <label class="btn btn-light active">
             <input type="radio" name="hide_default_connectors" id="hide_default_connectors-on" value="on" autocomplete="off"> On
           </label>
