@@ -295,6 +295,11 @@ margin: 8px 0;
   margin-bottom: 5px;
 }
 
+#ipa-tabs .nav-link {
+  font-size: 0.8rem;
+  padding: 0.3rem 0.6rem;
+}
+
 /* Responsive adjustments */
 @media (max-width: 576px) {
   .ipa-char-btn {
