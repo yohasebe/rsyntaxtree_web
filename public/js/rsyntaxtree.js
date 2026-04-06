@@ -103,6 +103,7 @@ $(function(){
     params = params + "&symmetrize="  +  $("input[name=symmetrize]:checked").val();
     params = params + "&transparent=" +  $("input[name=transparent]:checked").val();
     params = params + "&hide_default_connectors=" +  $("input[name=hide_default_connectors]:checked").val();
+    params = params + "&direction=" +  $("select[name=direction]").val();
     return params;
   }
 
@@ -215,6 +216,7 @@ $(function(){
       .append($('<input/>', {type: 'hidden', name: 'symmetrize', value:  $("input[name=symmetrize]:checked").val()}))
       .append($('<input/>', {type: 'hidden', name: 'hide_default_connectors', value:  $("input[name=hide_default_connectors]:checked").val()}))
       .append($('<input/>', {type: 'hidden', name: 'transparent', value: $("input[name=transparent]:checked").val()}))
+      .append($('<input/>', {type: 'hidden', name: 'direction', value: $("select[name=direction]").val()}))
       .appendTo(document.body).submit();
   }
 
