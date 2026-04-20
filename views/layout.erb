@@ -8,7 +8,8 @@
 
     <meta name="twitter:card"         content="summary" />
     <meta name="twitter:site"         content="@yohasebe" />
-    <meta property="og:url"           content="https://yohasebe.com/rsyntaxtree" />
+    <meta property="og:url"           content="https://yohasebe.com/rsyntaxtree<%= request.path_info %>" />
+    <link rel="canonical"             href="https://yohasebe.com/rsyntaxtree<%= request.path_info %>" />
     <meta property="og:type"          content="website" />
     <meta property="og:title"         content="RSyntaxTree" />
     <meta property="og:description"   content="A Linguistic Syntax Tree Generator" />
