@@ -56,6 +56,10 @@ The original version of RSyntaxTree was inspired by [phpSyntaxTree](http://ironc
 * Refined site design and documentation [March 2018]
 * Text styles (italic and bold) and decoration (underline, overline, line-through) [March 2018]
 
+### Related blog posts
+
+[RSyntaxTree tag on yohasebe.com](https://yohasebe.com/tags/rsyntaxtree/)
+
 ### Author
 
 Yoichiro HASEBE &nbsp;&nbsp;
