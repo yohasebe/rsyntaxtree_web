@@ -1,5 +1,5 @@
 FROM ruby:3.4-alpine
-ENV WORKSPACE /rsyntaxtree
+ENV WORKSPACE=/rsyntaxtree
 WORKDIR $WORKSPACE
 ADD Gemfile $WORKSPACE
 
