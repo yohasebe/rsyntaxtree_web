@@ -45,7 +45,11 @@ task :start do
   `./bin/start_server`
 end
 
-desc 'Push Docker images'
+desc 'Push Docker images to Docker Hub (DEPRECATED: use the GHCR GitHub Actions workflow)'
+# DEPRECATED: image distribution has moved to the GitHub Container Registry,
+# built automatically by .github/workflows/docker.yml. This task remains only
+# for a final courtesy push of the current version to the deprecated Docker Hub
+# repo, and can be removed once Docker Hub is fully retired.
 task :push do
   sh <<-DOCKER.strip_heredoc, { verbose: false }
     /bin/bash -xeu <<'BASH'

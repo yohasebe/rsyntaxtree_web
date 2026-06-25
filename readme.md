@@ -4,14 +4,17 @@ This is an web UI source code package for [RSyntaxTree](https://github.com/yohas
 
 **Changelog**
 
+- [June, 2026] Prebuilt images moved to the GitHub Container Registry (GHCR); the Docker Hub image is deprecated
 - [February, 2025] Japanese version web UI is added
 - [December, 2022] Docker Hub images are available
 - [December, 2022] Base Docker image is changed to Alpine
 - [November, 2022] Minified JS and CSS are included
 
-You can setup a docker container using either downloading a Docker Hub image or building a Docker image locally.
+You can setup a docker container using either the prebuilt image from the GitHub Container Registry or building a Docker image locally.
 
-## Usage 1: Use Docker Hub (Recommended)
+## Usage 1: Use the prebuilt image (Recommended)
+
+The prebuilt multi-arch image (linux/amd64, linux/arm64) is published on the **GitHub Container Registry (GHCR)**.
 
 ### Setup
 
@@ -23,8 +26,10 @@ You can setup a docker container using either downloading a Docker Hub image or 
 1. Run the following command in a terminal and set up the Docker image. This may take a while the first time. 
 
 ```
-docker run -it -p 8080:8080 yohasebe/rsyntaxtree
+docker run -it -p 8080:8080 ghcr.io/yohasebe/rsyntaxtree
 ```
+
+> **Note:** The Docker Hub image (`yohasebe/rsyntaxtree`) is **deprecated** and no longer updated. Please switch to the GHCR image above. Existing Docker Hub tags are kept for backward compatibility but will not receive new versions.
 
 When you have `INFO -- : worker=0 ready` shown in the terminal, the setup is complete.
 
