@@ -16,7 +16,6 @@ The original version of RSyntaxTree was inspired by [phpSyntaxTree](http://ironc
 * A straight apostrophe in a label is now rendered as a typographic (curly) apostrophe [June 2026]
 * Left-to-right tree layout (`Direction` option: Top to Bottom / Left to Right) [April 2026]
 * Per-node coloring with `@color:` syntax (named colors and hex colors) [January 2026]
-* Backslash `\` and bar `|` quick insert buttons added [June 2025]
 * `IPA (International Phonetic Alphabet) virtual keyboard` added [June 2025]
 * Improved usability of the Web UI; Japanese UI added [February 2025]
 
