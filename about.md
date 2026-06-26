@@ -12,7 +12,8 @@ The original version of RSyntaxTree was inspired by [phpSyntaxTree](http://ironc
 
 ### What's new
 
-* Region shade with `%` syntax: shade the whole subtree a node governs, e.g. c-command/binding domains (`[%@lightblue:VP ...]`); labels now use a smart (curly) apostrophe such as `T'` [June 2026]
+* Region shade with `%` syntax: shade the whole subtree a node governs, e.g. c-command/binding domains (`[%@lightblue:VP ...]`) [June 2026]
+* Labels now use a smart (curly) apostrophe such as `T'` [June 2026]
 * Left-to-right tree layout (`Direction` option: Top to Bottom / Left to Right) [April 2026]
 * Per-node coloring with `@color:` syntax (named colors and hex colors) [January 2026]
 * Backslash `\` and bar `|` quick insert buttons added [June 2025]
