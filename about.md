@@ -67,6 +67,7 @@ If you use RSyntaxTree in your research or teaching materials, please cite it. Y
   author  = {Hasebe, Yoichiro},
   title   = {RSyntaxTree: A graphical syntax tree image generator},
   url     = {https://yohasebe.com/rsyntaxtree},
+  doi     = {10.5281/zenodo.21916150},
   version = {1.6.3},
   year    = {2026}
 }
