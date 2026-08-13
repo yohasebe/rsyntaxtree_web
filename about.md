@@ -58,6 +58,20 @@ The original version of RSyntaxTree was inspired by [phpSyntaxTree](http://ironc
 * Refined site design and documentation [March 2018]
 * Text styles (italic and bold) and decoration (underline, overline, line-through) [March 2018]
 
+### How to cite
+
+If you use RSyntaxTree in your research or teaching materials, please cite it. You can use the following BibTeX entry (adjust `version` to the one shown at the top of this page):
+
+```
+@software{hasebe_rsyntaxtree,
+  author  = {Hasebe, Yoichiro},
+  title   = {RSyntaxTree: A graphical syntax tree image generator},
+  url     = {https://yohasebe.com/rsyntaxtree},
+  version = {1.6.3},
+  year    = {2026}
+}
+```
+
 ### Related blog posts
 
 [RSyntaxTree tag on yohasebe.com](https://yohasebe.com/tags/rsyntaxtree/)

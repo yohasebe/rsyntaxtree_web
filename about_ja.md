@@ -58,6 +58,20 @@ RSyntaxTreeのオリジナルバージョンは，André Esenbachによる[phpSy
 * サイトデザインとドキュメントの改良 [2018年3月]
 * テキストスタイル（イタリックと太字）と装飾（下線，上線，取り消し線）[2018年3月]
 
+### 引用方法
+
+研究や教材で RSyntaxTree をご利用の際は，ぜひ引用してください．以下の BibTeX エントリが利用できます（`version` はページ上部に表示されているものに合わせてください）．
+
+```
+@software{hasebe_rsyntaxtree,
+  author  = {Hasebe, Yoichiro},
+  title   = {RSyntaxTree: A graphical syntax tree image generator},
+  url     = {https://yohasebe.com/rsyntaxtree},
+  version = {1.6.3},
+  year    = {2026}
+}
+```
+
 ### 関連ブログ記事
 
 [yohasebe.com の RSyntaxTree タグ](https://yohasebe.com/tags/rsyntaxtree/)
