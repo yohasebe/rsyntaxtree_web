@@ -192,10 +192,10 @@
       <div class="form-group">
         <label for="polyline">折れ線コネクタ</label><br />
         <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
-          <label class="btn btn-light active">
+          <label class="btn btn-light">
             <input type="radio" name="polyline" id="polyline-on" value="on" autocomplete="off"> On
           </label>
-          <label class="btn btn-light">
+          <label class="btn btn-light active">
             <input type="radio" name="polyline" id="polyline-off" value="off" autocomplete="off" checked> Off
           </label>
         </div>
@@ -234,14 +234,20 @@
       <div class="form-group">
         <label for="hide_default_connectors">コネクタを隠す</label><br />
         <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
-          <label class="btn btn-light active">
+          <label class="btn btn-light">
             <input type="radio" name="hide_default_connectors" id="hide_default_connectors-on" value="on" autocomplete="off"> On
           </label>
-          <label class="btn btn-light">
+          <label class="btn btn-light active">
             <input type="radio" name="hide_default_connectors" id="hide_default_connectors-off" value="off" autocomplete="off" checked> Off
           </label>
         </div>
       </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 text-right">
+      <button type="button" class="btn btn-sm btn-link text-muted" id="reset-settings" title="このブラウザに保存された表示設定を消去してデフォルトに戻します">設定をリセット</button>
     </div>
   </div>
 

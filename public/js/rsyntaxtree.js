@@ -526,4 +526,85 @@ $(function(){
     insertAtCursor(char);
   });
 
+  // ------------------------------------------------------------------
+  // Persist display settings across sessions using localStorage.
+  // Only the settings are stored; the text in the editor is never saved.
+  var SETTINGS_KEY = 'rsyntaxtree-settings';
+  var settingSelects = ['leafstyle', 'fontstyle', 'fontsize', 'color', 'vheight', 'linewidth', 'direction'];
+  var settingRadios = ['polyline', 'transparent', 'symmetrize', 'hide_default_connectors'];
+
+  function saveSettings() {
+    var settings = {};
+    settingSelects.forEach(function(name) {
+      var val = $('select[name=' + name + ']').val();
+      if (val !== undefined && val !== null) settings[name] = val;
+    });
+    settingRadios.forEach(function(name) {
+      var val = $('input[name=' + name + ']:checked').val();
+      if (val !== undefined) settings[name] = val;
+    });
+    settings['auto_bracket'] = $('#auto-bracket').prop('checked');
+    try {
+      localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+    } catch (e) {
+      // Storage unavailable (private browsing etc.); silently skip
+    }
+  }
+
+  function restoreSettings() {
+    var raw = null;
+    try {
+      raw = localStorage.getItem(SETTINGS_KEY);
+    } catch (e) {
+      return;
+    }
+    if (!raw) return;
+    var settings;
+    try {
+      settings = JSON.parse(raw);
+    } catch (e) {
+      return;
+    }
+
+    settingSelects.forEach(function(name) {
+      if (settings[name] === undefined) return;
+      var $sel = $('select[name=' + name + ']');
+      if ($sel.find('option[value="' + settings[name] + '"]').length) {
+        $sel.val(settings[name]);
+      }
+    });
+    settingRadios.forEach(function(name) {
+      if (settings[name] === undefined) return;
+      var $radio = $('input[name=' + name + '][value="' + settings[name] + '"]');
+      if ($radio.length) {
+        $radio.prop('checked', true);
+        $radio.closest('label').addClass('active')
+              .siblings('label').removeClass('active');
+      }
+    });
+    if (settings['auto_bracket'] === true) {
+      $('#auto-bracket').prop('checked', true);
+      editor.setBehavioursEnabled(true);
+    }
+  }
+
+  restoreSettings();
+
+  settingSelects.forEach(function(name) {
+    $('select[name=' + name + ']').on('change', saveSettings);
+  });
+  settingRadios.forEach(function(name) {
+    $('input[name=' + name + ']').on('change', saveSettings);
+  });
+  $('#auto-bracket').on('change', saveSettings);
+
+  $('#reset-settings').click(function() {
+    try {
+      localStorage.removeItem(SETTINGS_KEY);
+    } catch (e) {
+      // ignore
+    }
+    location.reload();
+  });
+
 });
