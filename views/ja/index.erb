@@ -111,209 +111,181 @@
 
 <div class="container" style="margin-top: 40px; padding: 0;">
   <div class="row">
-    <div class="col-md-6 col-lg-3 mb-3">
-      <div class="card h-100 option-card">
-        <div class="card-header py-2">Layout / レイアウト</div>
-        <div class="card-body py-2">
-          <div class="row">
-<div class="col-12">
-    <div class="form-group">
-      <label for="tidy" title="レイアウトの尺度（広い→密の順）。Symmetric：完全な左右対称。Low：語順を厳密に保って圧縮。Medium：さらに圧縮するが語の左右順序は入れ替わらない。High：最も密（語順保証は段内のみ）">Tidy レイアウト</label>
-      <select class="form-control form-control-sm" name="tidy" id="tidy">
-          <option value="symmetric">Symmetric</option>
-          <option value="off" selected="selected">Off</option>
-          <option value="low">Low</option>
-          <option value="medium">Medium</option>
-          <option value="high">High</option>
-      </select>
-    </div>
-</div>
-<div class="col-12">
-    <div class="form-group">
-      <label for="hspacing" title="すべてのレイアウトモードで横方向の間隔を一括調整します（縦の間隔の横方向版。1.0が標準）">横の間隔</label>
-      <select class="form-control form-control-sm" name="hspacing" id="hspacing">
-          <option value="0.5">0.5</option>
-          <option value="0.75">0.75</option>
-          <option value="1.0" selected="selected">1.0</option>
-          <option value="1.5">1.5</option>
-          <option value="2.0">2.0</option>
-          <option value="3.0">3.0</option>
-      </select>
-    </div>
-</div>
-<div class="col-12">
-    <div class="form-group">
-      <label for="vheight" title="レベル間の縦方向の距離です。tidy モードでは基準値として機能し、枝の角度を揃える自動加算がこれに加わります">縦の間隔（コネクタの高さ）</label>
-      <select class="form-control form-control-sm" name="vheight" id="vheight">
-          <option value="0.5">0.5</option>
-          <option value="1.0">1.0</option>
-          <option value="1.5">1.5</option>
-          <option value="2.0" selected="selected">2.0</option>
-          <option value="3.0">3.0</option>
-          <option value="4.0">4.0</option>
-          <option value="5.0">5.0</option>
-      </select>
-    </div>
-</div>
-<div class="col-12">
-    <div class="form-group">
-      <label for="direction">方向</label>
-      <select class="form-control form-control-sm" name="direction" id="direction">
-          <option value="ttb" selected="selected">上から下</option>
-          <option value="ltr">左から右</option>
-      </select>
-    </div>
-</div>
-<div class="col-12">
-<div class="form-group">
-  <label for="mirror" title="樹形図全体を左右反転し、右から左に展開させます（アラビア語・ヘブライ語などRTL文字体系の慣習）">左右反転（RTL用）</label><br />
-  <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
-    <label class="btn btn-light">
-      <input type="radio" name="mirror" id="mirror-on" value="on" autocomplete="off"> On
-    </label>
-    <label class="btn btn-light active">
-      <input type="radio" name="mirror" id="mirror-off" value="off" autocomplete="off" checked> Off
-    </label>
-  </div>
-</div>
-</div>
-
+    <div class="col-md-3">
+          <div class="form-group">
+            <label for="tidy" title="レイアウトの尺度（広い→密の順）。Symmetric：完全な左右対称。Low：語順を厳密に保って圧縮。Medium：さらに圧縮するが語の左右順序は入れ替わらない。High：最も密（語順保証は段内のみ）">Tidy レイアウト</label>
+            <select class="form-control form-control-sm" name="tidy" id="tidy">
+                <option value="symmetric">Symmetric</option>
+                <option value="off" selected="selected">Off</option>
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+            </select>
           </div>
+    </div>
+    <div class="col-md-3">
+          <div class="form-group">
+            <label for="hspacing" title="すべてのレイアウトモードで横方向の間隔を一括調整します（縦の間隔の横方向版。1.0が標準）">横の間隔</label>
+            <select class="form-control form-control-sm" name="hspacing" id="hspacing">
+                <option value="0.5">0.5</option>
+                <option value="0.75">0.75</option>
+                <option value="1.0" selected="selected">1.0</option>
+                <option value="1.5">1.5</option>
+                <option value="2.0">2.0</option>
+                <option value="3.0">3.0</option>
+            </select>
+          </div>
+    </div>
+    <div class="col-md-3">
+          <div class="form-group">
+            <label for="vheight" title="レベル間の縦方向の距離です。tidy モードでは基準値として機能し、枝の角度を揃える自動加算がこれに加わります">縦の間隔（コネクタの高さ）</label>
+            <select class="form-control form-control-sm" name="vheight" id="vheight">
+                <option value="0.5">0.5</option>
+                <option value="1.0">1.0</option>
+                <option value="1.5">1.5</option>
+                <option value="2.0" selected="selected">2.0</option>
+                <option value="3.0">3.0</option>
+                <option value="4.0">4.0</option>
+                <option value="5.0">5.0</option>
+            </select>
+          </div>
+    </div>
+    <div class="col-md-3">
+          <div class="form-group">
+            <label for="direction">方向</label>
+            <select class="form-control form-control-sm" name="direction" id="direction">
+                <option value="ttb" selected="selected">上から下</option>
+                <option value="ltr">左から右</option>
+            </select>
+          </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+      <div class="form-group">
+        <label for="mirror" title="樹形図全体を左右反転し、右から左に展開させます（アラビア語・ヘブライ語などRTL文字体系の慣習）">左右反転（RTL用）</label><br />
+        <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
+          <label class="btn btn-light">
+            <input type="radio" name="mirror" id="mirror-on" value="on" autocomplete="off"> On
+          </label>
+          <label class="btn btn-light active">
+            <input type="radio" name="mirror" id="mirror-off" value="off" autocomplete="off" checked> Off
+          </label>
         </div>
       </div>
     </div>
-    <div class="col-md-6 col-lg-3 mb-3">
-      <div class="card h-100 option-card">
-        <div class="card-header py-2">Text / 書体と文字</div>
-        <div class="card-body py-2">
-          <div class="row">
-<div class="col-12">
-    <div class="form-group">
-      <label for="fontstyle">フォント・スタイル</label>
-      <select class="form-control form-control-sm" name="fontstyle" id="fontstyle">
-          <option value="noto-serif">Noto Serif</option>
-          <option value="noto-sans">Noto Sans</option>
-          <option value="noto-sans-mono">Noto Sans Mono</option>
-          <option value="cjk">WQY Zen Hei (CJK)</option>
-      </select>
-    </div>
-</div>
-<div class="col-12">
-    <div class="form-group">
-      <label for="fontsize">フォント・サイズ</label>
-      <select class="form-control form-control-sm" name="fontsize" id="fontsize">
-          <option value="6">6</option>
-          <option value="8">8</option>
-          <option value="10">10</option>
-          <option value="12">12</option>
-          <option value="14">14</option>
-          <option value="16" selected="selected">16</option>
-          <option value="18">18</option>
-          <option value="20">20</option>
-          <option value="22">22</option>
-          <option value="24">24</option>
-          <option value="26">26</option>
-      </select>
-    </div>
-</div>
-<div class="col-12">
-    <div class="form-group">
-      <label for="color">カラー</label>
-      <select class="form-control form-control-sm" name="color" id="color">
-          <option value="modern">Modern</option>
-          <option value="traditional" selected="selected">Traditional</option>
-          <option value="none">なし</option>
-      </select>
-    </div>
-</div>
-
+    <div class="col-md-3">
+          <div class="form-group">
+            <label for="fontstyle">フォント・スタイル</label>
+            <select class="form-control form-control-sm" name="fontstyle" id="fontstyle">
+                <option value="noto-serif">Noto Serif</option>
+                <option value="noto-sans">Noto Sans</option>
+                <option value="noto-sans-mono">Noto Sans Mono</option>
+                <option value="cjk">WQY Zen Hei (CJK)</option>
+            </select>
           </div>
+    </div>
+    <div class="col-md-3">
+          <div class="form-group">
+            <label for="fontsize">フォント・サイズ</label>
+            <select class="form-control form-control-sm" name="fontsize" id="fontsize">
+                <option value="6">6</option>
+                <option value="8">8</option>
+                <option value="10">10</option>
+                <option value="12">12</option>
+                <option value="14">14</option>
+                <option value="16" selected="selected">16</option>
+                <option value="18">18</option>
+                <option value="20">20</option>
+                <option value="22">22</option>
+                <option value="24">24</option>
+                <option value="26">26</option>
+            </select>
+          </div>
+    </div>
+    <div class="col-md-3">
+          <div class="form-group">
+            <label for="color">カラー</label>
+            <select class="form-control form-control-sm" name="color" id="color">
+                <option value="modern">Modern</option>
+                <option value="traditional" selected="selected">Traditional</option>
+                <option value="none">なし</option>
+            </select>
+          </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+          <div class="form-group">
+            <label for="leafstyle">コネクタの形状</label>
+            <select class="form-control form-control-sm" name="leafstyle" id="leafstyle">
+                <option value="auto" selected="selected">自動</option>
+                <option value="bar">縦線のみ</option>
+                <option value="nothing">なし</option>
+            </select>
+          </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group">
+        <label for="polyline">折れ線コネクタ</label><br />
+        <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
+          <label class="btn btn-light">
+            <input type="radio" name="polyline" id="polyline-on" value="on" autocomplete="off"> On
+          </label>
+          <label class="btn btn-light active">
+            <input type="radio" name="polyline" id="polyline-off" value="off" autocomplete="off" checked> Off
+          </label>
         </div>
       </div>
     </div>
-    <div class="col-md-6 col-lg-3 mb-3">
-      <div class="card h-100 option-card">
-        <div class="card-header py-2">Connectors / コネクタ</div>
-        <div class="card-body py-2">
-          <div class="row">
-<div class="col-12">
-    <div class="form-group">
-      <label for="leafstyle">コネクタの形状</label>
-      <select class="form-control form-control-sm" name="leafstyle" id="leafstyle">
-          <option value="auto" selected="selected">自動</option>
-          <option value="bar">縦線のみ</option>
-          <option value="nothing">なし</option>
-      </select>
-    </div>
-</div>
-<div class="col-12">
-<div class="form-group">
-  <label for="polyline">折れ線コネクタ</label><br />
-  <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
-    <label class="btn btn-light">
-      <input type="radio" name="polyline" id="polyline-on" value="on" autocomplete="off"> On
-    </label>
-    <label class="btn btn-light active">
-      <input type="radio" name="polyline" id="polyline-off" value="off" autocomplete="off" checked> Off
-    </label>
-  </div>
-</div>
-</div>
-<div class="col-12">
-    <div class="form-group">
-      <label for="linewidth">線の幅</label>
-      <select class="form-control form-control-sm" name="linewidth" id="linewidth">
-          <option value="1" selected="selected">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-      </select>
-    </div>
-</div>
-<div class="col-12">
-<div class="form-group">
-  <label for="hide_default_connectors">コネクタを隠す</label><br />
-  <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
-    <label class="btn btn-light">
-      <input type="radio" name="hide_default_connectors" id="hide_default_connectors-on" value="on" autocomplete="off"> On
-    </label>
-    <label class="btn btn-light active">
-      <input type="radio" name="hide_default_connectors" id="hide_default_connectors-off" value="off" autocomplete="off" checked> Off
-    </label>
-  </div>
-</div>
-</div>
-
+    <div class="col-md-3">
+          <div class="form-group">
+            <label for="linewidth">線の幅</label>
+            <select class="form-control form-control-sm" name="linewidth" id="linewidth">
+                <option value="1" selected="selected">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
           </div>
-        </div>
-      </div>
     </div>
-    <div class="col-md-6 col-lg-3 mb-3">
-      <div class="card h-100 option-card">
-        <div class="card-header py-2">Output / 出力</div>
-        <div class="card-body py-2">
-          <div class="row">
-<div class="col-12">
-<div class="form-group">
-  <label for="transparent">背景の透過</label><br />
-  <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
-    <label class="btn btn-light">
-      <input type="radio" name="transparent" id="transparent-on" value="on" autocomplete="off"> On
-    </label>
-    <label class="btn btn-light active">
-      <input type="radio" name="transparent" id="transparent-off" value="off" autocomplete="off" checked> Off
-    </label>
-  </div>
-</div>
-</div>
-<div class="col-12 d-flex justify-content-end">
-  <button type="button" class="btn btn-sm btn-link text-muted" id="reset-settings" title="このブラウザに保存された表示設定を消去してデフォルトに戻します">設定をリセット</button>
-</div>
-
-          </div>
+    <div class="col-md-3">
+      <div class="form-group">
+        <label for="hide_default_connectors">コネクタを隠す</label><br />
+        <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
+          <label class="btn btn-light">
+            <input type="radio" name="hide_default_connectors" id="hide_default_connectors-on" value="on" autocomplete="off"> On
+          </label>
+          <label class="btn btn-light active">
+            <input type="radio" name="hide_default_connectors" id="hide_default_connectors-off" value="off" autocomplete="off" checked> Off
+          </label>
         </div>
       </div>
     </div>
   </div>
+
+  <div class="row">
+    <div class="col-md-3">
+      <div class="form-group">
+        <label for="transparent">背景の透過</label><br />
+        <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
+          <label class="btn btn-light">
+            <input type="radio" name="transparent" id="transparent-on" value="on" autocomplete="off"> On
+          </label>
+          <label class="btn btn-light active">
+            <input type="radio" name="transparent" id="transparent-off" value="off" autocomplete="off" checked> Off
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3"></div>
+    <div class="col-md-3"></div>
+    <div class="col-md-3 d-flex align-items-end justify-content-end">
+      <button type="button" class="btn btn-sm btn-link text-muted" id="reset-settings" title="このブラウザに保存された表示設定を消去してデフォルトに戻します">設定をリセット</button>
+    </div>
+  </div>
+
 </div>
