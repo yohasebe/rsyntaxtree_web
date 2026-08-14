@@ -106,6 +106,7 @@ $(function(){
     params = params + "&direction=" +  $("select[name=direction]").val();
     params = params + "&mirror=" +  $("input[name=mirror]:checked").val();
     params = params + "&tidy=" +  $("input[name=tidy]:checked").val();
+    params = params + "&tidy_nest=" +  $("input[name=tidy_nest]:checked").val();
     params = params + "&tidy_spacing=" +  $("select[name=tidy_spacing]").val();
     params = params + "&tidy_slope=" +  $("select[name=tidy_slope]").val();
     return params;
@@ -223,6 +224,7 @@ $(function(){
       .append($('<input/>', {type: 'hidden', name: 'direction', value: $("select[name=direction]").val()}))
       .append($('<input/>', {type: 'hidden', name: 'mirror', value: $("input[name=mirror]:checked").val()}))
       .append($('<input/>', {type: 'hidden', name: 'tidy', value: $("input[name=tidy]:checked").val()}))
+      .append($('<input/>', {type: 'hidden', name: 'tidy_nest', value: $("input[name=tidy_nest]:checked").val()}))
       .append($('<input/>', {type: 'hidden', name: 'tidy_spacing', value: $("select[name=tidy_spacing]").val()}))
       .append($('<input/>', {type: 'hidden', name: 'tidy_slope', value: $("select[name=tidy_slope]").val()}))
       .appendTo(document.body).submit();
@@ -539,7 +541,7 @@ $(function(){
   // Only the settings are stored; the text in the editor is never saved.
   var SETTINGS_KEY = 'rsyntaxtree-settings';
   var settingSelects = ['leafstyle', 'fontstyle', 'fontsize', 'color', 'vheight', 'linewidth', 'direction', 'tidy_spacing', 'tidy_slope'];
-  var settingRadios = ['polyline', 'transparent', 'symmetrize', 'hide_default_connectors', 'mirror', 'tidy'];
+  var settingRadios = ['polyline', 'transparent', 'symmetrize', 'hide_default_connectors', 'mirror', 'tidy', 'tidy_nest'];
 
   function saveSettings() {
     var settings = {};
@@ -602,6 +604,7 @@ $(function(){
   function updateTidyKnobs() {
     var tidyOn = $('input[name=tidy]:checked').val() === 'on';
     $('select[name=tidy_spacing], select[name=tidy_slope]').prop('disabled', !tidyOn);
+    $('input[name=tidy_nest]').closest('.btn-group').css('opacity', tidyOn ? 1 : 0.5);
   }
   $('input[name=tidy]').on('change', updateTidyKnobs);
 
