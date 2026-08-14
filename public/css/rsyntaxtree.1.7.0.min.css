@@ -319,5 +319,15 @@ margin: 8px 0;
 }
 
 .option-card .form-group {
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.45rem;
+}
+
+.option-card label {
+  margin-bottom: 0.15rem;
+  font-size: 0.9em;
+}
+
+.option-card .card-body .row > div {
+  padding-left: 12px;
+  padding-right: 12px;
 }
