@@ -199,65 +199,20 @@
     </div>
   </div>
 
-  <div class="tidy-group">
   <div class="row">
     <div class="col-md-3">
       <div class="form-group">
-        <label for="tidy" title="空間効率の良いレイアウト：部分木を詰めて配置し、コネクタの高さを枝の広がりに応じて調整します">Tidy レイアウト</label><br />
-        <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
-          <label class="btn btn-light">
-            <input type="radio" name="tidy" id="tidy-on" value="on" autocomplete="off"> On
-          </label>
-          <label class="btn btn-light active">
-            <input type="radio" name="tidy" id="tidy-off" value="off" autocomplete="off" checked> Off
-          </label>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-3 tidy-dependent">
-      <div class="form-group">
-        <label for="tidy_spacing" title="隣り合う部分木の間に保つ最小間隔の倍率（1.0が標準）">Tidy 間隔</label>
-        <select class="form-control form-control-sm" name="tidy_spacing" id="tidy_spacing">
-          <option value="0.5">0.5</option>
-          <option value="0.75">0.75</option>
-          <option value="1.0" selected="selected">1.0</option>
-          <option value="1.5">1.5</option>
-          <option value="2.0">2.0</option>
-          <option value="3.0">3.0</option>
+        <label for="tidy" title="空間効率の良いレイアウト。「標準」はすべてのリーフの左右順序（語順）を厳密に保ちます。「最大」は枝を段をまたいで詰め込み、さらに圧縮します（リーフの順序保証は同じ段の中のみ）">Tidy レイアウト</label>
+        <select class="form-control form-control-sm" name="tidy" id="tidy">
+          <option value="off" selected="selected">オフ</option>
+          <option value="on">標準</option>
+          <option value="compact">最大</option>
         </select>
       </div>
     </div>
-
-    <div class="col-md-3 tidy-dependent">
-      <div class="form-group">
-        <label for="tidy_slope" title="枝の広がりに応じたコネクタ高さの増え方。小さいほど平たい樹形図になります（0.15なら高さがほぼ増えません）">Tidy 傾き</label>
-        <select class="form-control form-control-sm" name="tidy_slope" id="tidy_slope">
-          <option value="0.1">0.1</option>
-          <option value="0.15">0.15</option>
-          <option value="0.2">0.2</option>
-          <option value="0.3" selected="selected">0.3</option>
-          <option value="0.5">0.5</option>
-          <option value="0.75">0.75</option>
-          <option value="1.0">1.0</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="col-md-3 tidy-dependent">
-      <div class="form-group">
-        <label for="tidy_nest" title="浅い部分木を隣の深い部分木の上に入れ子にできるようにします（指定部NPを主要部側へ寄せる等）。リーフの順序は同じ行内でのみ保持されます">Tidy 入れ子</label><br />
-        <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
-          <label class="btn btn-light">
-            <input type="radio" name="tidy_nest" id="tidy_nest-on" value="on" autocomplete="off"> On
-          </label>
-          <label class="btn btn-light active">
-            <input type="radio" name="tidy_nest" id="tidy_nest-off" value="off" autocomplete="off" checked> Off
-          </label>
-        </div>
-      </div>
-    </div>
-  </div>
+    <div class="col-md-3"></div>
+    <div class="col-md-3"></div>
+    <div class="col-md-3"></div>
   </div>
 
   <div class="row">

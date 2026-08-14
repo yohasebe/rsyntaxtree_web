@@ -105,10 +105,7 @@ $(function(){
     params = params + "&hide_default_connectors=" +  $("input[name=hide_default_connectors]:checked").val();
     params = params + "&direction=" +  $("select[name=direction]").val();
     params = params + "&mirror=" +  $("input[name=mirror]:checked").val();
-    params = params + "&tidy=" +  $("input[name=tidy]:checked").val();
-    params = params + "&tidy_nest=" +  $("input[name=tidy_nest]:checked").val();
-    params = params + "&tidy_spacing=" +  $("select[name=tidy_spacing]").val();
-    params = params + "&tidy_slope=" +  $("select[name=tidy_slope]").val();
+    params = params + "&tidy=" +  $("select[name=tidy]").val();
     return params;
   }
 
@@ -223,10 +220,7 @@ $(function(){
       .append($('<input/>', {type: 'hidden', name: 'transparent', value: $("input[name=transparent]:checked").val()}))
       .append($('<input/>', {type: 'hidden', name: 'direction', value: $("select[name=direction]").val()}))
       .append($('<input/>', {type: 'hidden', name: 'mirror', value: $("input[name=mirror]:checked").val()}))
-      .append($('<input/>', {type: 'hidden', name: 'tidy', value: $("input[name=tidy]:checked").val()}))
-      .append($('<input/>', {type: 'hidden', name: 'tidy_nest', value: $("input[name=tidy_nest]:checked").val()}))
-      .append($('<input/>', {type: 'hidden', name: 'tidy_spacing', value: $("select[name=tidy_spacing]").val()}))
-      .append($('<input/>', {type: 'hidden', name: 'tidy_slope', value: $("select[name=tidy_slope]").val()}))
+      .append($('<input/>', {type: 'hidden', name: 'tidy', value: $("select[name=tidy]").val()}))
       .appendTo(document.body).submit();
   }
 
@@ -540,8 +534,8 @@ $(function(){
   // Persist display settings across sessions using localStorage.
   // Only the settings are stored; the text in the editor is never saved.
   var SETTINGS_KEY = 'rsyntaxtree-settings';
-  var settingSelects = ['leafstyle', 'fontstyle', 'fontsize', 'color', 'vheight', 'linewidth', 'direction', 'tidy_spacing', 'tidy_slope'];
-  var settingRadios = ['polyline', 'transparent', 'symmetrize', 'hide_default_connectors', 'mirror', 'tidy', 'tidy_nest'];
+  var settingSelects = ['leafstyle', 'fontstyle', 'fontsize', 'color', 'vheight', 'linewidth', 'direction', 'tidy'];
+  var settingRadios = ['polyline', 'transparent', 'symmetrize', 'hide_default_connectors', 'mirror'];
 
   function saveSettings() {
     var settings = {};
@@ -604,24 +598,7 @@ $(function(){
     }
   }
 
-  // The two tidy knobs only take effect when tidy is on; gray them out
-  // otherwise so the dependency is visible. (Values are still read via
-  // .val(), which works on disabled selects.)
-  function updateTidyKnobs() {
-    var tidyOn = $('input[name=tidy]:checked').val() === 'on';
-    $('select[name=tidy_spacing], select[name=tidy_slope]').prop('disabled', !tidyOn);
-    // Genuinely disable the nest toggle (inputs + Bootstrap's .disabled
-    // button styling) so it reads as disabled, consistent with the selects.
-    $('input[name=tidy_nest]').prop('disabled', !tidyOn)
-      .closest('label').toggleClass('disabled', !tidyOn);
-    // Dim the dependent columns (labels included) as a block, so the
-    // "enabled only while Tidy Layout is on" relationship is visible.
-    $('.tidy-group').toggleClass('tidy-off', !tidyOn);
-  }
-  $('input[name=tidy]').on('change', updateTidyKnobs);
-
   restoreSettings();
-  updateTidyKnobs();
 
   settingSelects.forEach(function(name) {
     $('select[name=' + name + ']').on('change', saveSettings);

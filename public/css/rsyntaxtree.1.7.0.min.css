@@ -309,22 +309,3 @@ margin: 8px 0;
   }
 }
 
-
-/* Tidy option group: the spacing/slope/nest controls belong to the Tidy
-   Layout toggle and are enabled only while it is on. The border groups
-   them visually; the .tidy-off state dims the dependent columns as a
-   whole (their inputs are also genuinely disabled via JS). */
-.tidy-group {
-  border: 1px solid #d8dce1;
-  border-radius: 8px;
-  padding: 12px 12px 0 12px;
-  margin-bottom: 15px;
-}
-
-.tidy-group .tidy-dependent {
-  transition: opacity 0.15s ease-in-out;
-}
-
-.tidy-group.tidy-off .tidy-dependent {
-  opacity: 0.45;
-}
