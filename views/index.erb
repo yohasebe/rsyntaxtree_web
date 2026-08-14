@@ -226,10 +226,11 @@
   <div class="row">
     <div class="col-md-3">
       <div class="form-group">
-        <label for="tidy" title="Layout scale from the most spacious to the most dense. Symmetric: fully balanced (radical symmetrization). Medium: packed, strict word order. High: packed further; branches may tuck across rows (word order kept per row)">Tidy layout</label>
+        <label for="tidy" title="Layout scale from the most spacious to the most dense. Symmetric: fully balanced. Low: packed, strict word order. Medium: packed further; words never swap order. High: densest; word order kept per row only">Tidy layout</label>
         <select class="form-control form-control-sm" name="tidy" id="tidy">
           <option value="off" selected="selected">Off</option>
           <option value="symmetric">Symmetric</option>
+          <option value="low">Low</option>
           <option value="medium">Medium</option>
           <option value="high">High</option>
         </select>
@@ -271,8 +272,8 @@
 
     <div class="col-md-3">
       <div class="form-group">
-        <label for="tidy_spacing" title="Minimum clearance between neighboring subtrees in the tidy medium/high layouts (1.0 = default)">Tidy spacing</label>
-        <select class="form-control form-control-sm" name="tidy_spacing" id="tidy_spacing">
+        <label for="hspacing" title="Scales every horizontal gap, in all layout modes — the horizontal counterpart of Connector height (1.0 = default)">Horizontal spacing</label>
+        <select class="form-control form-control-sm" name="hspacing" id="hspacing">
           <option value="0.5">0.5</option>
           <option value="0.75">0.75</option>
           <option value="1.0" selected="selected">1.0</option>

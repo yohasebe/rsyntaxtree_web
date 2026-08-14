@@ -105,7 +105,7 @@ $(function(){
     params = params + "&direction=" +  $("select[name=direction]").val();
     params = params + "&mirror=" +  $("input[name=mirror]:checked").val();
     params = params + "&tidy=" +  $("select[name=tidy]").val();
-    params = params + "&tidy_spacing=" +  $("select[name=tidy_spacing]").val();
+    params = params + "&hspacing=" +  $("select[name=hspacing]").val();
     return params;
   }
 
@@ -220,7 +220,7 @@ $(function(){
       .append($('<input/>', {type: 'hidden', name: 'direction', value: $("select[name=direction]").val()}))
       .append($('<input/>', {type: 'hidden', name: 'mirror', value: $("input[name=mirror]:checked").val()}))
       .append($('<input/>', {type: 'hidden', name: 'tidy', value: $("select[name=tidy]").val()}))
-      .append($('<input/>', {type: 'hidden', name: 'tidy_spacing', value: $("select[name=tidy_spacing]").val()}))
+      .append($('<input/>', {type: 'hidden', name: 'hspacing', value: $("select[name=hspacing]").val()}))
       .appendTo(document.body).submit();
   }
 
@@ -534,7 +534,7 @@ $(function(){
   // Persist display settings across sessions using localStorage.
   // Only the settings are stored; the text in the editor is never saved.
   var SETTINGS_KEY = 'rsyntaxtree-settings';
-  var settingSelects = ['leafstyle', 'fontstyle', 'fontsize', 'color', 'vheight', 'linewidth', 'direction', 'tidy', 'tidy_spacing'];
+  var settingSelects = ['leafstyle', 'fontstyle', 'fontsize', 'color', 'vheight', 'linewidth', 'direction', 'tidy', 'hspacing'];
   var settingRadios = ['polyline', 'transparent', 'hide_default_connectors', 'mirror'];
 
   function saveSettings() {
