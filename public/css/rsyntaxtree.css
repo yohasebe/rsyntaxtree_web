@@ -310,24 +310,48 @@ margin: 8px 0;
 }
 
 
-/* Property-sheet options: per functional column, a two-column grid with
-   right-justified labels and left-aligned content-width controls, so
-   everything shares clean vertical alignment lines. */
+/* Property-sheet options: label and control columns share one width across
+   all three functional groups, so the groups align with each other on wide
+   screens and stack into a single clean sheet on narrow ones. */
 .option-grid {
   display: grid;
-  grid-template-columns: max-content max-content;
+  grid-template-columns: var(--opt-label-w, 8.5rem) var(--opt-control-w, 10rem);
   column-gap: 0.75rem;
   row-gap: 0.55rem;
   align-items: center;
+  margin-bottom: 0.55rem;
 }
 
 .option-grid > label {
   justify-self: end;
+  text-align: right;
   margin: 0;
   font-size: 0.9em;
-  white-space: nowrap;
+  line-height: 1.2;
+}
+
+.option-grid > select,
+.option-grid > .btn-group {
+  width: 100%;
+}
+
+.option-grid .btn-group .btn {
+  flex: 1 1 0;
 }
 
 .option-grid .btn-group label {
   margin: 0;
+}
+
+.option-grid > #reset-settings {
+  justify-self: start;
+  padding-left: 0;
+}
+
+/* Narrow screens: the three groups stack, and the shared column widths keep
+   every label/control pair on the same alignment lines. */
+@media (max-width: 767.98px) {
+  .option-grid {
+    justify-content: center;
+  }
 }
