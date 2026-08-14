@@ -226,9 +226,10 @@
   <div class="row">
     <div class="col-md-3">
       <div class="form-group">
-        <label for="tidy" title="Space-efficient layout. Medium keeps every leaf in strict left-to-right (word) order; High compresses further by letting branches tuck across rows — leaf order is then guaranteed only within a row">Tidy layout</label>
+        <label for="tidy" title="Layout scale from the most spacious to the most dense. Symmetric: fully balanced (radical symmetrization). Medium: packed, strict word order. High: packed further; branches may tuck across rows (word order kept per row)">Tidy layout</label>
         <select class="form-control form-control-sm" name="tidy" id="tidy">
           <option value="off" selected="selected">Off</option>
+          <option value="symmetric">Symmetric</option>
           <option value="medium">Medium</option>
           <option value="high">High</option>
         </select>
@@ -270,15 +271,15 @@
 
     <div class="col-md-3">
       <div class="form-group">
-        <label for="symmetrize">Radical Symmetrization</label><br />
-        <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
-          <label class="btn btn-light">
-            <input type="radio" name="symmetrize" id="symmetrize-on" value="on" autocomplete="off"> On
-          </label>
-          <label class="btn btn-light active">
-            <input type="radio" name="symmetrize" id="symmetrize-off" value="off" autocomplete="off" checked> Off
-          </label>
-        </div>
+        <label for="tidy_spacing" title="Minimum clearance between neighboring subtrees in the tidy medium/high layouts (1.0 = default)">Tidy spacing</label>
+        <select class="form-control form-control-sm" name="tidy_spacing" id="tidy_spacing">
+          <option value="0.5">0.5</option>
+          <option value="0.75">0.75</option>
+          <option value="1.0" selected="selected">1.0</option>
+          <option value="1.5">1.5</option>
+          <option value="2.0">2.0</option>
+          <option value="3.0">3.0</option>
+        </select>
       </div>
     </div>
 

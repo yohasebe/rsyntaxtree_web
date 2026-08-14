@@ -100,12 +100,12 @@ $(function(){
     params = params + "&polyline=" +  $("input[name=polyline]:checked").val();
     params = params + "&color=" +  $("select[name=color]").val();
     params = params + "&linewidth=" +  $("select[name=linewidth]").val();
-    params = params + "&symmetrize="  +  $("input[name=symmetrize]:checked").val();
     params = params + "&transparent=" +  $("input[name=transparent]:checked").val();
     params = params + "&hide_default_connectors=" +  $("input[name=hide_default_connectors]:checked").val();
     params = params + "&direction=" +  $("select[name=direction]").val();
     params = params + "&mirror=" +  $("input[name=mirror]:checked").val();
     params = params + "&tidy=" +  $("select[name=tidy]").val();
+    params = params + "&tidy_spacing=" +  $("select[name=tidy_spacing]").val();
     return params;
   }
 
@@ -215,12 +215,12 @@ $(function(){
       .append($('<input/>', {type: 'hidden', name: 'polyline', value: $("input[name=polyline]:checked").val()}))
       .append($('<input/>', {type: 'hidden', name: 'color', value: $("select[name=color]").val()}))
       .append($('<input/>', {type: 'hidden', name: 'linewidth', value: $("select[name=linewidth]").val()}))
-      .append($('<input/>', {type: 'hidden', name: 'symmetrize', value:  $("input[name=symmetrize]:checked").val()}))
       .append($('<input/>', {type: 'hidden', name: 'hide_default_connectors', value:  $("input[name=hide_default_connectors]:checked").val()}))
       .append($('<input/>', {type: 'hidden', name: 'transparent', value: $("input[name=transparent]:checked").val()}))
       .append($('<input/>', {type: 'hidden', name: 'direction', value: $("select[name=direction]").val()}))
       .append($('<input/>', {type: 'hidden', name: 'mirror', value: $("input[name=mirror]:checked").val()}))
       .append($('<input/>', {type: 'hidden', name: 'tidy', value: $("select[name=tidy]").val()}))
+      .append($('<input/>', {type: 'hidden', name: 'tidy_spacing', value: $("select[name=tidy_spacing]").val()}))
       .appendTo(document.body).submit();
   }
 
@@ -534,8 +534,8 @@ $(function(){
   // Persist display settings across sessions using localStorage.
   // Only the settings are stored; the text in the editor is never saved.
   var SETTINGS_KEY = 'rsyntaxtree-settings';
-  var settingSelects = ['leafstyle', 'fontstyle', 'fontsize', 'color', 'vheight', 'linewidth', 'direction', 'tidy'];
-  var settingRadios = ['polyline', 'transparent', 'symmetrize', 'hide_default_connectors', 'mirror'];
+  var settingSelects = ['leafstyle', 'fontstyle', 'fontsize', 'color', 'vheight', 'linewidth', 'direction', 'tidy', 'tidy_spacing'];
+  var settingRadios = ['polyline', 'transparent', 'hide_default_connectors', 'mirror'];
 
   function saveSettings() {
     var settings = {};
