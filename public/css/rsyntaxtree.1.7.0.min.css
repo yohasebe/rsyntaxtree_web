@@ -329,6 +329,9 @@ margin: 8px 0;
 .option-grid > select,
 .option-grid > .btn-group {
   width: 100%;
+  /* The global `select { margin-bottom: 15px }` would make the grid row
+     taller than the control and push the label off its center. */
+  margin: 0;
 }
 
 .option-grid .btn-group .btn {
