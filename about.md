@@ -12,8 +12,8 @@ The original version of RSyntaxTree was inspired by [phpSyntaxTree](http://ironc
 
 ### What's new
 
-* Improved multilingual rendering: labels in any script (Khmer, Thai, Arabic, Myanmar, Devanagari, etc.) are now measured with the same engine that draws them and centered correctly [August 2026]
-* Display settings are now remembered across visits (stored locally in your browser; the input text is not saved) [August 2026]
+* Multilingual rendering improved: any script is measured by the engine that draws it [August 2026]
+* Display settings are remembered across visits (input text is never saved) [August 2026]
 * Region shade with `%` syntax: shade the whole subtree a node governs [June 2026]
 * A straight apostrophe in a label is now rendered as a typographic (curly) apostrophe [June 2026]
 * Left-to-right tree layout (`Direction` option: Top to Bottom / Left to Right) [April 2026]

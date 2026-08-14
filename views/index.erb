@@ -35,7 +35,7 @@
       </div>
 
       <div  class="text-right">
-        <div class="row" style="margin-top:15px; margin-bottom:15px;">
+        <div class="row" style="margin-top:12px; margin-bottom:12px;">
           <div class="col-sm-12">
             <div style="display:inline">
               <input type="checkbox" value="" id="auto-bracket">
@@ -44,13 +44,7 @@
               </label>&nbsp;&nbsp;
             </div>
             <button type="button" class="btn btn-sm btn-light" id="check"><i class="far fa-check-square"></i> Check brackets</button>&nbsp;
-            <button type="button" class="btn btn-sm btn-light" id="clear"><i class="fas fa-eraser"></i> Clear text</button>
-          </div>
-        </div>
-
-        <div class="row" style="margin-bottom:15px;">
-          <div class="col-sm-12">
-            <button type="button" class="btn btn-sm btn-info" id="toggle-ipa-keyboard" title="Click to show/hide IPA symbols for phonetic transcription"><i class="fas fa-keyboard"></i> IPA Keyboard</button>
+            <button type="button" class="btn btn-sm btn-light" id="clear"><i class="fas fa-eraser"></i> Clear text</button>&nbsp;<button type="button" class="btn btn-sm btn-info" id="toggle-ipa-keyboard" title="Click to show/hide IPA symbols for phonetic transcription"><i class="fas fa-keyboard"></i> IPA</button>
           </div>
         </div>
 
@@ -96,7 +90,7 @@
           </div>
         </div>
 
-        <div class="row" style="margin-bottom:15px; margin-top:15px;">
+        <div class="row" style="margin-top:12px; margin-bottom:12px;">
           <div class="col-sm-4">
             <button class="btn btn-sm btn-primary draw btn-block" id="draw_png" type="button"><i class="fas fa-image"></i> Draw <b>PNG</b></button>
           </div>
@@ -117,7 +111,7 @@
   <div class="row">
     <div class="col-md-4">
       <div class="option-grid">
-            <label for="tidy" title="Layout scale from the most spacious to the most dense. Symmetric: fully balanced. Low: packed, strict word order. Medium: packed further; words never swap order. High: densest; word order kept per row only">Tidy layout</label>
+            <label for="tidy" title="Layout scale from the most spacious to the most dense. Symmetric: fully balanced. Low: packed, strict word order. Medium: packed further; words never swap order. High: densest; word order kept per row only"><i class="fas fa-compress opt-icon"></i>Tidy layout</label>
             <select class="form-control form-control-sm" name="tidy" id="tidy">
               <option value="symmetric">Symmetric</option>
               <option value="off" selected="selected">Off</option>
@@ -125,7 +119,7 @@
               <option value="medium">Medium</option>
               <option value="high">High</option>
             </select>
-            <label for="hspacing" title="Scales every horizontal gap, in all layout modes — the horizontal counterpart of vertical spacing (1.0 = default)">H spacing</label>
+            <label for="hspacing" title="Scales every horizontal gap, in all layout modes — the horizontal counterpart of vertical spacing (1.0 = default)"><i class="fas fa-arrows-left-right opt-icon"></i>H spacing</label>
             <select class="form-control form-control-sm" name="hspacing" id="hspacing">
               <option value="0.5">0.5</option>
               <option value="0.75">0.75</option>
@@ -134,7 +128,7 @@
               <option value="2.0">2.0</option>
               <option value="3.0">3.0</option>
             </select>
-            <label for="vheight" title="Vertical distance between tree levels (connector height). In tidy modes this sets the base height, to which a small automatic extra is added to even out branch angles">V spacing</label>
+            <label for="vheight" title="Vertical distance between tree levels (connector height). In tidy modes this sets the base height, to which a small automatic extra is added to even out branch angles"><i class="fas fa-arrows-up-down opt-icon"></i>V spacing</label>
             <select class="form-control form-control-sm" name="vheight" id="vheight">
               <option value="0.5">0.5</option>
               <option value="1.0">1.0</option>
@@ -144,12 +138,12 @@
               <option value="4.0">4.0</option>
               <option value="5.0">5.0</option>
             </select>
-            <label for="direction">Direction</label>
+            <label for="direction"><i class="fas fa-sitemap opt-icon"></i>Direction</label>
             <select class="form-control form-control-sm" name="direction" id="direction">
               <option value="ttb" selected="selected">Top to Bottom</option>
               <option value="ltr">Left to Right</option>
             </select>
-        <label for="mirror" title="Flip the tree horizontally so it expands right to left (convention for RTL scripts such as Arabic and Hebrew)">Mirror (RTL)</label>
+        <label for="mirror" title="Flip the tree horizontally so it expands right to left (convention for RTL scripts such as Arabic and Hebrew)"><i class="fas fa-right-left opt-icon"></i>Mirror (RTL)</label>
         <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
           <label class="btn btn-light">
             <input type="radio" name="mirror" id="mirror-on" value="on" autocomplete="off"> On
@@ -162,13 +156,13 @@
     </div>
     <div class="col-md-4">
       <div class="option-grid">
-            <label for="fontstyle">Font</label>
+            <label for="fontstyle"><i class="fas fa-font opt-icon"></i>Font</label>
             <select class="form-control form-control-sm" name="fontstyle" id="fontstyle">
               <option value="noto-serif">Noto Serif</option>
               <option value="noto-sans">Noto Sans</option>
               <option value="noto-sans-mono">Noto Sans Mono</option>
             </select>
-            <label for="fontsize">Size</label>
+            <label for="fontsize"><i class="fas fa-text-height opt-icon"></i>Size</label>
             <select class="form-control form-control-sm" name="fontsize" id="fontsize">
               <option value="6">6</option>
               <option value="8">8</option>
@@ -182,13 +176,13 @@
               <option value="24">24</option>
               <option value="26">26</option>
             </select>
-            <label for="color">Color</label>
+            <label for="color"><i class="fas fa-palette opt-icon"></i>Color</label>
             <select class="form-control form-control-sm" name="color" id="color">
               <option value="modern">Modern</option>
               <option value="traditional" selected="selected">Traditional</option>
               <option value="none">None</option>
             </select>
-        <label for="transparent">Transparent bg</label>
+        <label for="transparent"><i class="fas fa-chess-board opt-icon"></i>Transparent bg</label>
         <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
           <label class="btn btn-light">
             <input type="radio" name="transparent" id="transparent-on" value="on" autocomplete="off"> On
@@ -201,13 +195,13 @@
     </div>
     <div class="col-md-4">
       <div class="option-grid">
-            <label for="leafstyle">Connector shape</label>
+            <label for="leafstyle"><i class="fas fa-code-branch opt-icon"></i>Connector shape</label>
             <select class="form-control form-control-sm" name="leafstyle" id="leafstyle">
               <option value="auto" selected="selected">Auto</option>
               <option value="bar">Bar</option>
               <option value="nothing">None</option>
             </select>
-            <label for="linewidth">Line width</label>
+            <label for="linewidth"><i class="fas fa-grip-lines opt-icon"></i>Line width</label>
             <select class="form-control form-control-sm" name="linewidth" id="linewidth">
               <option value="1" selected="selected">1</option>
               <option value="2">2</option>
@@ -215,7 +209,7 @@
               <option value="4">4</option>
               <option value="5">5</option>
             </select>
-        <label for="polyline">Polyline</label>
+        <label for="polyline"><i class="fas fa-wave-square opt-icon"></i>Polyline</label>
         <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
           <label class="btn btn-light">
             <input type="radio" name="polyline" id="polyline-on" value="on" autocomplete="off"> On
@@ -224,7 +218,7 @@
             <input type="radio" name="polyline" id="polyline-off" value="off" autocomplete="off" checked> Off
           </label>
         </div>
-        <label for="hide_default_connectors">Hide connectors</label>
+        <label for="hide_default_connectors"><i class="fas fa-eye-slash opt-icon"></i>Hide connectors</label>
         <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
           <label class="btn btn-light">
             <input type="radio" name="hide_default_connectors" id="hide_default_connectors-on" value="on" autocomplete="off"> On
