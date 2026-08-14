@@ -309,3 +309,35 @@ margin: 8px 0;
   }
 }
 
+
+/* Compact inline option rows: each control is a label + auto-width
+   input, so numeric selects take only the width they need. */
+.option-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 1.6rem;
+  row-gap: 0.25rem;
+  padding: 0.3rem 0;
+  border-bottom: 1px dotted #e0e3e7;
+}
+
+.option-row:last-of-type {
+  border-bottom: none;
+}
+
+.option-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.25rem;
+}
+
+.option-item label {
+  margin: 0 0.5rem 0 0;
+  font-size: 0.9em;
+  white-space: nowrap;
+}
+
+.option-item .btn-group label {
+  margin: 0;
+}
