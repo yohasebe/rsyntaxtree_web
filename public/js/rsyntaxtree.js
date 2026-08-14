@@ -610,7 +610,10 @@ $(function(){
   function updateTidyKnobs() {
     var tidyOn = $('input[name=tidy]:checked').val() === 'on';
     $('select[name=tidy_spacing], select[name=tidy_slope]').prop('disabled', !tidyOn);
-    $('input[name=tidy_nest]').closest('.btn-group').css('opacity', tidyOn ? 1 : 0.5);
+    // Genuinely disable the nest toggle (inputs + Bootstrap's .disabled
+    // button styling) so it reads as disabled, consistent with the selects.
+    $('input[name=tidy_nest]').prop('disabled', !tidyOn)
+      .closest('label').toggleClass('disabled', !tidyOn);
   }
   $('input[name=tidy]').on('change', updateTidyKnobs);
 
