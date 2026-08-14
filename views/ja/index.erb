@@ -199,6 +199,7 @@
     </div>
   </div>
 
+  <div class="tidy-group">
   <div class="row">
     <div class="col-md-3">
       <div class="form-group">
@@ -214,7 +215,7 @@
       </div>
     </div>
 
-    <div class="col-md-3">
+    <div class="col-md-3 tidy-dependent">
       <div class="form-group">
         <label for="tidy_spacing" title="隣り合う部分木の間に保つ最小間隔の倍率（1.0が標準）">Tidy 間隔</label>
         <select class="form-control form-control-sm" name="tidy_spacing" id="tidy_spacing">
@@ -228,7 +229,7 @@
       </div>
     </div>
 
-    <div class="col-md-3">
+    <div class="col-md-3 tidy-dependent">
       <div class="form-group">
         <label for="tidy_slope" title="枝の広がりに応じたコネクタ高さの増え方。小さいほど平たい樹形図になります（0.15なら高さがほぼ増えません）">Tidy 傾き</label>
         <select class="form-control form-control-sm" name="tidy_slope" id="tidy_slope">
@@ -243,7 +244,7 @@
       </div>
     </div>
 
-    <div class="col-md-3">
+    <div class="col-md-3 tidy-dependent">
       <div class="form-group">
         <label for="tidy_nest" title="浅い部分木を隣の深い部分木の上に入れ子にできるようにします（指定部NPを主要部側へ寄せる等）。リーフの順序は同じ行内でのみ保持されます">Tidy 入れ子</label><br />
         <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
@@ -256,6 +257,7 @@
         </div>
       </div>
     </div>
+  </div>
   </div>
 
   <div class="row">

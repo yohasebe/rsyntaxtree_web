@@ -223,6 +223,7 @@
     </div>
   </div>
 
+  <div class="tidy-group">
   <div class="row">
     <div class="col-md-3">
       <div class="form-group">
@@ -238,7 +239,7 @@
       </div>
     </div>
 
-    <div class="col-md-3">
+    <div class="col-md-3 tidy-dependent">
       <div class="form-group">
         <label for="tidy_spacing" title="Minimum clearance between neighboring subtrees (1.0 = default)">Tidy spacing</label>
         <select class="form-control form-control-sm" name="tidy_spacing" id="tidy_spacing">
@@ -252,7 +253,7 @@
       </div>
     </div>
 
-    <div class="col-md-3">
+    <div class="col-md-3 tidy-dependent">
       <div class="form-group">
         <label for="tidy_slope" title="How strongly connector height grows with branch spread; lower = flatter tree (0.15 adds almost no height)">Tidy slope</label>
         <select class="form-control form-control-sm" name="tidy_slope" id="tidy_slope">
@@ -267,7 +268,7 @@
       </div>
     </div>
 
-    <div class="col-md-3">
+    <div class="col-md-3 tidy-dependent">
       <div class="form-group">
         <label for="tidy_nest" title="Let a shallow subtree nest above the deep tail of its neighbor (e.g. a spec NP tucking toward the head); leaf order is kept per row, not globally">Tidy nesting</label><br />
         <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
@@ -280,6 +281,7 @@
         </div>
       </div>
     </div>
+  </div>
   </div>
 
   <div class="row">

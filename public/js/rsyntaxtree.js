@@ -614,6 +614,9 @@ $(function(){
     // button styling) so it reads as disabled, consistent with the selects.
     $('input[name=tidy_nest]').prop('disabled', !tidyOn)
       .closest('label').toggleClass('disabled', !tidyOn);
+    // Dim the dependent columns (labels included) as a block, so the
+    // "enabled only while Tidy Layout is on" relationship is visible.
+    $('.tidy-group').toggleClass('tidy-off', !tidyOn);
   }
   $('input[name=tidy]').on('change', updateTidyKnobs);
 
