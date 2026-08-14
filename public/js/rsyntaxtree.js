@@ -587,7 +587,13 @@ $(function(){
       if (settings[name] === undefined) return;
       var $radio = $('input[name=' + name + '][value="' + settings[name] + '"]');
       if ($radio.length) {
-        $radio.prop('checked', true);
+        // Sync the checked ATTRIBUTE as well as the property: Bootstrap's
+        // button plugin re-derives the active classes on window load from
+        // `input.checked || input.hasAttribute('checked')`, so a stale
+        // attribute on the default radio would mark both buttons active.
+        $radio.closest('.btn-group').find('input')
+              .prop('checked', false).removeAttr('checked');
+        $radio.prop('checked', true).attr('checked', 'checked');
         $radio.closest('label').addClass('active')
               .siblings('label').removeClass('active');
       }
