@@ -104,6 +104,10 @@ $(function(){
     params = params + "&transparent=" +  $("input[name=transparent]:checked").val();
     params = params + "&hide_default_connectors=" +  $("input[name=hide_default_connectors]:checked").val();
     params = params + "&direction=" +  $("select[name=direction]").val();
+    params = params + "&mirror=" +  $("input[name=mirror]:checked").val();
+    params = params + "&tidy=" +  $("input[name=tidy]:checked").val();
+    params = params + "&tidy_spacing=" +  $("select[name=tidy_spacing]").val();
+    params = params + "&tidy_slope=" +  $("select[name=tidy_slope]").val();
     return params;
   }
 
@@ -217,6 +221,10 @@ $(function(){
       .append($('<input/>', {type: 'hidden', name: 'hide_default_connectors', value:  $("input[name=hide_default_connectors]:checked").val()}))
       .append($('<input/>', {type: 'hidden', name: 'transparent', value: $("input[name=transparent]:checked").val()}))
       .append($('<input/>', {type: 'hidden', name: 'direction', value: $("select[name=direction]").val()}))
+      .append($('<input/>', {type: 'hidden', name: 'mirror', value: $("input[name=mirror]:checked").val()}))
+      .append($('<input/>', {type: 'hidden', name: 'tidy', value: $("input[name=tidy]:checked").val()}))
+      .append($('<input/>', {type: 'hidden', name: 'tidy_spacing', value: $("select[name=tidy_spacing]").val()}))
+      .append($('<input/>', {type: 'hidden', name: 'tidy_slope', value: $("select[name=tidy_slope]").val()}))
       .appendTo(document.body).submit();
   }
 
@@ -530,8 +538,8 @@ $(function(){
   // Persist display settings across sessions using localStorage.
   // Only the settings are stored; the text in the editor is never saved.
   var SETTINGS_KEY = 'rsyntaxtree-settings';
-  var settingSelects = ['leafstyle', 'fontstyle', 'fontsize', 'color', 'vheight', 'linewidth', 'direction'];
-  var settingRadios = ['polyline', 'transparent', 'symmetrize', 'hide_default_connectors'];
+  var settingSelects = ['leafstyle', 'fontstyle', 'fontsize', 'color', 'vheight', 'linewidth', 'direction', 'tidy_spacing', 'tidy_slope'];
+  var settingRadios = ['polyline', 'transparent', 'symmetrize', 'hide_default_connectors', 'mirror', 'tidy'];
 
   function saveSettings() {
     var settings = {};
@@ -588,7 +596,17 @@ $(function(){
     }
   }
 
+  // The two tidy knobs only take effect when tidy is on; gray them out
+  // otherwise so the dependency is visible. (Values are still read via
+  // .val(), which works on disabled selects.)
+  function updateTidyKnobs() {
+    var tidyOn = $('input[name=tidy]:checked').val() === 'on';
+    $('select[name=tidy_spacing], select[name=tidy_slope]').prop('disabled', !tidyOn);
+  }
+  $('input[name=tidy]').on('change', updateTidyKnobs);
+
   restoreSettings();
+  updateTidyKnobs();
 
   settingSelects.forEach(function(name) {
     $('select[name=' + name + ']').on('change', saveSettings);
