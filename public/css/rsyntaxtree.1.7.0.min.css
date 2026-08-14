@@ -309,3 +309,15 @@ margin: 8px 0;
   }
 }
 
+
+/* Option cards: group controls by function (Layout / Text / Connectors /
+   Output) with compact headers. */
+.option-card .card-header {
+  font-weight: 600;
+  font-size: 0.95em;
+  background-color: #f4f6f8;
+}
+
+.option-card .form-group {
+  margin-bottom: 0.6rem;
+}
