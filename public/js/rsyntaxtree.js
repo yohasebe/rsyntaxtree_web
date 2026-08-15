@@ -600,37 +600,61 @@ $(function(){
     }
   }
 
-// Settings panel visibility is part of the saved display settings.
-function applySettingsPanel(open) {
-  var panel = document.getElementById('settings-panel');
-  if (!panel) return;
-  panel.hidden = !open;
-  $('#toggle-settings').attr('aria-expanded', open ? 'true' : 'false')
-    .find('.settings-caret')
-    .toggleClass('fa-chevron-up', open)
-    .toggleClass('fa-chevron-down', !open);
-}
-
-$('#toggle-settings').click(function() {
-  var open = document.getElementById('settings-panel').hidden;
-  applySettingsPanel(open);
-  saveSettings();
-  // Opening the panel may reveal content below the fold, which reads as
-  // "nothing happened". Scroll the minimum amount to bring it into view:
-  // 'nearest' is a no-op when the panel already fits on screen, and aligns
-  // the top when the panel is taller than the viewport (small screens).
-  if (open) {
-    var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    // Target the whole settings area (toggle bar plus panel): scrolling the
-    // panel alone would push the bar off screen on short viewports.
-    var bar = document.querySelector('.settings-bar');
-    var area = (bar && bar.parentElement) || document.getElementById('settings-panel');
-    area.scrollIntoView({
-      block: 'nearest',
-      behavior: reduced ? 'auto' : 'smooth'
-    });
+  function prefersReducedMotion() {
+    return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   }
-});
+
+  // Settings panel visibility is part of the saved display settings. The
+  // panel is animated rather than appearing at once, so the change is easy
+  // to follow; `done` runs once the geometry has settled. Readers who ask
+  // for reduced motion get a fade instead of a slide — a visible cue that
+  // involves no movement.
+  function applySettingsPanel(open, animate, done) {
+    var $panel = $('#settings-panel');
+    var panel = $panel[0];
+    if (!panel) return;
+    var reduced = prefersReducedMotion();
+    var duration = animate ? 250 : 0;
+    var showFn = reduced ? 'fadeIn' : 'slideDown';
+    var hideFn = reduced ? 'fadeOut' : 'slideUp';
+    $panel.stop(true, true);
+    if (open) {
+      panel.hidden = false;
+      $panel[showFn](duration, function () {
+        $panel.css({ display: '', opacity: '' });
+        if (done) done();
+      });
+    } else {
+      $panel[hideFn](duration, function () {
+        $panel.css({ display: '', opacity: '' });
+        panel.hidden = true;
+        if (done) done();
+      });
+    }
+    $('#toggle-settings').attr('aria-expanded', open ? 'true' : 'false')
+      .find('.settings-caret')
+      .toggleClass('fa-chevron-up', open)
+      .toggleClass('fa-chevron-down', !open);
+  }
+
+  $('#toggle-settings').click(function () {
+    var open = document.getElementById('settings-panel').hidden;
+    applySettingsPanel(open, true, function () {
+      // A panel that unfolds below the fold reads as nothing having
+      // happened. Scroll the minimum amount once the slide has finished:
+      // 'nearest' is a no-op when the settings already fit on screen, and
+      // aligns the top when they are taller than the viewport. The target
+      // is the toggle bar plus the panel, so the bar stays in view.
+      if (!open) return;
+      var bar = document.querySelector('.settings-bar');
+      var area = (bar && bar.parentElement) || document.getElementById('settings-panel');
+      area.scrollIntoView({
+        block: 'nearest',
+        behavior: prefersReducedMotion() ? 'auto' : 'smooth'
+      });
+    });
+    saveSettings();
+  });
 
 restoreSettings();
 

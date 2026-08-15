@@ -369,7 +369,8 @@ margin: 8px 0;
   align-items: center;
   justify-content: flex-end;
   gap: 0.5rem;
-  margin-bottom: 0.9rem;
+  /* Matches the space between the last option row and the storage note. */
+  margin-bottom: 0.75rem;
 }
 
 #settings-panel[hidden] {
@@ -390,4 +391,19 @@ margin: 8px 0;
 
 .settings-note i {
   margin-right: 0.35rem;
+}
+
+/* Spread the three option groups across the row so the last one ends flush
+   with the right edge, in line with the toggle and the storage note. */
+#settings-panel .row > div:nth-child(2) .option-grid {
+  justify-content: center;
+}
+
+#settings-panel .row > div:nth-child(3) .option-grid {
+  justify-content: end;
+}
+
+.option-grid > #reset-settings {
+  justify-self: end;
+  padding-right: 0;
 }
