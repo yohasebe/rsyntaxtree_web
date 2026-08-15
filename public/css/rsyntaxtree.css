@@ -367,6 +367,7 @@ margin: 8px 0;
 .settings-bar {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 0.5rem;
   margin-bottom: 0.9rem;
 }
@@ -384,6 +385,7 @@ margin: 8px 0;
   margin: 0.2rem 0 0;
   font-size: 0.85em;
   color: #7b8794;
+  text-align: right;
 }
 
 .settings-note i {
