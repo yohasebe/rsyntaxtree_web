@@ -548,6 +548,7 @@ $(function(){
       if (val !== undefined) settings[name] = val;
     });
     settings['auto_bracket'] = $('#auto-bracket').prop('checked');
+    settings['settings_open'] = !document.getElementById('settings-panel').hidden;
     try {
       localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
     } catch (e) {
@@ -592,13 +593,31 @@ $(function(){
               .siblings('label').removeClass('active');
       }
     });
+    if (settings['settings_open'] === false) applySettingsPanel(false);
     if (settings['auto_bracket'] === true) {
       $('#auto-bracket').prop('checked', true);
       editor.setBehavioursEnabled(true);
     }
   }
 
-  restoreSettings();
+// Settings panel visibility is part of the saved display settings.
+function applySettingsPanel(open) {
+  var panel = document.getElementById('settings-panel');
+  if (!panel) return;
+  panel.hidden = !open;
+  $('#toggle-settings').attr('aria-expanded', open ? 'true' : 'false')
+    .find('.settings-caret')
+    .toggleClass('fa-chevron-up', open)
+    .toggleClass('fa-chevron-down', !open);
+}
+
+$('#toggle-settings').click(function() {
+  var open = document.getElementById('settings-panel').hidden;
+  applySettingsPanel(open);
+  saveSettings();
+});
+
+restoreSettings();
 
   settingSelects.forEach(function(name) {
     $('select[name=' + name + ']').on('change', saveSettings);

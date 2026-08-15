@@ -362,3 +362,30 @@ margin: 8px 0;
   margin-right: 0.35rem;
   text-align: center;
 }
+/* Collapsible settings panel: a toggle plus the reset link on one bar, and
+   a note explaining that the panel's state lives in the browser. */
+.settings-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.9rem;
+}
+
+#settings-panel[hidden] {
+  display: none;
+}
+
+.settings-caret {
+  font-size: 0.8em;
+  margin-left: 0.15rem;
+}
+
+.settings-note {
+  margin: 0.2rem 0 0;
+  font-size: 0.85em;
+  color: #7b8794;
+}
+
+.settings-note i {
+  margin-right: 0.35rem;
+}
