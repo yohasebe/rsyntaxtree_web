@@ -12,6 +12,10 @@ The original version of RSyntaxTree was inspired by [phpSyntaxTree](http://ironc
 
 ### What's new
 
+* Tidy layout: one scale from symmetric to high that packs the tree, with connector heights adjusted automatically [August 2026]
+* Mirror option: right-to-left trees for Arabic and Hebrew syntax [August 2026]
+* Horizontal spacing option, the counterpart of connector height [August 2026]
+* Hangul and simplified/traditional Han now render in every font style [August 2026]
 * Multilingual rendering improved: any script is measured by the engine that draws it [August 2026]
 * Display settings are remembered across visits (input text is never saved) [August 2026]
 * Region shade with `%` syntax: shade the whole subtree a node governs [June 2026]
