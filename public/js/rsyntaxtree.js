@@ -614,12 +614,16 @@ $(function(){
     var panel = $panel[0];
     if (!panel) return;
     var reduced = prefersReducedMotion();
-    var duration = animate ? 250 : 0;
+    var duration = animate ? 400 : 0;
     var showFn = reduced ? 'fadeIn' : 'slideDown';
     var hideFn = reduced ? 'fadeOut' : 'slideUp';
     $panel.stop(true, true);
     if (open) {
+      // Clearing `hidden` alone would make the panel visible, and jQuery's
+      // reveal animations are no-ops on a visible element. Hand it over
+      // hidden (inline display:none) so the reveal actually animates.
       panel.hidden = false;
+      $panel.hide();
       $panel[showFn](duration, function () {
         $panel.css({ display: '', opacity: '' });
         if (done) done();
