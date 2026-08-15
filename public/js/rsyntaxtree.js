@@ -615,6 +615,21 @@ $('#toggle-settings').click(function() {
   var open = document.getElementById('settings-panel').hidden;
   applySettingsPanel(open);
   saveSettings();
+  // Opening the panel may reveal content below the fold, which reads as
+  // "nothing happened". Scroll the minimum amount to bring it into view:
+  // 'nearest' is a no-op when the panel already fits on screen, and aligns
+  // the top when the panel is taller than the viewport (small screens).
+  if (open) {
+    var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // Target the whole settings area (toggle bar plus panel): scrolling the
+    // panel alone would push the bar off screen on short viewports.
+    var bar = document.querySelector('.settings-bar');
+    var area = (bar && bar.parentElement) || document.getElementById('settings-panel');
+    area.scrollIntoView({
+      block: 'nearest',
+      behavior: reduced ? 'auto' : 'smooth'
+    });
+  }
 });
 
 restoreSettings();
