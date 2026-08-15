@@ -15,7 +15,8 @@ RUN apk update && \
 # resolves families through fontconfig, so any installed script renders.
 RUN apk add --no-cache \
       font-noto font-noto-cjk font-noto-cjk-extra \
-      font-noto-arabic font-noto-hebrew font-noto-devanagari font-noto-thai
+      font-noto-arabic font-noto-naskh-arabic font-noto-hebrew \
+      font-noto-devanagari font-noto-thai font-noto-khmer
 
 # Noto Sans Math (pulled in by font-noto) claims the Arabic block but carries no
 # joining rules, and fontconfig ranks it above Noto Sans Arabic — Arabic then
