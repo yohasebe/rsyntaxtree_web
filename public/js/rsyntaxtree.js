@@ -604,61 +604,87 @@ $(function(){
     return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   }
 
-  // Settings panel visibility is part of the saved display settings. The
-  // panel is animated rather than appearing at once, so the change is easy
-  // to follow; `done` runs once the geometry has settled. Readers who ask
-  // for reduced motion get a fade instead of a slide — a visible cue that
-  // involves no movement.
-  function applySettingsPanel(open, animate, done) {
-    var $panel = $('#settings-panel');
-    var panel = $panel[0];
-    if (!panel) return;
-    var reduced = prefersReducedMotion();
-    var duration = animate ? 400 : 0;
-    var showFn = reduced ? 'fadeIn' : 'slideDown';
-    var hideFn = reduced ? 'fadeOut' : 'slideUp';
-    $panel.stop(true, true);
-    if (open) {
-      // Clearing `hidden` alone would make the panel visible, and jQuery's
-      // reveal animations are no-ops on a visible element. Hand it over
-      // hidden (inline display:none) so the reveal actually animates.
-      panel.hidden = false;
-      $panel.hide();
-      $panel[showFn](duration, function () {
+// Where the page must scroll for the whole settings area (toggle bar plus
+// panel) to be visible; null when it already is. Call this only while the
+// panel occupies its full height, or the target will fall short.
+function settingsScrollTarget() {
+  var bar = document.querySelector('.settings-bar');
+  var area = (bar && bar.parentElement) || document.getElementById('settings-panel');
+  if (!area) return null;
+  var rect = area.getBoundingClientRect();
+  var viewTop = window.pageYOffset;
+  var top = rect.top + viewTop;
+  var bottom = top + rect.height;
+  if (top >= viewTop && bottom <= viewTop + window.innerHeight) return null;
+  // Move the least: bring the bottom into view without scrolling past the
+  // top (which matters when the area is taller than the viewport).
+  return Math.min(top, Math.max(0, bottom - window.innerHeight));
+}
+
+function scrollToSettings(target, animated) {
+  if (target === null) return;
+  if (animated) {
+    $('html, body').stop(true).animate({ scrollTop: target }, 400);
+  } else {
+    window.scrollTo(0, target);
+  }
+}
+
+// Settings panel visibility is part of the saved display settings.
+//
+// Opening is ordered so the reader sees it happen: the panel claims its
+// space first, the page scrolls to it, and only then does the reveal
+// animate. Animating first would play the whole thing below the fold.
+// With motion allowed the scroll runs alongside the slide, so the page
+// follows the unfolding panel; readers who ask for reduced motion get an
+// immediate scroll followed by a fade, which involves no movement.
+function applySettingsPanel(open, animate) {
+  var $panel = $('#settings-panel');
+  var panel = $panel[0];
+  if (!panel) return;
+  var reduced = prefersReducedMotion();
+  var duration = animate ? 400 : 0;
+  $panel.stop(true, true);
+
+  if (open) {
+    panel.hidden = false;
+    if (!animate) {
+      $panel.css({ display: '', opacity: '' });
+    } else if (reduced) {
+      // Claim the space invisibly, jump to it, then fade in place.
+      $panel.css({ opacity: 0 }).show();
+      scrollToSettings(settingsScrollTarget(), false);
+      $panel.animate({ opacity: 1 }, duration, function () {
         $panel.css({ display: '', opacity: '' });
-        if (done) done();
       });
     } else {
-      $panel[hideFn](duration, function () {
+      // Measure the final height to aim the scroll, then slide and scroll
+      // together so the panel unfolds into view.
+      $panel.css({ visibility: 'hidden' }).show();
+      var target = settingsScrollTarget();
+      $panel.hide().css({ visibility: '' });
+      scrollToSettings(target, true);
+      $panel.slideDown(duration, function () {
         $panel.css({ display: '', opacity: '' });
-        panel.hidden = true;
-        if (done) done();
       });
     }
-    $('#toggle-settings').attr('aria-expanded', open ? 'true' : 'false')
-      .find('.settings-caret')
-      .toggleClass('fa-chevron-up', open)
-      .toggleClass('fa-chevron-down', !open);
+  } else {
+    $panel[reduced ? 'fadeOut' : 'slideUp'](duration, function () {
+      $panel.css({ display: '', opacity: '' });
+      panel.hidden = true;
+    });
   }
 
-  $('#toggle-settings').click(function () {
-    var open = document.getElementById('settings-panel').hidden;
-    applySettingsPanel(open, true, function () {
-      // A panel that unfolds below the fold reads as nothing having
-      // happened. Scroll the minimum amount once the slide has finished:
-      // 'nearest' is a no-op when the settings already fit on screen, and
-      // aligns the top when they are taller than the viewport. The target
-      // is the toggle bar plus the panel, so the bar stays in view.
-      if (!open) return;
-      var bar = document.querySelector('.settings-bar');
-      var area = (bar && bar.parentElement) || document.getElementById('settings-panel');
-      area.scrollIntoView({
-        block: 'nearest',
-        behavior: prefersReducedMotion() ? 'auto' : 'smooth'
-      });
-    });
-    saveSettings();
-  });
+  $('#toggle-settings').attr('aria-expanded', open ? 'true' : 'false')
+    .find('.settings-caret')
+    .toggleClass('fa-chevron-up', open)
+    .toggleClass('fa-chevron-down', !open);
+}
+
+$('#toggle-settings').click(function () {
+  applySettingsPanel(document.getElementById('settings-panel').hidden, true);
+  saveSettings();
+});
 
 restoreSettings();
 
