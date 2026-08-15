@@ -11,10 +11,12 @@ RUN apk update && \
     apk add --no-cache -t .build-packages --no-cache build-base curl-dev wget gcompat && \
     bundle install -j4
 
-ADD fonts $WORKSPACE
-RUN mkdir -p /usr/share/fonts/yh
-COPY ./fonts/* /usr/share/fonts/yh/
-RUN fc-cache -fv
+# Fonts come from the distribution, not from the repository: rsyntaxtree 1.8.0
+# resolves families through fontconfig, so any installed script renders.
+RUN apk add --no-cache \
+      font-noto font-noto-cjk font-noto-cjk-extra font-noto-emoji font-noto-math \
+      font-noto-arabic font-noto-hebrew font-noto-devanagari font-noto-thai && \
+    fc-cache -f
 
 ADD . $WORKSPACE
 CMD ["bundle", "exec", "unicorn"]
