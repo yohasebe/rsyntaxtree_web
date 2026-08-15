@@ -621,12 +621,19 @@ function settingsScrollTarget() {
   return Math.min(top, Math.max(0, bottom - window.innerHeight));
 }
 
-function scrollToSettings(target, animated) {
-  if (target === null) return;
+// Animating 'html, body' would run the completion callback once per
+// element; scroll the single scrolling element instead.
+function scrollToSettings(target, animated, done) {
+  if (target === null) {
+    if (done) done();
+    return;
+  }
   if (animated) {
-    $('html, body').stop(true).animate({ scrollTop: target }, 400);
+    var scroller = document.scrollingElement || document.documentElement;
+    $(scroller).stop(true).animate({ scrollTop: target }, 400, done);
   } else {
     window.scrollTo(0, target);
+    if (done) done();
   }
 }
 
@@ -669,10 +676,21 @@ function applySettingsPanel(open, animate) {
       });
     }
   } else {
-    $panel[reduced ? 'fadeOut' : 'slideUp'](duration, function () {
-      $panel.css({ display: '', opacity: '' });
-      panel.hidden = true;
-    });
+    var collapse = function () {
+      $panel[reduced ? 'fadeOut' : 'slideUp'](duration, function () {
+        $panel.css({ display: '', opacity: '' });
+        panel.hidden = true;
+      });
+    };
+    // Closing has the same problem as opening, in reverse: a panel below
+    // the fold collapses out of sight. Bring it into view first, then
+    // animate it away. The panel is still at full height here, so the
+    // scroll target is the right one.
+    if (animate) {
+      scrollToSettings(settingsScrollTarget(), !reduced, collapse);
+    } else {
+      collapse();
+    }
   }
 
   $('#toggle-settings').attr('aria-expanded', open ? 'true' : 'false')
