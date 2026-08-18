@@ -12,6 +12,9 @@ The original version of RSyntaxTree was inspired by [phpSyntaxTree](http://ironc
 
 ### What's new
 
+* Attribute-value matrices: `\t` aligns columns down a label and `#(` … `#)` nests one matrix inside another, for the feature structures of HPSG, SBCG and LFG [August 2026]
+* `Hyphen` option: read a hyphen as a hyphen rather than as underline markup, for feature names such as HEAD-DTR [August 2026]
+* `Gray lines` colour scheme: labels stay black, connectors and movement paths go grey, for diagrams whose links outnumber their labels [August 2026]
 * Tidy layout: one scale from symmetric to high that packs the tree, with connector heights adjusted automatically [August 2026]
 * Mirror option: right-to-left trees for Arabic and Hebrew syntax [August 2026]
 * Horizontal spacing option, the counterpart of connector height [August 2026]
@@ -73,7 +76,7 @@ If you use RSyntaxTree in your research or teaching materials, please cite it. Y
   title   = {RSyntaxTree: A graphical syntax tree image generator},
   url     = {https://yohasebe.com/rsyntaxtree},
   doi     = {10.5281/zenodo.21916150},
-  version = {1.8.2},
+  version = {1.9.0},
   year    = {2026}
 }
 ```

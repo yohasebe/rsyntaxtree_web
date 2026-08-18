@@ -99,6 +99,7 @@ $(function(){
     params = params + "&vheight=" +  $("select[name=vheight]").val();
     params = params + "&polyline=" +  $("input[name=polyline]:checked").val();
     params = params + "&color=" +  $("select[name=color]").val();
+    params = params + "&hyphen=" +  $("select[name=hyphen]").val();
     params = params + "&linewidth=" +  $("select[name=linewidth]").val();
     params = params + "&transparent=" +  $("input[name=transparent]:checked").val();
     params = params + "&hide_default_connectors=" +  $("input[name=hide_default_connectors]:checked").val();
@@ -214,6 +215,7 @@ $(function(){
       .append($('<input/>', {type: 'hidden', name: 'vheight', value: $("select[name=vheight]").val()}))
       .append($('<input/>', {type: 'hidden', name: 'polyline', value: $("input[name=polyline]:checked").val()}))
       .append($('<input/>', {type: 'hidden', name: 'color', value: $("select[name=color]").val()}))
+      .append($('<input/>', {type: 'hidden', name: 'hyphen', value: $("select[name=hyphen]").val()}))
       .append($('<input/>', {type: 'hidden', name: 'linewidth', value: $("select[name=linewidth]").val()}))
       .append($('<input/>', {type: 'hidden', name: 'hide_default_connectors', value:  $("input[name=hide_default_connectors]:checked").val()}))
       .append($('<input/>', {type: 'hidden', name: 'transparent', value: $("input[name=transparent]:checked").val()}))
@@ -534,7 +536,7 @@ $(function(){
   // Persist display settings across sessions using localStorage.
   // Only the settings are stored; the text in the editor is never saved.
   var SETTINGS_KEY = 'rsyntaxtree-settings';
-  var settingSelects = ['leafstyle', 'fontstyle', 'fontsize', 'color', 'vheight', 'linewidth', 'direction', 'tidy', 'hspacing'];
+  var settingSelects = ['leafstyle', 'fontstyle', 'fontsize', 'color', 'vheight', 'linewidth', 'direction', 'tidy', 'hspacing', 'hyphen'];
   var settingRadios = ['polyline', 'transparent', 'hide_default_connectors', 'mirror'];
 
   function saveSettings() {

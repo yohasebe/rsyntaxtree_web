@@ -12,6 +12,9 @@ RSyntaxTreeのオリジナルバージョンは，André Esenbachによる[phpSy
 
 ### 最新の情報
 
+* 素性構造（AVM）：`\t` でラベルの列を揃え，`#(` … `#)` で行列を入れ子にできます．HPSG・SBCG・LFG の素性構造のための機能です [2026年8月]
+* `ハイフン` オプション：ハイフンを下線の記法ではなく文字として扱えます．HEAD-DTR のような素性名のための機能です [2026年8月]
+* `線を灰色に` の配色：ラベルは黒のまま，コネクタと移動パスだけを灰色で描きます．ラベルより線の数が多い図のための配色です [2026年8月]
 * Tidy レイアウト：symmetric から high までの単一の尺度で樹形図を詰めて描画（コネクタの高さは自動調整） [2026年8月]
 * 左右反転オプション：アラビア語・ヘブライ語の右から左に展開する樹形図 [2026年8月]
 * 横方向の間隔オプション（コネクタの高さの横方向版） [2026年8月]
@@ -73,7 +76,7 @@ RSyntaxTreeのオリジナルバージョンは，André Esenbachによる[phpSy
   title   = {RSyntaxTree: A graphical syntax tree image generator},
   url     = {https://yohasebe.com/rsyntaxtree},
   doi     = {10.5281/zenodo.21916150},
-  version = {1.8.2},
+  version = {1.9.0},
   year    = {2026}
 }
 ```
