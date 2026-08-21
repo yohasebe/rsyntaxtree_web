@@ -71,17 +71,26 @@ get '/ja' do
   erb :"ja/index", :layout => :"ja/layout"
 end
 
+# A failure answers with the human-readable message as before, plus the
+# structured diagnosis (code/hint/label/position/retryable) for the UI to
+# show alongside. Protocol unchanged: HTTP 200 and status:"failure".
+def failure_json(e)
+  { status: "failure", message: e.message.gsub("\n", "<br />") }.merge(e.to_h).to_json
+end
+
 post '/check' do
   data = params["data"]
   begin
-    result = RSyntaxTree::RSGenerator.check_data(data)
+    # Options go with the data: hyphen: literal decides whether a hyphen is
+    # an underline, so checking without them rejects input that would draw.
+    result = RSyntaxTree::RSGenerator.check_data(data, params)
     if result
       { status: "success", message: "OK" }.to_json
     else
       { status: "failure", message: "NG" }.to_json
     end
   rescue RSTError => e
-    { status: "failure", message: e.message.gsub("\n", "<br />") }.to_json
+    failure_json(e)
   rescue StandardError
     { status: "failure", message: "Error: invalid input" }.to_json
   end
@@ -91,7 +100,7 @@ end
 post '/check_plus' do
   data = params["data"]
   begin
-    result = RSyntaxTree::RSGenerator.check_data(data)
+    result = RSyntaxTree::RSGenerator.check_data(data, params)
 
     return { status: "failure", message: "NG" }.to_json unless result
 
@@ -99,7 +108,7 @@ post '/check_plus' do
     svg = rs_generator.draw_svg
     svg ? { status: "success", message: "OK" }.to_json : raise
   rescue RSTError => e
-    { status: "failure", message: e.message.gsub("\n", "<br />") }.to_json
+    failure_json(e)
   rescue StandardError
     { status: "failure", message: "Error: invalid input" }.to_json
   end
@@ -114,7 +123,7 @@ post '/draw_png' do
   response.headers['content_disposition'] = "inline" + %(; filename="#{basename}")
   { status: "success", "png" => Base64.encode64(png_blob) }.to_json
 rescue RSTError => e
-  { status: "failure", message: e.message.gsub("\n", "<br />") }.to_json
+  failure_json(e)
 rescue StandardError
   { status: "failure", message: "Error: invalid input" }.to_json
 end
@@ -128,7 +137,7 @@ post '/draw_svg' do
   response.headers['content_disposition'] = "inline" + %(; filename="#{basename}")
   { status: "success", svg: Base64.encode64(svg) }.to_json
 rescue RSTError => e
-  { status: "failure", message: e.message.gsub("\n", "<br />") }.to_json
+  failure_json(e)
 rescue StandardError
   { status: "failure", message: "Error: invalid input" }.to_json
 end

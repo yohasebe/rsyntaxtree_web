@@ -91,6 +91,16 @@ $(function(){
     },15000);
   }
 
+  // A failure response carries the structured diagnosis alongside the
+  // message; show the one-line fix when the server sent one.
+  function failure_message(res){
+    var msg = res["message"];
+    if(res["errors"] && res["errors"][0] && res["errors"][0]["hint"]){
+      msg += "<br />→ " + res["errors"][0]["hint"];
+    }
+    return msg;
+  }
+
   function make_params(data){
     var params = "data=" + encodeURIComponent(data);
     params = params + "&leafstyle=" +  $("select[name=leafstyle]").val();
@@ -238,7 +248,7 @@ $(function(){
       data: make_params(data)
     }).done(function(res){
       if(res["status"] === "failure"){
-        alert(res["message"], "danger");
+        alert(failure_message(res), "danger");
         $('body, html').animate({ scrollTop: top}, 500)
       } else {
         if($("input[name=transparent]:checked").val()){
@@ -265,7 +275,7 @@ $(function(){
       data: make_params(data)
     }).done(function(res){
       if(res["status"] === "failure"){
-        alert(res["message"], "danger");
+        alert(failure_message(res), "danger");
         $('body, html').animate({ scrollTop: top}, 500)
       } else {
         if($("input[name=transparent]:checked").val()){
@@ -293,7 +303,7 @@ $(function(){
       data: make_params(data)
     }).done(function(res){
       if(res["status"] === "failure"){
-        alert(res["message"], "warning");
+        alert(failure_message(res), "warning");
         $('body, html').animate({ scrollTop: top}, 500)
       } else {
         alert("Syntree generated successfully", "success");
@@ -317,7 +327,7 @@ $(function(){
       data: make_params(data)
     }).done(function(res){
       if(res["status"] === "failure"){
-        alert(res["message"], "warning");
+        alert(failure_message(res), "warning");
         $('body, html').animate({ scrollTop: top}, 500)
       } else {
         alert("Syntree generated successfully", "success");
@@ -341,7 +351,7 @@ $(function(){
       data: make_params(data)
     }).done(function(res){
       if(res["status"] === "failure"){
-        alert(res["message"], "warning");
+        alert(failure_message(res), "warning");
         $('body, html').animate({ scrollTop: top}, 500)
       } else {
         alert("Syntree generated successfully", "success");
@@ -360,10 +370,10 @@ $(function(){
       type: "POST",
       dataType: 'json',
       url: subdir + "/check",
-      data:"data=" + escape_chrs(data)
+      data: make_params(escape_chrs(data))
     }).done(function(res){
       if(res["status"] === "failure"){
-        alert(res["message"], "warning");
+        alert(failure_message(res), "warning");
       } else {
         alert("Brackets are balanced", "success");
       }
