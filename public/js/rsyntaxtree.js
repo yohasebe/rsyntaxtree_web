@@ -838,6 +838,22 @@ $('#toggle-settings').click(function () {
   saveSettings();
 });
 
+// What the page ships with, taken before anything saved is applied.
+// restoreSettings rewrites the checked attribute on the radios, so once it has
+// run the markup no longer says what the defaults were.
+var SETTINGS_DEFAULTS = (function() {
+  var panel = document.getElementById('settings-panel');
+  var defaults = { settings_open: panel ? !panel.hidden : true };
+  settingSelects.forEach(function(name) {
+    defaults[name] = $('select[name=' + name + ']').val();
+  });
+  settingRadios.forEach(function(name) {
+    defaults[name] = $('input[name=' + name + ']:checked').val();
+  });
+  defaults['auto_bracket'] = $('#auto-bracket').prop('checked');
+  return defaults;
+})();
+
 restoreSettings();
 
   settingSelects.forEach(function(name) {
@@ -848,13 +864,35 @@ restoreSettings();
   });
   $('#auto-bracket').on('change', saveSettings);
 
+  // Put the controls back where they started. This used to reload the page,
+  // which also emptied the editor back to the sample: resetting the settings
+  // is not a reason to lose the tree someone is in the middle of writing.
   $('#reset-settings').click(function() {
     try {
       localStorage.removeItem(SETTINGS_KEY);
     } catch (e) {
       // ignore
     }
-    location.reload();
+
+    settingSelects.forEach(function(name) {
+      $('select[name=' + name + ']').val(SETTINGS_DEFAULTS[name]);
+    });
+    settingRadios.forEach(function(name) {
+      var $group = $('input[name=' + name + ']');
+      $group.prop('checked', false).removeAttr('checked')
+            .closest('label').removeClass('active');
+      $group.filter('[value="' + SETTINGS_DEFAULTS[name] + '"]')
+            .prop('checked', true).attr('checked', 'checked')
+            .closest('label').addClass('active');
+    });
+    $('#auto-bracket').prop('checked', SETTINGS_DEFAULTS['auto_bracket']);
+    editor.setBehavioursEnabled(SETTINGS_DEFAULTS['auto_bracket']);
+    applySettingsPanel(SETTINGS_DEFAULTS['settings_open'], false);
+
+    // The controls now hold the defaults, so record that rather than leaving
+    // the next change to write a half-reset state.
+    saveSettings();
+    alert("Settings reset", "success");
   });
 
 });
