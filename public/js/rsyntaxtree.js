@@ -22,27 +22,45 @@ $(function(){
   define('ace/mode/custom_highlight_rules', [], function(require, exports, module) {
     var oop = require("ace/lib/oop");
     var TextHighlightRules = require("ace/mode/text_highlight_rules").TextHighlightRules;
-    var EmbedDepth = 0
 
+    // Structure only. The notation has a dozen kinds of markup inside a label
+    // and none of them are recognised here on purpose: a second reading of the
+    // grammar drifts from the one that draws, and a highlighter drifts
+    // silently. What is coloured is what can be known without reading markup —
+    // where a node opens and closes, and where its label runs.
+    //
+    // A label runs from the bracket to the first real space. Newlines and
+    // columns are written \n and \t, two characters rather than whitespace,
+    // so a feature matrix is one long label and is coloured as one.
     var CustomHighlightRules = function() {
       this.$rules = {
         "start" : [
           {
-            token : ["text", "string", "text"],
-            regex : /(\[)(\S+)(\])/,
-            next  : "start"
-          },
-          {
-            token : ["text", "keyword"],
-            regex : /(\[)(\S+)/,
-            next  : "start"
-          },
-          {
+            // An escape is two characters and neither is structure. Taken
+            // first so that \[ and \] are not read as brackets: six gallery
+            // examples write phonological features that way.
             token : "text",
-            regex : /\]/,
-            next : "start"
+            regex : /\\[\s\S]/,
+            next  : "start"
           },
           {
+            token : ["paren.lparen", "keyword"],
+            regex : /(\[)((?:\\[\s\S]|[^\s\[\]\\])+)/,
+            next  : "start"
+          },
+          {
+            token : "paren.lparen",
+            regex : /\[/,
+            next  : "start"
+          },
+          {
+            token : "paren.rparen",
+            regex : /\]/,
+            next  : "start"
+          },
+          {
+            // Leaf text keeps the colour it had. The change here is what is
+            // no longer claimed about it, not how it looks.
             defaultToken: "string",
             next : "start"
           }
@@ -100,6 +118,110 @@ $(function(){
     }
     return msg;
   }
+
+  // Ask the library where the input is wrong, once typing stops. The
+  // highlighter above knows nothing about markup on purpose, so this is where
+  // a mistake inside a label becomes visible, and it comes from the parser
+  // that draws rather than from a second reading of the notation.
+  //
+  // Shown in the gutter rather than as a message: it fires while the input is
+  // still being written, and half-written input is wrong most of the time.
+  var live_check_timer, live_check_last;
+
+  function mark_diagnosis(res){
+    if(res["status"] !== "failure"){
+      editor.session.clearAnnotations();
+      return;
+    }
+    var err = (res["errors"] || [])[0] || {};
+    // The cause and the fix, and nothing else. The answer also carries where
+    // the notation is written down, which is for a caller driving this over
+    // the API; it names a command line and a file meant for a language model,
+    // neither of which helps someone reading a tooltip in a browser. The
+    // links under the editor are where a reader goes.
+    var text = (err["message"] || res["message"] || "").replace(/<br \/>/g, "\n");
+    if(err["hint"]){ text += "\n\n" + err["hint"]; }
+
+    editor.session.setAnnotations([{ row: row_of(err), column: 0, text: text, type: "warning" }]);
+  }
+
+  // Which line to mark. The label comes back as the parser read it, and a
+  // label written over several lines comes back with the breaks as the two
+  // characters backslash-n, so it is a substring of no line at all. That is
+  // the feature matrix case — the construction most in need of a marker —
+  // which would otherwise land on line one every time.
+  //
+  // So: look for the whole label first, which is right for a label on one
+  // line. Failing that, cut the label at its line breaks and look for the
+  // piece the reported position falls in.
+  function row_of(err){
+    var label = err["label"];
+    if(!label){ return 0; }
+    var lines = editor.getValue().split("\n");
+
+    var whole = find_row(lines, label);
+    if(whole !== -1){ return whole; }
+
+    var pieces = [], start = 0, current = "", i = 0;
+    while(i < label.length){
+      if(label.charAt(i) === "\\" && label.charAt(i + 1) === "n"){
+        pieces.push({ start: start, text: current });
+        i += 2; start = i; current = "";
+      } else {
+        current += label.charAt(i); i += 1;
+      }
+    }
+    pieces.push({ start: start, text: current });
+
+    var pos = err["position"] || 0, piece = pieces[0];
+    for(var p = 0; p < pieces.length; p++){
+      if(pieces[p].start <= pos){ piece = pieces[p]; }
+    }
+    var row = find_row(lines, piece.text);
+    return row === -1 ? 0 : row;
+  }
+
+  function find_row(lines, needle){
+    if(!needle){ return -1; }
+    for(var i = 0; i < lines.length; i++){
+      if(lines[i].indexOf(needle) !== -1){ return i; }
+    }
+    return -1;
+  }
+
+  function live_check(){
+    // The marker lives in the gutter, which is off on a small screen. Asking
+    // would cost the request and show nothing; there the Check button is the
+    // way in.
+    if(isMobile){ return; }
+    var data = editor.getValue();
+    if(data.replace(/\s/g, "") === ""){
+      editor.session.clearAnnotations();
+      return;
+    }
+    if(data === live_check_last){ return; }
+    live_check_last = data;
+    $.ajax({
+      type: "POST",
+      dataType: "json",
+      url: subdir + "/check",
+      data: make_params(escape_chrs(data))
+    }).done(function(res){
+      // Answers can arrive out of order: a check queues behind a drawing
+      // request, and a slow answer about text that has since been edited
+      // would otherwise overwrite a newer one.
+      if(data !== editor.getValue()){ return; }
+      mark_diagnosis(res);
+    }).fail(function(){
+      // Let the same text be asked about again.
+      live_check_last = null;
+    });
+  }
+
+  editor.session.on("change", function(){
+    if(live_check_timer){ clearTimeout(live_check_timer); }
+    live_check_timer = setTimeout(live_check, 700);
+  });
 
   function make_params(data){
     var params = "data=" + encodeURIComponent(data);
@@ -375,7 +497,7 @@ $(function(){
       if(res["status"] === "failure"){
         alert(failure_message(res), "warning");
       } else {
-        alert("Brackets are balanced", "success");
+        alert("The input parses", "success");
       }
     }).fail(function(){
       process_finished();

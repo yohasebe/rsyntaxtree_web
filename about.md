@@ -12,6 +12,8 @@ The original version of RSyntaxTree was inspired by [phpSyntaxTree](http://ironc
 
 ### What's new
 
+* The editor marks the line where the input is wrong while you write, with the cause and a one-line fix [August 2026]
+* An escaped bracket, as in `\[cons\]`, is no longer read as structure by the editor [August 2026]
 * Line width is a ratio of the font size, 0.5 to 3.0 in halves, so text and lines keep the same balance at any size [August 2026]
 * Input that is refused now says how to fix it: the message carries a one-line correction [August 2026]
 * A label can be a matrix on its own, without a label above it: `[#(HEAD\tnoun#)]` [August 2026]

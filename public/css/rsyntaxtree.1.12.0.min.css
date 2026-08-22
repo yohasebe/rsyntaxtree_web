@@ -407,3 +407,44 @@ margin: 8px 0;
   justify-self: end;
   padding-right: 0;
 }
+
+/* The editor's diagnosis marker and its tooltip. Ace ships a raised, gradient
+   tooltip and a pictorial gutter icon, neither of which belongs on a page
+   built out of flat panels with a 1px #DDD border and a 4px radius. */
+
+.ace_gutter-cell.ace_warning,
+.ace_gutter-cell.ace_error {
+  background-image: none;
+  padding-left: 13px;
+}
+
+/* A bar in the gutter rather than a picture: it reads at a glance, lines up
+   with the row it belongs to, and needs no icon set. */
+.ace_gutter-cell.ace_warning::before,
+.ace_gutter-cell.ace_error::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background-color: #dc3545;
+}
+
+.ace_tooltip {
+  background: #fff;
+  background-image: none;
+  border: 1px solid #DDD;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  color: #4c4c4c;
+  font-family: Menlo, Monaco, Consolas, monospace;
+  font-size: 0.85em;
+  line-height: 150%;
+  padding: 8px 10px;
+  /* Ace lays the tooltip out from the left edge of the marker with nothing to
+     stop it, so a long hint ran off the right of the window. */
+  max-width: 32em;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
