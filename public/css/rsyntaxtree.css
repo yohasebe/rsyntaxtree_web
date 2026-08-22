@@ -247,18 +247,28 @@ margin: 8px 0;
   overflow-y: auto;
 }
 
+/* Each group is one row: its name in a column of its own, the characters
+   flowing beside it. Stacking the name above a handful of 30px buttons and
+   boxing the pair spent about ninety pixels of height on six characters, so
+   most of the panel was the space between the rows. */
 .ipa-subcategory {
-  margin-bottom: 15px;
-  padding: 10px;
+  display: grid;
+  grid-template-columns: 7.5em 1fr;
+  align-items: center;
+  gap: 4px 10px;
+  margin-bottom: 3px;
+  padding: 3px 6px;
   background-color: #f8f9fa;
-  border-radius: 5px;
+  border-radius: 4px;
 }
 
 .ipa-subcategory-title {
-  font-size: 0.9em;
-  font-weight: bold;
-  margin-bottom: 8px;
-  color: #495057;
+  font-size: 0.8em;
+  font-weight: 600;
+  margin: 0;
+  color: #6c757d;
+  text-align: right;
+  line-height: 1.2;
 }
 
 .ipa-button-group {
