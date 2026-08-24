@@ -230,6 +230,7 @@ $(function(){
     params = params + "&fontsize=" +  $("select[name=fontsize]").val();
     params = params + "&vheight=" +  $("select[name=vheight]").val();
     params = params + "&polyline=" +  $("input[name=polyline]:checked").val();
+    params = params + "&derivation=" +  $("input[name=derivation]:checked").val();
     params = params + "&color=" +  $("select[name=color]").val();
     params = params + "&hyphen=" +  $("select[name=hyphen]").val();
     params = params + "&linewidth=" +  $("select[name=linewidth]").val();
@@ -346,6 +347,7 @@ $(function(){
       .append($('<input/>', {type: 'hidden', name: 'fontsize', value: $("select[name=fontsize]").val()}))
       .append($('<input/>', {type: 'hidden', name: 'vheight', value: $("select[name=vheight]").val()}))
       .append($('<input/>', {type: 'hidden', name: 'polyline', value: $("input[name=polyline]:checked").val()}))
+      .append($('<input/>', {type: 'hidden', name: 'derivation', value: $("input[name=derivation]:checked").val()}))
       .append($('<input/>', {type: 'hidden', name: 'color', value: $("select[name=color]").val()}))
       .append($('<input/>', {type: 'hidden', name: 'hyphen', value: $("select[name=hyphen]").val()}))
       .append($('<input/>', {type: 'hidden', name: 'linewidth', value: $("select[name=linewidth]").val()}))
@@ -669,7 +671,7 @@ $(function(){
   // Only the settings are stored; the text in the editor is never saved.
   var SETTINGS_KEY = 'rsyntaxtree-settings';
   var settingSelects = ['leafstyle', 'fontstyle', 'fontsize', 'color', 'vheight', 'linewidth', 'direction', 'tidy', 'hspacing', 'hyphen'];
-  var settingRadios = ['polyline', 'transparent', 'hide_default_connectors', 'mirror'];
+  var settingRadios = ['polyline', 'transparent', 'hide_default_connectors', 'mirror', 'derivation'];
 
   function saveSettings() {
     var settings = {};

@@ -145,6 +145,7 @@
             <select class="form-control form-control-sm" name="direction" id="direction">
               <option value="ttb" selected="selected">上から下</option>
               <option value="ltr">左から右</option>
+              <option value="btt">下から上</option>
             </select>
         <label for="mirror" title="樹形図全体を左右反転し、右から左に展開させます（アラビア語・ヘブライ語などRTL文字体系の慣習）"><i class="fas fa-right-left opt-icon"></i>左右反転（RTL）</label>
         <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
@@ -219,6 +220,15 @@
               <option value="2.5">2.5</option>
               <option value="3">3</option>
             </select>
+        <label for="derivation" title="各ノードと娘を結ぶ線を、娘全体をまたぐ1本の罫に置き換えます。導出の書き方です"><i class="fas fa-grip-lines opt-icon"></i>導出</label>
+        <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
+          <label class="btn btn-light">
+            <input type="radio" name="derivation" id="derivation-on" value="on" autocomplete="off"> On
+          </label>
+          <label class="btn btn-light active">
+            <input type="radio" name="derivation" id="derivation-off" value="off" autocomplete="off" checked> Off
+          </label>
+        </div>
         <label for="polyline"><i class="fas fa-wave-square opt-icon"></i>折れ線</label>
         <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
           <label class="btn btn-light">

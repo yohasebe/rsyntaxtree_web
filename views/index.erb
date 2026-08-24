@@ -149,6 +149,7 @@
             <select class="form-control form-control-sm" name="direction" id="direction">
               <option value="ttb" selected="selected">Top to Bottom</option>
               <option value="ltr">Left to Right</option>
+              <option value="btt">Bottom to Top</option>
             </select>
         <label for="mirror" title="Flip the tree horizontally so it expands right to left (convention for RTL scripts such as Arabic and Hebrew)"><i class="fas fa-right-left opt-icon"></i>Mirror (RTL)</label>
         <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
@@ -223,6 +224,15 @@
               <option value="2.5">2.5</option>
               <option value="3">3</option>
             </select>
+        <label for="derivation" title="Join each node to its daughters with one rule across all of them, as a derivation is written, instead of a line to each"><i class="fas fa-grip-lines opt-icon"></i>Derivation</label>
+        <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
+          <label class="btn btn-light">
+            <input type="radio" name="derivation" id="derivation-on" value="on" autocomplete="off"> On
+          </label>
+          <label class="btn btn-light active">
+            <input type="radio" name="derivation" id="derivation-off" value="off" autocomplete="off" checked> Off
+          </label>
+        </div>
         <label for="polyline"><i class="fas fa-wave-square opt-icon"></i>Polyline</label>
         <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
           <label class="btn btn-light">
