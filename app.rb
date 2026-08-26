@@ -83,12 +83,16 @@ end
 # which is how three broken Download buttons went unnoticed until somebody
 # wrote in about one of them. Say what went wrong.
 def download_failure(e)
-  status 500
   content_type "text/plain; charset=utf-8"
   if e.is_a?(RSTError)
+    # The input or the options were wrong, which is the caller's to fix — 400,
+    # not 500. A 500 here said the server had broken, and sent anyone reading
+    # the logs looking in the wrong place.
+    status 400
     hint = (e.to_h["errors"] || []).first&.fetch("hint", nil)
     [e.message, hint].compact.join("\n")
   else
+    status 500
     "Error: the figure could not be generated"
   end
 end

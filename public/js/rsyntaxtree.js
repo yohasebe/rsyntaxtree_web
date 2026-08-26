@@ -2,6 +2,33 @@ $(function(){
 
   var isMobile = (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase()));
 
+  // The drawing options, named once. Three places used to carry their own copy
+  // of this list — the serialiser, the download form and the settings store —
+  // and keeping three lists in step with the page is what failed: a `format`
+  // select was taken out of the page and the download form went on reading it,
+  // so every Download button sent an empty value and answered 500. One list,
+  // and adding or removing a control is one edit.
+  var optionSelects = ['leafstyle', 'fontstyle', 'fontsize', 'color', 'vheight',
+                       'linewidth', 'direction', 'tidy', 'hspacing', 'hyphen'];
+  var optionRadios = ['polyline', 'transparent', 'hide_default_connectors',
+                      'mirror', 'derivation'];
+
+  // What a control says, or undefined if the page has no such control and for a
+  // radio group with nothing checked. Every caller below skips those rather
+  // than sending them: an option nobody chose is one the server should default,
+  // and written into a query string an undefined becomes the literal text
+  // "undefined", which no amount of leniency at the far end can read.
+  function optionValue(name, isRadio) {
+    var value = isRadio ? $("input[name=" + name + "]:checked").val()
+                        : $("select[name=" + name + "]").val();
+    return (value === undefined || value === null || value === "") ? undefined : value;
+  }
+
+  function eachOption(fn) {
+    optionSelects.forEach(function(name){ fn(name, optionValue(name, false)); });
+    optionRadios.forEach(function(name){ fn(name, optionValue(name, true)); });
+  }
+
   //////////////////// Setup Ace Syntax ///////////////
   define('ace/mode/custom', [], function(_require, exports, _module) {
     var oop = require("ace/lib/oop");
@@ -225,21 +252,10 @@ $(function(){
 
   function make_params(data){
     var params = "data=" + encodeURIComponent(data);
-    params = params + "&leafstyle=" +  $("select[name=leafstyle]").val();
-    params = params + "&fontstyle=" +  $("select[name=fontstyle]").val();
-    params = params + "&fontsize=" +  $("select[name=fontsize]").val();
-    params = params + "&vheight=" +  $("select[name=vheight]").val();
-    params = params + "&polyline=" +  $("input[name=polyline]:checked").val();
-    params = params + "&derivation=" +  $("input[name=derivation]:checked").val();
-    params = params + "&color=" +  $("select[name=color]").val();
-    params = params + "&hyphen=" +  $("select[name=hyphen]").val();
-    params = params + "&linewidth=" +  $("select[name=linewidth]").val();
-    params = params + "&transparent=" +  $("input[name=transparent]:checked").val();
-    params = params + "&hide_default_connectors=" +  $("input[name=hide_default_connectors]:checked").val();
-    params = params + "&direction=" +  $("select[name=direction]").val();
-    params = params + "&mirror=" +  $("input[name=mirror]:checked").val();
-    params = params + "&tidy=" +  $("select[name=tidy]").val();
-    params = params + "&hspacing=" +  $("select[name=hspacing]").val();
+    eachOption(function(name, value){
+      if(value === undefined) return;
+      params = params + "&" + name + "=" + encodeURIComponent(value);
+    });
     return params;
   }
 
@@ -346,18 +362,12 @@ $(function(){
   // Building the form from what is there cannot outlive a control again, and
   // it covers the radio groups too, which read empty when nothing is checked.
   function postForm(data, format){
-    var selects = ["leafstyle", "fontstyle", "fontsize", "vheight", "color",
-                   "hyphen", "linewidth", "direction", "tidy", "hspacing"];
-    var radios = ["polyline", "derivation", "hide_default_connectors",
-                  "transparent", "mirror"];
     var form = $('<form/>', {action: subdir + '/download_' + format, method: 'POST'})
       .append($('<input/>', {type: 'hidden', name: 'data', value: data}));
-    function add(name, value){
-      if(value === undefined || value === null || value === "") return;
+    eachOption(function(name, value){
+      if(value === undefined) return;
       form.append($('<input/>', {type: 'hidden', name: name, value: value}));
-    }
-    selects.forEach(function(name){ add(name, $("select[name=" + name + "]").val()); });
-    radios.forEach(function(name){ add(name, $("input[name=" + name + "]:checked").val()); });
+    });
     form.appendTo(document.body).submit();
   }
 
@@ -671,8 +681,9 @@ $(function(){
   // Persist display settings across sessions using localStorage.
   // Only the settings are stored; the text in the editor is never saved.
   var SETTINGS_KEY = 'rsyntaxtree-settings';
-  var settingSelects = ['leafstyle', 'fontstyle', 'fontsize', 'color', 'vheight', 'linewidth', 'direction', 'tidy', 'hspacing', 'hyphen'];
-  var settingRadios = ['polyline', 'transparent', 'hide_default_connectors', 'mirror', 'derivation'];
+  // The same list the serialiser and the download form read.
+  var settingSelects = optionSelects;
+  var settingRadios = optionRadios;
 
   function saveSettings() {
     var settings = {};
