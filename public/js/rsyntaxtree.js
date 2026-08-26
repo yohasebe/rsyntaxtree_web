@@ -338,26 +338,27 @@ $(function(){
     return data;
   }
 
+  // One field per control that is actually on the page. This used to be a
+  // written-out list of fields, one of which — format — read a select that had
+  // since been taken out of the page. jQuery sends such a field anyway, empty,
+  // and an empty value is not one the library accepts: every Download button
+  // answered 500 for every input, and the reason never reached the user.
+  // Building the form from what is there cannot outlive a control again, and
+  // it covers the radio groups too, which read empty when nothing is checked.
   function postForm(data, format){
-    $('<form/>', {action: subdir + '/download_' + format, method: 'POST'})
-      .append($('<input/>', {type: 'hidden', name: 'data', value: data}))
-      .append($('<input/>', {type: 'hidden', name: 'format', value: $("select[name=format]").val()}))
-      .append($('<input/>', {type: 'hidden', name: 'leafstyle', value: $("select[name=leafstyle]").val()}))
-      .append($('<input/>', {type: 'hidden', name: 'fontstyle', value: $("select[name=fontstyle]").val()}))
-      .append($('<input/>', {type: 'hidden', name: 'fontsize', value: $("select[name=fontsize]").val()}))
-      .append($('<input/>', {type: 'hidden', name: 'vheight', value: $("select[name=vheight]").val()}))
-      .append($('<input/>', {type: 'hidden', name: 'polyline', value: $("input[name=polyline]:checked").val()}))
-      .append($('<input/>', {type: 'hidden', name: 'derivation', value: $("input[name=derivation]:checked").val()}))
-      .append($('<input/>', {type: 'hidden', name: 'color', value: $("select[name=color]").val()}))
-      .append($('<input/>', {type: 'hidden', name: 'hyphen', value: $("select[name=hyphen]").val()}))
-      .append($('<input/>', {type: 'hidden', name: 'linewidth', value: $("select[name=linewidth]").val()}))
-      .append($('<input/>', {type: 'hidden', name: 'hide_default_connectors', value:  $("input[name=hide_default_connectors]:checked").val()}))
-      .append($('<input/>', {type: 'hidden', name: 'transparent', value: $("input[name=transparent]:checked").val()}))
-      .append($('<input/>', {type: 'hidden', name: 'direction', value: $("select[name=direction]").val()}))
-      .append($('<input/>', {type: 'hidden', name: 'mirror', value: $("input[name=mirror]:checked").val()}))
-      .append($('<input/>', {type: 'hidden', name: 'tidy', value: $("select[name=tidy]").val()}))
-      .append($('<input/>', {type: 'hidden', name: 'hspacing', value: $("select[name=hspacing]").val()}))
-      .appendTo(document.body).submit();
+    var selects = ["leafstyle", "fontstyle", "fontsize", "vheight", "color",
+                   "hyphen", "linewidth", "direction", "tidy", "hspacing"];
+    var radios = ["polyline", "derivation", "hide_default_connectors",
+                  "transparent", "mirror"];
+    var form = $('<form/>', {action: subdir + '/download_' + format, method: 'POST'})
+      .append($('<input/>', {type: 'hidden', name: 'data', value: data}));
+    function add(name, value){
+      if(value === undefined || value === null || value === "") return;
+      form.append($('<input/>', {type: 'hidden', name: name, value: value}));
+    }
+    selects.forEach(function(name){ add(name, $("select[name=" + name + "]").val()); });
+    radios.forEach(function(name){ add(name, $("input[name=" + name + "]:checked").val()); });
+    form.appendTo(document.body).submit();
   }
 
 

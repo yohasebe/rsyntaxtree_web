@@ -78,6 +78,21 @@ def failure_json(e)
   { status: "failure", message: e.message.gsub("\n", "<br />") }.merge(e.to_h).to_json
 end
 
+# A download is a form submission, so the browser navigates to whatever comes
+# back. A bare 500 tells the user nothing and leaves no trace they can reach,
+# which is how three broken Download buttons went unnoticed until somebody
+# wrote in about one of them. Say what went wrong.
+def download_failure(e)
+  status 500
+  content_type "text/plain; charset=utf-8"
+  if e.is_a?(RSTError)
+    hint = (e.to_h["errors"] || []).first&.fetch("hint", nil)
+    [e.message, hint].compact.join("\n")
+  else
+    "Error: the figure could not be generated"
+  end
+end
+
 post '/check' do
   data = params["data"]
   begin
@@ -146,8 +161,8 @@ post '/download_svg' do
   begin
     rs_generator = RSyntaxTree::RSGenerator.new(params)
     svg = rs_generator.draw_svg
-  rescue StandardError
-    error 500
+  rescue StandardError => e
+    return download_failure(e)
   end
   content_type 'image/svg+xml'
   attachment 'syntree.svg'
@@ -158,8 +173,8 @@ post '/download_png' do
   begin
     rs_generator = RSyntaxTree::RSGenerator.new(params)
     png = rs_generator.draw_png
-  rescue StandardError
-    error 500
+  rescue StandardError => e
+    return download_failure(e)
   end
   content_type 'image/png'
   attachment 'syntree.png'
@@ -170,8 +185,8 @@ post '/download_pdf' do
   begin
     rs_generator = RSyntaxTree::RSGenerator.new(params)
     pdf = rs_generator.draw_pdf
-  rescue StandardError
-    error 500
+  rescue StandardError => e
+    return download_failure(e)
   end
   content_type 'application/pdf'
   attachment 'syntree.pdf'
