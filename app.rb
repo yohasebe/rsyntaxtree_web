@@ -61,6 +61,40 @@ helpers do
   end
 end
 
+# What this site is, for a program reading rather than a person looking — the
+# convention proposed as /llms.txt. It carries no notation of its own: the
+# notation is documented once, on the documentation site, and a second copy here
+# would drift from it. What it does carry is the one thing a model arriving at
+# this address cannot work out for itself, which is where that documentation is.
+get "/llms.txt" do
+  content_type "text/plain; charset=utf-8"
+  <<~TXT
+    # RSyntaxTree
+
+    > A generator for linguistic syntax trees. The input is labeled bracket
+    > notation; the output is PNG, SVG or PDF. This address is the web
+    > interface: paste the notation into the editor and press Draw.
+
+    Writing the notation is the part worth reading about first. Several
+    characters in it already mean something, and the reference leads with
+    those.
+
+    ## The notation
+
+    - [Brief reference](https://yohasebe.github.io/rsyntaxtree/llms.txt): the
+      traps first, in about a page.
+    - [Everything in one file](https://yohasebe.github.io/rsyntaxtree/llms-full.txt):
+      the reference, the manual and every example in the gallery.
+
+    ## Running it yourself
+
+    - [Command line and library](https://github.com/yohasebe/rsyntaxtree):
+      `rsyntaxtree --notation` prints the reference, `--examples` prints the
+      gallery, and `--validate` reports what is wrong with an input as JSON
+      without drawing it.
+  TXT
+end
+
 # the default / route, whose views are in the '/views' directory
 get '/' do
   erb :index
