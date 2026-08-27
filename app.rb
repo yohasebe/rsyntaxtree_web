@@ -81,8 +81,9 @@ get "/llms.txt" do
 
     ## The notation
 
-    - [Brief reference](https://yohasebe.github.io/rsyntaxtree/llms.txt): the
-      traps first, in about a page.
+    - [The reference, on one page](https://yohasebe.github.io/rsyntaxtree/notation.txt):
+      the characters that already mean something, then every feature at a
+      line each, then the options.
     - [Everything in one file](https://yohasebe.github.io/rsyntaxtree/llms-full.txt):
       the reference, the manual and every example in the gallery.
 
