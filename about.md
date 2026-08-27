@@ -12,64 +12,27 @@ The original version of RSyntaxTree was inspired by [phpSyntaxTree](http://ironc
 
 ### What's new
 
-* The editor marks the line where the input is wrong while you write, with the cause and a one-line fix [August 2026]
-* An escaped bracket, as in `\[cons\]`, is no longer read as structure by the editor [August 2026]
-* Line width is a ratio of the font size, 0.5 to 3.0 in halves, so text and lines keep the same balance at any size [August 2026]
-* Input that is refused now says how to fix it: the message carries a one-line correction [August 2026]
-* A label can be a matrix on its own, without a label above it: `[#(HEAD\tnoun#)]` [August 2026]
-* Attribute-value matrices: `\t` aligns columns down a label and `#(` … `#)` nests one matrix inside another, for the feature structures of HPSG, SBCG and LFG [August 2026]
-* `Hyphen` option: read a hyphen as a hyphen rather than as underline markup, for feature names such as HEAD-DTR [August 2026]
-* `Gray lines` colour scheme: labels stay black, connectors and movement paths go grey, for diagrams whose links outnumber their labels [August 2026]
-* Tidy layout: one scale from symmetric to high that packs the tree, with connector heights adjusted automatically [August 2026]
-* Mirror option: right-to-left trees for Arabic and Hebrew syntax [August 2026]
-* `H spacing` option, the counterpart of `V spacing` [August 2026]
-* Hangul and simplified/traditional Han now render in every font style [August 2026]
-* Multilingual rendering improved: any script is measured by the engine that draws it [August 2026]
-* Display settings are remembered across visits (input text is never saved) [August 2026]
-* Region shade with `%` syntax: shade the whole subtree a node governs [June 2026]
-* A straight apostrophe in a label is now rendered as a typographic (curly) apostrophe [June 2026]
-* Left-to-right tree layout (`Direction` option: Top to Bottom / Left to Right) [April 2026]
-* Per-node coloring with `@color:` syntax (named colors and hex colors) [January 2026]
-* `IPA (International Phonetic Alphabet) virtual keyboard` added [June 2025]
-* Improved usability of the Web UI; Japanese UI added [February 2025]
+As of **1.14.0** (August 2026). Dates and details for every release are in the
+[changelog](https://yohasebe.github.io/rsyntaxtree/changelog).
 
-### Past updates
-
-* Escape square brackets with `\[` and `\]` [October 2024]
-* Cross-hatch rendering issue fixed [September 2023]
-* PDF download feature added [February 2023]
-* Line edge rendering improved [February 2023]
-* `Line width` option added [February 2023]
-* `Traditional` color option added [February 2023]
-* `Hide connectors` option added [February 2023]
-* Extra connector drawing feature added [February 2023]
-* `Noto Sans Mono` font option added [January 2023]
-* The `¥` symbol can be used in place of the backslash `\` to escape certain characters [November 2022]
-* Documentation in [日本語 (Japanese)](https://yohasebe.github.io/rsyntaxtree/documentation_ja) has been added [November 2022]
-* RSyntaxTree on the Web (UI sourcecode package you can run locally using docker) [June 2022]
-* `Polyline connector` option [February 2022]
-* Improved user interface (error message display; image zoom, etc.) [January 2022]
-* Comprehensive code rewrite [January 2022]
-* Path drawing functionality (non-directional, directional, bidirectional) [January 2022]
-* Text markup is more flexibly applicable than before [January 2022]
-* New text markup patterns (newlines, brackets, horizontal lines, boxed texts) [January 2022]
-* Triangle can be specified in all connector modes (`auto`, `bar`, `none`) [January 2022]
-* Subscript (`_text_`) and superscript (`__text__`) specification is possible (e.g. `DP_i_` → DP<sub>i</sub>, `T__0__` → T<sup>0</sup>) [December 2021]
-* Newline characters `\n` can be used inside terminal nodes [December 2021]
-* Label-less terminal nodes are now allowed (e.g. `[A [B] [C]]`) [November 2021]
-* Auto bracket close option [November 2021]
-* Math symbol rendering [November 2021]
-* Better image quality [November 2021]
-* Some decoration symbols have been altered [November 2021]
-* System fix (SVG download error) [November 2019]
-* Bug fix (SVG color on/off) [April 2019]
-* White spaces can be included in node labels with the `<>` notation (e.g. `Modal<>AUX`) [June 2018]
-* Various sizes of `margin` to the image [February 2018]
-* Better text editor using <a href='https://ace.c9.io/'>Ace</a> [February 2018]
-* `V spacing` option, then called Connector height [March 2018]
-* Syntax highlighting of input text [March 2018]
-* Refined site design and documentation [March 2018]
-* Text styles (italic and bold) and decoration (underline, overline, line-through) [March 2018]
+* Derivations: `Derivation` joins each node to its daughters with one rule
+  across them, and `Direction: btt` puts the words first — the format
+  categorial grammar is written in, rule names included
+* Attribute-value matrices: `	` aligns columns down a label and `#(` … `#)`
+  nests one matrix inside another, for the feature structures of HPSG, SBCG
+  and LFG
+* A one-page reference for the notation — the characters that already mean
+  something, then every feature at a line each — at
+  [notation.txt](https://yohasebe.github.io/rsyntaxtree/notation.txt), also
+  what `rsyntaxtree --notation` prints; made for handing to an AI model
+* The editor marks the line where the input is wrong while you write, with the
+  cause and a one-line fix
+* Region shade with `%`: shade the whole subtree a node governs, in colour
+  with `%@blue:`
+* Mirror option: right-to-left trees for Arabic and Hebrew syntax
+* Tidy layout: one scale from symmetric to high that packs the tree
+* Per-node colour with `@color:`, left-to-right layout with `Direction`, and
+  an IPA virtual keyboard
 
 ### How to cite
 
