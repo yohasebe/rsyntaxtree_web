@@ -46,9 +46,7 @@ UI = ui_option_sets(File.read(INDEX_ERB))
 # the UI can send. nil means "no control needed — the UI default matches".
 VALUE_MAP = {
   "color" => ->(v) { { "off" => "none", "on" => "modern" }.fetch(v, v) },
-  "fontstyle" => ->(v) { { "sans" => "noto-sans", "serif" => "noto-serif", "mono" => "noto-sans-mono" }.fetch(v, v) },
-  # symmetrize: "on" is sent as tidy=symmetric; "off" is the UI default
-  "symmetrize" => ->(v) { v == "on" ? ["tidy", "symmetric"] : nil }
+  "fontstyle" => ->(v) { { "sans" => "noto-sans", "serif" => "noto-serif", "mono" => "noto-sans-mono" }.fetch(v, v) }
 }.freeze
 
 # Options checked against a UI control of the same name, and booleans.
@@ -61,7 +59,6 @@ SKIP_KEYS = %w[name caption category reference].freeze
 OLD_KEY_MAP = {
   "line_width" => "linewidth",
   "connector_height" => "vheight",
-  "symmetrization" => "symmetrize",
   "connector" => "leafstyle",
   "font" => "fontstyle"
 }.freeze
@@ -76,7 +73,7 @@ Dir.glob(File.join(EXAMPLES_DIR, "*.md")).sort.each do |md|
     key = OLD_KEY_MAP.fetch(key, key)
     value = opts[key.to_sym].to_s
     mapped = VALUE_MAP[key]&.call(value)
-    next if mapped.nil? && VALUE_MAP.key?(key) # e.g. symmetrize off: UI default
+    next if mapped.nil? && VALUE_MAP.key?(key) # the UI default already matches
 
     param, wanted = mapped.is_a?(Array) ? mapped : [key, mapped || value]
 
