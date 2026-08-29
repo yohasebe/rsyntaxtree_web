@@ -749,97 +749,36 @@ $(function(){
     }
   }
 
-  function prefersReducedMotion() {
-    return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  }
-
-// Where the page must scroll for the whole settings area (toggle bar plus
-// panel) to be visible; null when it already is. Call this only while the
-// panel occupies its full height, or the target will fall short.
-function settingsScrollTarget() {
-  var bar = document.querySelector('.settings-bar');
-  var area = (bar && bar.parentElement) || document.getElementById('settings-panel');
-  if (!area) return null;
-  var rect = area.getBoundingClientRect();
-  var viewTop = window.pageYOffset;
-  var top = rect.top + viewTop;
-  var bottom = top + rect.height;
-  if (top >= viewTop && bottom <= viewTop + window.innerHeight) return null;
-  // Move the least: bring the bottom into view without scrolling past the
-  // top (which matters when the area is taller than the viewport).
-  return Math.min(top, Math.max(0, bottom - window.innerHeight));
-}
-
-// Animating 'html, body' would run the completion callback once per
-// element; scroll the single scrolling element instead.
-function scrollToSettings(target, animated, done) {
-  if (target === null) {
-    if (done) done();
-    return;
-  }
-  if (animated) {
-    var scroller = document.scrollingElement || document.documentElement;
-    $(scroller).stop(true).animate({ scrollTop: target }, 400, done);
-  } else {
-    window.scrollTo(0, target);
-    if (done) done();
-  }
-}
-
 // Settings panel visibility is part of the saved display settings.
 //
-// Opening is ordered so the reader sees it happen: the panel claims its
-// space first, the page scrolls to it, and only then does the reveal
-// animate. Animating first would play the whole thing below the fold.
-// With motion allowed the scroll runs alongside the slide, so the page
-// follows the unfolding panel; readers who ask for reduced motion get an
-// immediate scroll followed by a fade, which involves no movement.
+// The panel slides, the way the IPA keyboard does, and the page is left
+// where the reader put it. Opening used to scroll the panel into view and
+// time the slide against that scroll — a courtesy on a short page, and a
+// lurch on a long one, since the reader had asked to see the settings and
+// not to be moved away from whatever they were looking at.
 function applySettingsPanel(open, animate) {
   var $panel = $('#settings-panel');
   var panel = $panel[0];
   if (!panel) return;
-  var reduced = prefersReducedMotion();
-  var duration = animate ? 400 : 0;
-  $panel.stop(true, true);
 
-  if (open) {
+  $panel.stop(true, true);
+  if (!animate) {
+    panel.hidden = !open;
+    $panel.css('display', '');
+  } else if (open) {
+    // The panel is kept out of sight by the hidden attribute, which a
+    // stylesheet turns into display:none. Dropping the attribute first lets
+    // the panel stand at its full height for the frame before the slide is
+    // set up, which the reader sees as a flash of the whole thing. Hiding it
+    // inline first means the attribute can go with nothing to show for it.
+    $panel.hide();
     panel.hidden = false;
-    if (!animate) {
-      $panel.css({ display: '', opacity: '' });
-    } else if (reduced) {
-      // Claim the space invisibly, jump to it, then fade in place.
-      $panel.css({ opacity: 0 }).show();
-      scrollToSettings(settingsScrollTarget(), false);
-      $panel.animate({ opacity: 1 }, duration, function () {
-        $panel.css({ display: '', opacity: '' });
-      });
-    } else {
-      // Measure the final height to aim the scroll, then slide and scroll
-      // together so the panel unfolds into view.
-      $panel.css({ visibility: 'hidden' }).show();
-      var target = settingsScrollTarget();
-      $panel.hide().css({ visibility: '' });
-      scrollToSettings(target, true);
-      $panel.slideDown(duration, function () {
-        $panel.css({ display: '', opacity: '' });
-      });
-    }
+    $panel.slideDown(400, function () { $panel.css('display', ''); });
   } else {
-    var collapse = function () {
-      $panel[reduced ? 'fadeOut' : 'slideUp'](duration, function () {
-        $panel.css({ display: '', opacity: '' });
-        panel.hidden = true;
-      });
-    };
-    // Closing has the same problem as opening, in reverse: a panel below
-    // the fold collapses out of sight. Bring it into view first, then
-    // animate it away. The panel is still at full height here, so the
-    // scroll target is the right one.
-    if (animate) {
-      scrollToSettings(settingsScrollTarget(), !reduced, collapse);
-    } else {
-      collapse();
-    }
+    $panel.slideUp(400, function () {
+      panel.hidden = true;
+      $panel.css('display', '');
+    });
   }
 
   $('#toggle-settings').attr('aria-expanded', open ? 'true' : 'false')
