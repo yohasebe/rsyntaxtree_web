@@ -12,9 +12,22 @@ The original version of RSyntaxTree was inspired by [phpSyntaxTree](http://ironc
 
 ### What's new
 
-As of **1.14.0** (August 2026). Dates and details for every release are in the
+As of **2.0.0** (August 2026). Dates and details for every release are in the
 [changelog](https://yohasebe.github.io/rsyntaxtree/changelog).
 
+* Shear: `Shear` tilts the finished figure by so many degrees and `Shear
+  plane` draws the plane it lies on, so the lean reads as a surface seen at
+  an angle. The whole picture leans as one piece — a region shade inside it
+  comes out a parallelogram of its own accord
+* `Label air` sets the space a label keeps from its connectors, the same
+  above as below. Every figure now has that space equal: it used to be
+  measured from the invisible box around a label, whose edges sit unevenly
+  around the type
+* JPG and GIF output are gone, and with them the ImageMagick dependency —
+  installing the gem no longer asks a machine for it. Use PNG
+* The options `symmetrize`, `tidy_spacing` and `tidy_nest` are gone too;
+  `Tidy layout` and `H spacing` say what they said, and asking for one of
+  the old names now says so rather than passing over it in silence
 * Derivations: `Derivation` joins each node to its daughters with one rule
   across them, and `Direction: btt` puts the words first — the format
   categorial grammar is written in, rule names included
