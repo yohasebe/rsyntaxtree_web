@@ -9,9 +9,10 @@ $(function(){
   // so every Download button sent an empty value and answered 500. One list,
   // and adding or removing a control is one edit.
   var optionSelects = ['leafstyle', 'fontstyle', 'fontsize', 'color', 'vheight',
-                       'linewidth', 'direction', 'tidy', 'hspacing', 'hyphen'];
+                       'linewidth', 'direction', 'tidy', 'hspacing', 'hyphen',
+                       'vmargin', 'shear'];
   var optionRadios = ['polyline', 'transparent', 'hide_default_connectors',
-                      'mirror', 'derivation'];
+                      'mirror', 'derivation', 'shear_plane'];
 
   // What a control says, or undefined if the page has no such control and for a
   // radio group with nothing checked. Every caller below skips those rather

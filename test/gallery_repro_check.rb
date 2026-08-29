@@ -50,8 +50,13 @@ VALUE_MAP = {
 }.freeze
 
 # Options checked against a UI control of the same name, and booleans.
-DIRECT = %w[tidy direction hyphen leafstyle vheight hspacing linewidth fontsize].freeze
+DIRECT = %w[tidy direction hyphen leafstyle vheight hspacing linewidth fontsize
+            vmargin shear].freeze
 BOOLEAN = %w[polyline mirror transparent hide_default_connectors].freeze
+# shear_plane takes a colour as well as on and off, and the interface offers
+# only the two: a figure that asks for a colour is not one the gallery can
+# claim is reproducible there.
+TRISTATE = %w[shear_plane].freeze
 
 # Front-matter keys that are not drawing options, and the old-to-new name
 # mapping the generator applies (dev/example_options.rb).
@@ -74,6 +79,11 @@ Dir.glob(File.join(EXAMPLES_DIR, "*.md")).sort.each do |md|
     value = opts[key.to_sym].to_s
     mapped = VALUE_MAP[key]&.call(value)
     next if mapped.nil? && VALUE_MAP.key?(key) # the UI default already matches
+
+    if TRISTATE.include?(key) && !%w[on off].include?(value)
+      failures << "#{name}: #{key}=#{value} is not one of the two the interface offers"
+      next
+    end
 
     param, wanted = mapped.is_a?(Array) ? mapped : [key, mapped || value]
 
