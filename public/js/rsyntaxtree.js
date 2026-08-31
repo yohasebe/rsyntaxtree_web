@@ -137,14 +137,61 @@ $(function(){
     },15000);
   }
 
-  // A failure response carries the structured diagnosis alongside the
-  // message; show the one-line fix when the server sent one.
-  function failure_message(res){
-    var msg = res["message"];
-    if(res["errors"] && res["errors"][0] && res["errors"][0]["hint"]){
-      msg += "<br />→ " + res["errors"][0]["hint"];
+  // A failure response carries the whole diagnosis: every error of the
+  // stage that failed, and a note when later stages were not reached.
+  // The errors go to the image area (there is no figure to show when the
+  // input does not read), and the status band gets the one-line count.
+  function problems_alert(res){
+    var n = (res["errors"] || []).length;
+    if(n === 0){
+      alert((res["message"] || "Error").replace(/<br \/>/g, " "), "danger");
+    } else {
+      alert(n === 1 ? "1 problem found" : n + " problems found", "danger");
     }
-    return msg;
+  }
+
+  // One error per block: the message with the quoted label in monospace,
+  // then the fix the library suggests. Text nodes throughout — the label
+  // is user input and must not be parsed as markup here.
+  function build_error_panel(res){
+    var panel = $("<div id='error_panel'></div>");
+    $.each(res["errors"] || [], function(i, err){
+      var item = $("<div class='error-item'></div>");
+      var message = $("<div class='error-message'></div>");
+      message.append($("<span class='error-num'></span>").text((i + 1) + ". "));
+      var lines = (err["message"] || "").split("\n");
+      $.each(lines, function(j, line){
+        if(j > 0){ message.append($("<br />")); }
+        if(/^ ?&gt;|^ ?>/.test(line)){
+          message.append($("<code class='error-label'></code>").text(line));
+        } else {
+          message.append($("<span></span>").text(line));
+        }
+      });
+      item.append(message);
+      if(err["hint"]){
+        item.append($("<div class='error-hint'></div>").text("→ " + err["hint"]));
+      }
+      if(err["code"]){
+        item.append($("<div class='error-code'></div>").text(err["code"]));
+      }
+      panel.append(item);
+    });
+    if(res["note"]){
+      panel.append($("<div class='error-note'></div>").text(res["note"]));
+    }
+    return panel;
+  }
+
+  // The image area doubles as the error display. It is a resizable element,
+  // so it is torn down and rebuilt around the swap, the way the drawing
+  // path does; the panel scrolls inside the area rather than growing it.
+  function show_error_panel(res){
+    try { $("#result").resizable('destroy'); } catch(e) {}
+    $("#result").empty();
+    $("#result").append(build_error_panel(res));
+    $("#result").resizable({ handles: "se", grid: [10000000, 1] }).on('resize', function(){});
+    problems_alert(res);
   }
 
   // Ask the library where the input is wrong, once typing stops. The
@@ -219,8 +266,8 @@ $(function(){
 
   function live_check(){
     // The marker lives in the gutter, which is off on a small screen. Asking
-    // would cost the request and show nothing; there the Check button is the
-    // way in.
+    // would cost the request and show nothing; there a mistake surfaces when
+    // the figure is drawn, which reports every error of the stage.
     if(isMobile){ return; }
     var data = editor.getValue();
     if(data.replace(/\s/g, "") === ""){
@@ -240,13 +287,34 @@ $(function(){
       // would otherwise overwrite a newer one.
       if(data !== editor.getValue()){ return; }
       mark_diagnosis(res);
+      live_status(res);
     }).fail(function(){
       // Let the same text be asked about again.
       live_check_last = null;
     });
   }
 
+  // The band's one line during typing: just how many problems, rewritten
+  // only when the count changes so the display does not flicker. The
+  // details stay out of the image area until the user asks (Draw or
+  // Check) — half-written input is wrong most of the time.
+  var live_status_count = null;
+  function live_status(res){
+    var n = (res["status"] === "failure" && res["errors"]) ? res["errors"].length : 0;
+    if(n === live_status_count){ return; }
+    live_status_count = n;
+    if(n === 0){
+      $("#alert").html(waiting);
+    } else {
+      alert(n === 1 ? "1 problem found" : n + " problems found", "warning");
+    }
+  }
+
   editor.session.on("change", function(){
+    // A diagnosis in the image area is about the text as it was: keep it
+    // visible to fix against, but mark it stale once the input moves on.
+    var panel = $("#error_panel");
+    if(panel.length){ panel.css("opacity", 0.45); }
     if(live_check_timer){ clearTimeout(live_check_timer); }
     live_check_timer = setTimeout(live_check, 700);
   });
@@ -297,9 +365,8 @@ $(function(){
           alert("Syntree generated successfully", "success");
           $('body, html').animate({ scrollTop: top}, 500)
         } else {
-          var message = data["message"];
           process_finished();
-          alert(message, "warning");
+          show_error_panel(data);
           $('body, html').animate({ scrollTop: top}, 500)
         }
       }).fail(function(){
@@ -331,9 +398,8 @@ $(function(){
           alert("Syntree generated successfully", "success");
           $('body, html').animate({ scrollTop: top}, 500)
         } else {
-          var message = data["message"];
           process_finished();
-          alert(message, "danger");
+          show_error_panel(data);
           $('body, html').animate({ scrollTop: top }, 500)
         }
       }).fail(function(jqXHR, textStatus, errorThrown){
@@ -384,7 +450,7 @@ $(function(){
       data: make_params(data)
     }).done(function(res){
       if(res["status"] === "failure"){
-        alert(failure_message(res), "danger");
+        show_error_panel(res);
         $('body, html').animate({ scrollTop: top}, 500)
       } else {
         if($("input[name=transparent]:checked").val()){
@@ -411,7 +477,7 @@ $(function(){
       data: make_params(data)
     }).done(function(res){
       if(res["status"] === "failure"){
-        alert(failure_message(res), "danger");
+        show_error_panel(res);
         $('body, html').animate({ scrollTop: top}, 500)
       } else {
         if($("input[name=transparent]:checked").val()){
@@ -439,7 +505,7 @@ $(function(){
       data: make_params(data)
     }).done(function(res){
       if(res["status"] === "failure"){
-        alert(failure_message(res), "warning");
+        show_error_panel(res);
         $('body, html').animate({ scrollTop: top}, 500)
       } else {
         alert("Syntree generated successfully", "success");
@@ -463,7 +529,7 @@ $(function(){
       data: make_params(data)
     }).done(function(res){
       if(res["status"] === "failure"){
-        alert(failure_message(res), "warning");
+        show_error_panel(res);
         $('body, html').animate({ scrollTop: top}, 500)
       } else {
         alert("Syntree generated successfully", "success");
@@ -487,7 +553,7 @@ $(function(){
       data: make_params(data)
     }).done(function(res){
       if(res["status"] === "failure"){
-        alert(failure_message(res), "warning");
+        show_error_panel(res);
         $('body, html').animate({ scrollTop: top}, 500)
       } else {
         alert("Syntree generated successfully", "success");
@@ -497,25 +563,6 @@ $(function(){
       process_finished();
       alert("Error: Something unexpected occurrred", "danger");
       $('body, html').animate({ scrollTop: top}, 500)
-    });
-  });
-
-  $("#check").click(function(){
-    var data = editor.getValue();
-    $.ajax({
-      type: "POST",
-      dataType: 'json',
-      url: subdir + "/check",
-      data: make_params(escape_chrs(data))
-    }).done(function(res){
-      if(res["status"] === "failure"){
-        alert(failure_message(res), "warning");
-      } else {
-        alert("The input parses", "success");
-      }
-    }).fail(function(){
-      process_finished();
-      alert("Error: Something unexpected occurred", "danger");
     });
   });
 
