@@ -78,3 +78,8 @@ http://localhost:8080
 4. You can stop the server with `Ctrl + c` in the terminal
 
 **NOTE:** Setup tutorial is also available in [Chinese](https://zhuanlan.zhihu.com/p/585260718) (thanks to Kent)
+
+## Licence
+
+MIT (see [LICENSE](LICENSE)). The libraries this app ships and loads, and
+their licences, are listed in [THIRD-PARTY.md](THIRD-PARTY.md).
