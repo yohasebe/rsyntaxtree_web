@@ -1,7 +1,45 @@
+# Keep out of the image everything the repository keeps out of itself, plus
+# the machine's own files. A file ignored by git — a private note, a token
+# list, an editor or agent config — is exactly a file that must not ride
+# ADD . into a public image, and the two ignore lists have drifted apart
+# before. This mirrors .gitignore and adds the globally-ignored agent files
+# (.claude, CLAUDE.md, AGENTS.md) that the repository's own .gitignore does
+# not name because a global ignore already hides them from git.
+
+# Repository and build machinery
 .git
 .github
-pkg
 .dockerignore
 .gitignore
+pkg
 Gemfile.lock
 readme.md
+
+# Editor, linter and agent files
+.claude
+CLAUDE.md
+AGENTS.md
+.rubocop.yml
+.solargraph.yml
+.vscode
+.idea
+
+# Generated, cached and scratch
+tmp
+tempfiles
+doc
+log
+logs
+*.log
+*.bak
+*.~
+tags
+.tags
+
+# OS metadata
+.DS_Store
+**/.DS_Store
+
+# Developer-only scripts the .gitignore names
+bin/rsync_code
+bin/linktree.rb
