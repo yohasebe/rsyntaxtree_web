@@ -12,9 +12,11 @@ The original version of RSyntaxTree was inspired by [phpSyntaxTree](http://ironc
 
 ### What's new
 
-As of **2.2.0** (September 2026). Dates and details for every release are in
+As of **2.4.1** (September 2026). Dates and details for every release are in
 the [changelog](https://yohasebe.github.io/rsyntaxtree/changelog).
 
+* Connectors from a short node start right below its label, even beside a taller one
+* `\'` keeps a straight apostrophe, `\@` is an at sign, and `\+` before digits is a plus sign
 * Every mistake at once: all errors listed with how to fix each, not just the first
 * Checking as you type: mistakes marked in the editor margin
 * JSON output renamed from `lsif` to `json` (`lsif` still works until 3.0)
