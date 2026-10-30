@@ -15,37 +15,17 @@ The original version of RSyntaxTree was inspired by [phpSyntaxTree](http://ironc
 As of **2.2.0** (September 2026). Dates and details for every release are in
 the [changelog](https://yohasebe.github.io/rsyntaxtree/changelog).
 
-* Every mistake at once: an input with three problems lists all three, one
-  entry each, where it used to stop at the first. The list appears in the
-  image area, and each entry says what is wrong and how to fix it
-* Checking as you type: a mistake shows in the editor margin, and the bar
-  above the editor counts the problems. The separate check button is gone;
-  drawing reports the same thing
-* The JSON output is called `json` — `-f json`, writing `syntree.json`. The
-  old name `lsif` still works and will be removed in 3.0
-* A feature matrix comes out in the JSON as rows and cells rather than one
-  run of text, so a program can read an attribute and its value
-
-* Shear: `Shear` tilts the finished figure by so many degrees and `Shear
-  plane` draws the plane it lies on. The whole picture leans as one piece,
-  so a region shade inside it comes out a parallelogram
-* `Label air` sets the space a label keeps from its connectors, the same
-  above as below. It used to be a little wider below every label than above
-* JPG and GIF output are gone, and with them the ImageMagick dependency,
-  which the gem no longer needs installed. Use PNG
-* The options `symmetrize`, `tidy_spacing` and `tidy_nest` are gone too;
-  `Tidy layout` and `H spacing` say what they said, and asking for one of
-  the old names now says so rather than passing over it in silence
-* Derivations: `Derivation` joins each node to its daughters with one rule
-  drawn across them, and `Direction: btt` puts the words at the top — the
-  shape a CCG derivation is written in, with a name beside each step
-* Attribute-value matrices: `	` aligns columns down a label and `#(` … `#)`
-  nests one matrix inside another, for the feature structures of HPSG, LFG
-  and the like
-* A one-page reference for the notation — the characters that already mean
-  something, then every feature at a line each — at
-  [notation.txt](https://yohasebe.github.io/rsyntaxtree/notation.txt), also
-  what `rsyntaxtree --notation` prints; made for handing to an AI model
+* Every mistake at once: all errors listed with how to fix each, not just the first
+* Checking as you type: mistakes marked in the editor margin
+* JSON output renamed from `lsif` to `json` (`lsif` still works until 3.0)
+* Feature matrices in the JSON output as rows and cells
+* Shear: tilt the whole figure, with `Shear plane` drawing the plane behind it
+* `Label air`: the same space above and below every label
+* JPG and GIF output removed; use PNG
+* `symmetrize`, `tidy_spacing` and `tidy_nest` removed in favour of `Tidy layout` and `H spacing`
+* Derivations: one rule across each node's daughters, words at the top with `Direction: btt`
+* Attribute-value matrices: `\t` aligns columns and `#(` … `#)` nests matrices
+* One-page notation reference: [notation.txt](https://yohasebe.github.io/rsyntaxtree/notation.txt), also printed by `rsyntaxtree --notation`
 * Region shade with `%`: shade the whole subtree a node governs, in colour
   with `%@blue:`
 * Mirror option: right-to-left trees for Arabic and Hebrew syntax
