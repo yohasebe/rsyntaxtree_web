@@ -29,7 +29,10 @@
     <link href="<%= $SUB_DIRECTORY %>/css/whirl.min.css" rel="stylesheet">
     <link href="<%= $SUB_DIRECTORY %>/css/rsyntaxtree.<%= RSyntaxTreeWeb::VERSION %>.min.css?v=<%= asset_version %>" rel="stylesheet">
     <link href="<%= $SUB_DIRECTORY %>/css/gh-fork-ribbon.min.css" rel="stylesheet">
-    <%= $GOOGLE_CODE %>
+    <% if $GA_ID %>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=<%= $GA_ID %>"></script>
+    <script src="<%= $SUB_DIRECTORY %>/js/ga.js" data-ga-id="<%= $GA_ID %>"></script>
+    <% end %>
   </head>
 
   <body>

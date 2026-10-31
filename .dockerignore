@@ -43,3 +43,7 @@ tags
 # Developer-only scripts the .gitignore names
 bin/rsync_code
 bin/linktree.rb
+
+# Host-specific analytics settings (see .gitignore)
+google_analytics_id
+google_analytics_tracking_code

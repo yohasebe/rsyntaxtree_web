@@ -11,14 +11,55 @@ require_relative "lib/rsyntaxtree_web/version"
 
 $RSYNTAXTREE_VER = Gem.loaded_specs["rsyntaxtree"].version.to_s
 
-# Use Google Analytics code only if the code file exists
-ga_path = File.dirname(__FILE__) + "/google_analytics_tracking_code"
-if File.exist?(ga_path)
-  gfile = File.open(ga_path, "r:UTF-8:UTF-8")
-  $GOOGLE_CODE = gfile.read
-  gfile.close
-else
-  $GOOGLE_CODE = ""
+# Google Analytics runs only where a measurement ID has been put on the host,
+# in a file the repository does not track. Only the ID is read, never a snippet:
+# the page loads gtag.js and a script of its own that passes the ID on, so no
+# inline script is needed and the policy below can refuse them all.
+ga_id_path = File.join(__dir__, "google_analytics_id")
+ga_id = File.exist?(ga_id_path) ? File.read(ga_id_path).strip : ""
+$GA_ID = ga_id.match?(/\AG-[A-Z0-9]+\z/) ? ga_id : nil
+
+# Every resource the page uses comes from here or from the hosts named below,
+# and no script runs inline or through eval. Styles may be inline: the pages
+# carry style attributes and the editor injects its own stylesheet.
+CSP_SOURCES = {
+  "default-src" => %w['self'],
+  "script-src" => %w['self' https://cdn.jsdelivr.net],
+  "style-src" => %w['self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://fonts.googleapis.com],
+  "font-src" => %w['self' data: https://fonts.gstatic.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com],
+  "img-src" => %w['self' data: https://cdn.jsdelivr.net],
+  "connect-src" => %w['self'],
+  "form-action" => %w['self'],
+  "base-uri" => %w['self'],
+  "object-src" => %w['none'],
+  "frame-ancestors" => %w['self']
+}.freeze
+
+# The hosts Google documents for GA4, added only when it is switched on. A
+# wildcard does not cover the bare domain, and gtag sends hits to
+# analytics.google.com itself, so that is named on its own. Google signals are
+# switched off in ga.js; with them on, gtag also reaches advertising hosts
+# under country domains that no policy can list.
+GA_SOURCES = {
+  "script-src" => %w[https://*.googletagmanager.com],
+  "img-src" => %w[https://*.google-analytics.com https://*.googletagmanager.com],
+  "connect-src" => %w[https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://*.googletagmanager.com]
+}.freeze
+
+def content_security_policy(with_ga)
+  CSP_SOURCES.map do |directive, sources|
+    sources += GA_SOURCES.fetch(directive, []) if with_ga
+    "#{directive} #{sources.join(' ')}"
+  end.join("; ")
+end
+
+CSP_HEADER = content_security_policy(!$GA_ID.nil?).freeze
+
+# HTML responses only. At this point a page rendered with the default type may
+# not carry its Content-Type yet, so an empty one counts as HTML.
+after do
+  type = response.headers["Content-Type"].to_s
+  response.headers["Content-Security-Policy"] = CSP_HEADER if type.empty? || type.start_with?("text/html")
 end
 
 class CustomRenderer < Redcarpet::Render::HTML
