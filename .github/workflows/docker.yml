@@ -37,10 +37,14 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      # Nothing is pushed until the image passes the check: the build context
-      # as Docker sees it is written out, an amd64 image is built and loaded,
-      # and its application directory is compared with the context both ways
-      # and scanned for private names, secrets and local paths.
+      # The image is checked twice. First an amd64 build is loaded and
+      # checked before anything is pushed, so an image that leaks never
+      # reaches the registry, not even under a candidate tag. Then every
+      # platform is pushed under a candidate tag, each platform of that very
+      # index is pulled by digest and checked again, and only that digest is
+      # given the public tags. The check compares the application directory
+      # with the build context as Docker sees it, both ways, and scans it and
+      # the image configuration for private names, secrets and local paths.
       - name: Write out the build context
         run: docker buildx build --target build-context --output type=local,dest="$RUNNER_TEMP/context" .
 
@@ -55,7 +59,7 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-      - name: Check the image
+      - name: Check the image before pushing
         run: .github/scripts/verify_image.sh rsyntaxtree-check:${{ steps.ver.outputs.version }} "$RUNNER_TEMP/context"
 
       - name: Log in to GHCR
@@ -65,16 +69,33 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push (linux/amd64, linux/arm64)
+      - name: Push the candidate (linux/amd64, linux/arm64)
+        id: candidate
         uses: docker/build-push-action@v6
         with:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
           cache-from: type=gha
-          tags: |
-            ${{ env.IMAGE }}:${{ steps.ver.outputs.version }}
-            ${{ env.IMAGE }}:latest
+          tags: ${{ env.IMAGE }}:candidate-${{ github.sha }}
           labels: |
             org.opencontainers.image.source=https://github.com/yohasebe/rsyntaxtree_web
             org.opencontainers.image.version=${{ steps.ver.outputs.version }}
+
+      - name: Check every platform of the candidate
+        run: .github/scripts/check_candidate.sh "$IMAGE" "${{ steps.candidate.outputs.digest }}" "$RUNNER_TEMP/context"
+
+      - name: Give the checked digest the public tags
+        env:
+          DIGEST: ${{ steps.candidate.outputs.digest }}
+          VERSION: ${{ steps.ver.outputs.version }}
+        run: |
+          docker buildx imagetools create -t "$IMAGE:$VERSION" -t "$IMAGE:latest" "$IMAGE@$DIGEST"
+          for tag in "$VERSION" latest; do
+            got=$(docker buildx imagetools inspect "$IMAGE:$tag" --format '{{json .Manifest}}' | jq -r .digest)
+            if [ "$got" != "$DIGEST" ]; then
+              echo "$IMAGE:$tag is $got, not the checked $DIGEST" >&2
+              exit 1
+            fi
+            echo "$IMAGE:$tag = $DIGEST"
+          done
