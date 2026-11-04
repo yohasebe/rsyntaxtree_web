@@ -857,6 +857,18 @@ var SETTINGS_DEFAULTS = (function() {
 
 restoreSettings();
 
+  // The plane is drawn behind a sheared figure, so with Shear at 0° there is
+  // nothing for it to do. The toggle is greyed out then, which also keeps it
+  // from reading as the switch that tilts the tree. Its value is kept and
+  // still sent, as every setting is.
+  function syncShearPlane() {
+    var flat = Number($('select[name=shear]').val()) === 0;
+    $('input[name=shear_plane]').prop('disabled', flat)
+      .closest('label').toggleClass('disabled', flat);
+  }
+  syncShearPlane();
+  $('select[name=shear]').on('change', syncShearPlane);
+
   settingSelects.forEach(function(name) {
     $('select[name=' + name + ']').on('change', saveSettings);
   });
@@ -889,6 +901,7 @@ restoreSettings();
     $('#auto-bracket').prop('checked', SETTINGS_DEFAULTS['auto_bracket']);
     editor.setBehavioursEnabled(SETTINGS_DEFAULTS['auto_bracket']);
     applySettingsPanel(SETTINGS_DEFAULTS['settings_open'], false);
+    syncShearPlane();
 
     // The controls now hold the defaults, so record that rather than leaving
     // the next change to write a half-reset state.

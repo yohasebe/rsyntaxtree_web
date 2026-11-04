@@ -164,17 +164,20 @@
               <option value="30">30&deg;</option>
               <option value="45">45&deg;</option>
             </select>
+        <label for="shear_plane" title="Draw a plane behind the figure when Shear tilts it, so the tilt reads as a surface. Available when Shear is not 0°"><i class="fas fa-layer-group opt-icon"></i>Plane behind shear</label>
+        <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
+          <label class="btn btn-light active">
+            <input type="radio" name="shear_plane" id="shear_plane-on" value="on" autocomplete="off" checked> On
+          </label>
+          <label class="btn btn-light">
+            <input type="radio" name="shear_plane" id="shear_plane-off" value="off" autocomplete="off"> Off
+          </label>
+        </div>
             <label for="direction"><i class="fas fa-sitemap opt-icon"></i>Direction</label>
             <select class="form-control form-control-sm" name="direction" id="direction">
               <option value="ttb" selected="selected">Top to Bottom</option>
               <option value="ltr">Left to Right</option>
               <option value="btt">Bottom to Top</option>
-            </select>
-            <label for="leaf_align" title="Line the leaves up on one row: Words lowers only the words, Subtrees lowers whole subtrees"><i class="fas fa-ruler-horizontal opt-icon"></i>Leaf align</label>
-            <select class="form-control form-control-sm" name="leaf_align" id="leaf_align">
-              <option value="off" selected="selected">Off</option>
-              <option value="words">Words</option>
-              <option value="subtrees">Subtrees</option>
             </select>
       </div>
     </div>
@@ -240,6 +243,12 @@
               <option value="bar">Bar</option>
               <option value="nothing">None</option>
             </select>
+            <label for="leaf_align" title="Line the leaves up on one row: Words lowers only the words, Subtrees lowers whole subtrees"><i class="fas fa-ruler-horizontal opt-icon"></i>Leaf align</label>
+            <select class="form-control form-control-sm" name="leaf_align" id="leaf_align">
+              <option value="off" selected="selected">Off</option>
+              <option value="words">Words</option>
+              <option value="subtrees">Subtrees</option>
+            </select>
             <label for="linewidth"><i class="fas fa-grip-lines opt-icon"></i>Line width</label>
             <select class="form-control form-control-sm" name="linewidth" id="linewidth">
               <option value="0.5">0.5</option>
@@ -265,15 +274,6 @@
           </label>
           <label class="btn btn-light active">
             <input type="radio" name="polyline" id="polyline-off" value="off" autocomplete="off" checked> Off
-          </label>
-        </div>
-        <label for="shear_plane" title="The plane drawn behind a sheared figure, so the tilt reads as a surface rather than a mistake"><i class="fas fa-layer-group opt-icon"></i>Shear plane</label>
-        <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
-          <label class="btn btn-light active">
-            <input type="radio" name="shear_plane" id="shear_plane-on" value="on" autocomplete="off" checked> On
-          </label>
-          <label class="btn btn-light">
-            <input type="radio" name="shear_plane" id="shear_plane-off" value="off" autocomplete="off"> Off
           </label>
         </div>
         <label for="hide_default_connectors"><i class="fas fa-eye-slash opt-icon"></i>Hide connectors</label>

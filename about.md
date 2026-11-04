@@ -23,7 +23,7 @@ the [changelog](https://yohasebe.github.io/rsyntaxtree/changelog).
 * Checking as you type: mistakes marked in the editor margin
 * JSON output renamed from `lsif` to `json` (`lsif` still works until 3.0)
 * Feature matrices in the JSON output as rows and cells
-* Shear: tilt the whole figure, with `Shear plane` drawing the plane behind it
+* Shear: tilt the whole figure, with `Plane behind shear` drawing the plane behind it
 * `Label air`: the same space above and below every label
 * JPG and GIF output removed; use PNG
 * `symmetrize`, `tidy_spacing` and `tidy_nest` removed in favour of `Tidy layout` and `H spacing`
