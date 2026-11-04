@@ -14,7 +14,7 @@ gem "rake"
 # top of the old red-colors.
 gem "red-colors", ">= 0.5.0"
 gem "redcarpet"
-gem "rsyntaxtree", ">=2.0.0"
+gem "rsyntaxtree", ">=2.5.0"
 gem "sinatra"
 gem "uglifier"
 gem "unicorn"

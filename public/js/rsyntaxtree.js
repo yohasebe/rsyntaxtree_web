@@ -10,7 +10,7 @@ $(function(){
   // and adding or removing a control is one edit.
   var optionSelects = ['leafstyle', 'fontstyle', 'fontsize', 'color', 'vheight',
                        'linewidth', 'direction', 'tidy', 'hspacing', 'hyphen',
-                       'vmargin', 'shear'];
+                       'vmargin', 'shear', 'leaf_align'];
   var optionRadios = ['polyline', 'transparent', 'hide_default_connectors',
                       'mirror', 'derivation', 'shear_plane'];
 

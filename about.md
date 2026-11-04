@@ -12,9 +12,11 @@ The original version of RSyntaxTree was inspired by [phpSyntaxTree](http://ironc
 
 ### What's new
 
-As of **2.4.1** (September 2026). Dates and details for every release are in
+As of **2.5.0** (November 2026). Dates and details for every release are in
 the [changelog](https://yohasebe.github.io/rsyntaxtree/changelog).
 
+* `Leaf align`: the leaves on one row, by lowering the words or whole subtrees
+* Movement paths go around every label in their way, and above the words in bottom-to-top trees
 * Connectors from a short node start right below its label, even beside a taller one
 * `\'` keeps a straight apostrophe, `\@` is an at sign, and `\+` before digits is a plus sign
 * Every mistake at once: all errors listed with how to fix each, not just the first
