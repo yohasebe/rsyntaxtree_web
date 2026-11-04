@@ -1,3 +1,9 @@
+# The build context as Docker sees it after .dockerignore, written out by the
+# image check in CI (--target build-context). Listed first so that a plain build
+# still produces the application image below.
+FROM scratch AS build-context
+COPY . /
+
 FROM ruby:3.4-alpine
 ENV WORKSPACE=/rsyntaxtree
 WORKDIR $WORKSPACE
