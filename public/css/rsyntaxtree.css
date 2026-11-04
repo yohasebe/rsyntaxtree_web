@@ -402,9 +402,10 @@ margin: 8px 0;
   padding-left: 0;
 }
 
-/* Narrow screens: the three groups stack, and the shared column widths keep
-   every label/control pair on the same alignment lines. */
-@media (max-width: 767.98px) {
+/* A group is about 21rem wide, which three columns hold only on the widest
+   container; below it the three groups stack, and the shared column widths
+   keep every label/control pair on the same alignment lines. */
+@media (max-width: 1199.98px) {
   .option-grid {
     justify-content: center;
   }
@@ -450,12 +451,14 @@ margin: 8px 0;
 
 /* Spread the three option groups across the row so the last one ends flush
    with the right edge, in line with the toggle and the storage note. */
-#settings-panel .row > div:nth-child(2) .option-grid {
-  justify-content: center;
-}
+@media (min-width: 1200px) {
+  #settings-panel .row > div:nth-child(2) .option-grid {
+    justify-content: center;
+  }
 
-#settings-panel .row > div:nth-child(3) .option-grid {
-  justify-content: end;
+  #settings-panel .row > div:nth-child(3) .option-grid {
+    justify-content: end;
+  }
 }
 
 .option-grid > #reset-settings {
