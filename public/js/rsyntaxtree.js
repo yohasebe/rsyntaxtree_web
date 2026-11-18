@@ -20,6 +20,12 @@ $(function(){
   // and written into a query string an undefined becomes the literal text
   // "undefined", which no amount of leniency at the far end can read.
   function optionValue(name, isRadio) {
+    // A tree drawn left to right is not mirrored: the library refuses the
+    // pair. The toggle is greyed out then (syncMirror) and sent as off, while
+    // its own setting is kept for when the direction changes back.
+    if (name === 'mirror' && $("select[name=direction]").val() === 'ltr') {
+      return 'off';
+    }
     var value = isRadio ? $("input[name=" + name + "]:checked").val()
                         : $("select[name=" + name + "]").val();
     return (value === undefined || value === null || value === "") ? undefined : value;
@@ -869,6 +875,14 @@ restoreSettings();
   syncShearPlane();
   $('select[name=shear]').on('change', syncShearPlane);
 
+  function syncMirror() {
+    var across = $('select[name=direction]').val() === 'ltr';
+    $('input[name=mirror]').prop('disabled', across)
+      .closest('label').toggleClass('disabled', across);
+  }
+  syncMirror();
+  $('select[name=direction]').on('change', syncMirror);
+
   settingSelects.forEach(function(name) {
     $('select[name=' + name + ']').on('change', saveSettings);
   });
@@ -902,6 +916,7 @@ restoreSettings();
     editor.setBehavioursEnabled(SETTINGS_DEFAULTS['auto_bracket']);
     applySettingsPanel(SETTINGS_DEFAULTS['settings_open'], false);
     syncShearPlane();
+    syncMirror();
 
     // The controls now hold the defaults, so record that rather than leaving
     // the next change to write a half-reset state.

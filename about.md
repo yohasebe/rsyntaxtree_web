@@ -12,9 +12,13 @@ The original version of RSyntaxTree was inspired by [phpSyntaxTree](http://ironc
 
 ### What's new
 
-As of **2.6.0** (November 2026). Dates and details for every release are in
+As of **2.8.0** (November 2026). Dates and details for every release are in
 the [changelog](https://yohasebe.github.io/rsyntaxtree/changelog).
 
+* `@red(...)` colours part of a label: a word, a line, or the shapes in it — `look @red(at) it`, `NP\n@gray(___*note*___)`
+* `Tidy layout: High` no longer squeezes a pair of branches far narrower than the ones below it
+* Movement paths keep clear of labels packed under their ends, and a path to a phrase stops at the phrase's edge
+* `Mirror (RTL)` cannot be combined with left-to-right; the toggle is greyed out then
 * `Connector shape: Dashed bar`: the lines down to the words dashed; with `Leaf align`, the look of some generative grammar literature
 * Two movement paths that meet at one label no longer cross
 * `Leaf align`: the leaves on one row, by lowering the words or whole subtrees
